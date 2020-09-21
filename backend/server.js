@@ -3,6 +3,7 @@ require('dotenv').config()
 const cors = require('cors')
 require ("./config/cnx-db")
 const app = express()
+const router = require('./routes');
 /* const router = require('./routes/routes') */
 
 
