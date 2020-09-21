@@ -1,9 +1,13 @@
 const initialState = {
-    name: '',
-    urlpic: '',
-    token: '',
-    username: '',
-    lastname: '',
+    usuario: "",
+    password: "",
+    email: "",
+    nombre: "",
+    apellido: "",
+    urlFoto: "",
+    idComentario: "", 
+    logInGoogle: false,
+    primeraVez: false,
 }
 
 const usuariosReducer = (state = initialState, action) => {
@@ -11,29 +15,27 @@ const usuariosReducer = (state = initialState, action) => {
         case 'SET_USER':
             localStorage.setItem('token', action.payload.token)
             return {
-                
                 ...state,
-                name: action.payload.name,
-                urlpic: action.payload.urlpic,
+                usuario: action.payload.usuario,
+                urlFoto: action.payload.urlFoto,
+                nombre: action.payload.nombre,
+                apellido: action.payload.apellido,
                 token: action.payload.token,
-                username: action.payload.username,
-                lastname: action.payload.lastname,
             }
         case 'UPDATE_USER':
             return {
-
                 ...state,
-                name: action.payload.name,
-                urlpic: action.payload.urlpic,
-                lastname: action.payload.lastname,
+                nombre: action.payload.nombre,
+                apellido: action.payload.apellido,
+                urlFoto: action.payload.urlFoto,
             }
 
-        // case 'LOGOUT_USER':
-        //     localStorage.clear()
-        //     return {
-        //         ...state,
-        //         ...initialState
-        //     }
+        case 'LOGOUT_USER':
+            localStorage.clear()
+            return {
+                ...state,
+                ...initialState
+            }
         default:
             return state;
     }

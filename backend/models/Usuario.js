@@ -8,7 +8,7 @@ const UsuarioSchema = new mongoose.Schema({
     nombre: String,
     apellido: String,
     urlFoto: String,
-    IdComentario: { type: mongoose.Types.ObjectId, ref: "Comment" }, 
+    idComentario: { type: mongoose.Types.ObjectId, ref: "Comment" }, 
     logInGoogle: Boolean,
     primeraVez: Boolean,
 })

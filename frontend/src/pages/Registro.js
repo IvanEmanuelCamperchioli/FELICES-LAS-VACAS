@@ -1,32 +1,32 @@
 import React, { useState } from 'react'
 import { connect } from "react-redux"
-import usuarioActions from '../redux/actions/usuarioActions'
+import usuariosActions from '../redux/actions/usuariosActions'
 
 const Registro = (props) => {
     
-    const [newUser, setNewUser] = useState({
-        name: '',
-        lastname: '',
-        username: '',
+    const [nuevoUsuario, setNuevoUsuario] = useState({
+        nombre: '',
+        apellido: '',
+        usuario: '',
         password: '',
         email: '',
-        urlpic: '',
-        // logWithGoogle: false,
+        urlFoto: '',
+        logInGoogle: false,
     })
 
     const readInput = e => {
         const value = e.target.value
         //const value = e.target.name === "urlpic" ? e.target.files[0] : e.target.value
-        setNewUser({
-            ...newUser,
-            [e.target.name]: value
+        setNuevoUsuario({
+            ...nuevoUsuario,
+            [e.target.nombre]: value
         })
     }
 
     const sendInfo = async e => {
         e.preventDefault()
-        if (newUser.username === '' || newUser.password === '' || newUser.name === '' || newUser.lastname === '' || newUser.email === '') {
-            alert('error un campo requerido está vacío')
+        if (nuevoUsuario.usuario === '' || nuevoUsuario.password === '' || nuevoUsuario.nombre === '' || nuevoUsuario.apellido === '' || nuevoUsuario.email === '') {
+            alert('Por favor, verifique que todos los campos estén llenos.')
             // Swal.fire({
             //     icon: 'error',
             //     title: 'Error!',
@@ -45,7 +45,7 @@ const Registro = (props) => {
             // fd.append("firstTime", newUser.firstTime)
             // fd.append("favConsole", newUser.favConsole)
 
-            await props.createAccount(newUser)
+            await props.crearCuenta(nuevoUsuario)
         }
     }
  
@@ -113,7 +113,7 @@ const Registro = (props) => {
 }
 
 const mapDispatchToProps = {
-    createAccount: usuarioActions.createAccount,
+    crearCuenta: usuariosActions.crearCuenta,
     // createAccountGoogle: usersActions.createAccountGoogle,
 }
 
