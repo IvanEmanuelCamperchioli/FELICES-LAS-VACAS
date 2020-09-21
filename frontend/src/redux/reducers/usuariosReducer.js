@@ -11,6 +11,7 @@ const usuariosReducer = (state = initialState, action) => {
         case 'SET_USER':
             localStorage.setItem('token', action.payload.token)
             return {
+                
                 ...state,
                 name: action.payload.name,
                 urlpic: action.payload.urlpic,
