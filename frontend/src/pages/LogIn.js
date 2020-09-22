@@ -1,17 +1,24 @@
 import React, { useState }  from 'react'
 import {Link} from 'react-router-dom'
+import GoogleLogin from 'react-google-login'
 
 const LogIn = (props) => {
 
-    const [newUser, setNewUser] = useState({
-        username: '',
+    const [nuevoUsuario, setNuevoUsuario] = useState({
+        usuario: '',
         password: '',
+        logInGoogle: false,
     })
 
+    const [errors, setErrors] = useState({
+        usuario: '',
+        password: '',
+        logInGoogle: false,
+    })
 
     const readInput = e => {
-        setNewUser({
-            ...newUser,
+        setNuevoUsuario({
+            ...nuevoUsuario,
             [e.target.name]: e.target.value
         })
     }
@@ -19,29 +26,31 @@ const LogIn = (props) => {
     const sendInfo = e => {
         e.preventDefault()
 
-        if (newUser.username === '' || newUser.password === '') {
-            alert('eror: un dato requerido vacío')
-            
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Error!',
-            //     text: 'All camps are required, please take a look again',
-            // })
-        }
-        else {
-            const userToLogIn = { username: newUser.username, password: newUser.password }
+        const errorsCopy = errors
+        
+        errorsCopy.usuario = (nuevoUsuario.usuario.length < 2)
+            ? "¡La contraseño o el usuario son incorrectos!" : ""
+
+        errorsCopy.password = (nuevoUsuario.password.length < 2)
+            ? "¡La contraseño o el usuario son incorrectos!" : ""
+
+        setErrors({...errorsCopy})
+
+        if (errors.usuario === "" && errors.password === ""){
+            const userToLogIn = { username: nuevoUsuario.nombre, password: nuevoUsuario.password }
 
             props.userLogIn(userToLogIn)
         }
     }
 
-    // const responseGoogle = (response) => {
-    //     props.userLogIn({
-    //         username: response.profileObj.email,
-    //         password: response.profileObj.googleId,
-    //         logInMethod: 'google'
-    //     })
-    // }
+    const responseGoogle = (response) => {
+        setNuevoUsuario({
+            ...nuevoUsuario,
+            usuario:response.profileObj.email,
+            password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
+            logInGoogle: true,
+        })
+    }
 
     return (
         <>
@@ -56,25 +65,36 @@ const LogIn = (props) => {
 
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column'}}>
+
                     <h1>Please, choose your account</h1>
-                    <label>Username</label>
+
+                    <label>Usuario</label>
                     <input style={{
                         borderRadius: '3vw'
                     }} type='text' name='username' placeholder='Type your username'
                         onChange={readInput} />
+
                     <label>Password</label>
                     <input style={{
                         borderRadius: '3vw'
                     }} type='password' name='password' placeholder='Type your password'
                         onChange={readInput} />
-                    {/* <GoogleLogin
-                        clientId="575358746516-8ot9u4rh9irr4uf17ogf1bcqjt2aqneu.apps.googleusercontent.com"
-                        buttonText="Log in with Google"
+
+                    <span className='error'>{errors.password}</span>
+
+                    <button onClick={sendInfo}>Enviar</button>
+                    
+                    <p>No tienes cuenta? Presiona<Link to='/registro'>Aqui!</Link></p>
+                    
+                    <GoogleLogin
+                        className="googleBtn"
+                        clientId="410495293057-2vf4ipg2vojn0pdvjg2p4pc8269vcbbq.apps.googleusercontent.com"
+                        buttonText="Create account with Google"
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
-                    /> */}
-                    <p>No tienes cuenta? Presiona<Link to='/registro'>Aqui!</Link></p>
+                    />
+
 
                 </div>
             </div>

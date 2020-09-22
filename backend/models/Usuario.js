@@ -4,13 +4,13 @@ const mongoose = require("mongoose")
 const UsuarioSchema = new mongoose.Schema({
     usuario: String,
     password: String,
-    email: String,
-    nombre: String,
+    email: {type: String, required: true},
+    nombre: {type: String, required: true},
     apellido: String,
-    urlFoto: String,
-    idComentario: { type: mongoose.Types.ObjectId, ref: "Comment" }, 
-    logInGoogle: Boolean,
-    primeraVez: Boolean,
+    DNI: {type: Number, default: null},
+    provincia: {type: String, default: null},
+    rol: {type: String, default: "comprador"}
+    
 })
 
 

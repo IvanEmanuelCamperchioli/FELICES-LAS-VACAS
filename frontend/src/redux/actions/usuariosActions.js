@@ -11,10 +11,10 @@ const usuariosActions = {
                 }
 
             }*/
-      );
+      )
 
       if (response.data.success !== true) {
-        alert("Lo siento no se pudo crear usuario correctamente");
+        alert("Lo siento no se pudo crear usuario correctamente")
         // Swal.fire({
         //     title: 'Im sorry :(',
         //     imageUrl: `${SadSquare}`,
@@ -53,33 +53,33 @@ const usuariosActions = {
     };
   },
 
-  crearCuentaConGoogle: (nuevoUsuario) => {
-    return async (dispatch, getState) => {
-      const response = await axios.post(
-        "http://127.0.0.1:4000/api/userGoogle",
-        nuevoUsuario
-      );
+  // crearCuentaConGoogle: (nuevoUsuario) => {
+  //   return async (dispatch, getState) => {
+  //     const response = await axios.post(
+  //       "http://127.0.0.1:4000/api/userGoogle",
+  //       nuevoUsuario
+  //     );
       
-      if (response.data.success !== true) {
-        console.log(response.data.message);
-        Swal.fire({
-          icon: "error",
-          title: "Error!",
-          text: response.data.message,
-        });
-      } else {
-        dispatch({
-          type: "SET_USER",
-          payload: {
-            nombre: response.data.nombre,
-            urlFoto: response.data.urlFoto,
-            token: response.data.token,
-            primeraVez: response.data.primeraVez,
-          },
-        });
-      }
-    };
-  },
+  //     if (response.data.success !== true) {
+  //       console.log(response.data.message);
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Error!",
+  //         text: response.data.message,
+  //       });
+  //     } else {
+  //       dispatch({
+  //         type: "SET_USER",
+  //         payload: {
+  //           nombre: response.data.nombre,
+  //           urlFoto: response.data.urlFoto,
+  //           token: response.data.token,
+  //           primeraVez: response.data.primeraVez,
+  //         },
+  //       });
+  //     }
+  //   };
+  // },
 
   loguearUsuario: (nuevoUsuario) => {
     return async (dispatch, getState) => {
