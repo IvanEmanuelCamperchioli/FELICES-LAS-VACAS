@@ -39,7 +39,6 @@ const usuariosController = {
     },
 
     crearCuentaConGoogle: async (req, res) => {
-
         const { usuario, password, email, urlFoto, nombre, apellido, logInGoogle, primeraVez } = req.body
 
         const passwordHasheada = bcryptjs.hashSync(password.trim(), 10)
