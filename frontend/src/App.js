@@ -1,10 +1,14 @@
 import React from 'react';
-
+import Home from './pages/Home';
+import './styles/generalStyles.css'
+import './styles/css/all.css'
 
 function App() {
   return (
-    <h1>Componente app</h1>
-  );
+    <>
+      <Home />
+    </>
+  )
 }
 
 export default App;
