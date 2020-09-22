@@ -3,11 +3,10 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
     name:{type: String, required: true},
     price:{type: Number, required: true},
-    description:{type: String, required:true},
-    comments:{type: Array},
-    brand:{type: String, required:true},
+    description:{type: String},
+    stock:{type: String},
+    category:{type:String},
     views:{type: Number},
-    postedBy:{type: mongoose.Schema.ObjectId, ref: "user"},
 },{timestamps:true})
 
 const Product = mongoose.model('product', productSchema);
