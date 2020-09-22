@@ -66,7 +66,7 @@ const Registro = (props) => {
             if (!response.success) {
                 if (response.usuario !== ""){
                     setErrors({
-                        ..,errors,
+                        ...errors,
                         user: response.usuario
                     })
                 }
