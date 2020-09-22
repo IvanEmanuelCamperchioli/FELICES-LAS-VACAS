@@ -9,57 +9,77 @@ const Registro = (props) => {
         apellido: '',
         usuario: '',
         password: '',
+        passwordValidation: "",
+        email: '',        
+    })
+
+    const [errors, setErrors] = useState({
+        nombre: '',
+        apellido: '',
+        usuario: '',
+        password: '',
+        passwordValidation: "",
         email: '',
-        urlFoto: '',
-        logInGoogle: false,
     })
 
     const readInput = e => {
         const value = e.target.value
-        //const value = e.target.name === "urlpic" ? e.target.files[0] : e.target.value
+        
         setNuevoUsuario({
             ...nuevoUsuario,
             [e.target.nombre]: value
         })
     }
+    const validEmailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+
+    const validPassword = RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/)
 
     const sendInfo = async e => {
         e.preventDefault()
-        if (nuevoUsuario.usuario === '' || nuevoUsuario.password === '' || nuevoUsuario.nombre === '' || nuevoUsuario.apellido === '' || nuevoUsuario.email === '') {
-            alert('Por favor, verifique que todos los campos estén llenos.')
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Error!',
-            //     text: 'All camps are required, please take a look again',
-            // })
-        } else {
 
-            // const fd = new FormData()
-            // fd.append("name", newUser.name)
-            // fd.append("lastname", newUser.lastname)
-            // fd.append("username", newUser.username)
-            // fd.append("password", newUser.password)
-            // fd.append("email", newUser.email)
-            // fd.append("urlpic", newUser.urlpic)
-            // fd.append("logWithGoogle", newUser.logWithGoogle)
-            // fd.append("firstTime", newUser.firstTime)
-            // fd.append("favConsole", newUser.favConsole)
+        const errorsCopy = errors
 
-            await props.crearCuenta(nuevoUsuario)
+        errorsCopy.usuario = (nuevoUsuario.usuario.length < 2)
+            ? "¡El usuario debe tener al menos 2 caracteres!" : ""
+
+        errorsCopy.password = (nuevoUsuario.password.length < 2)
+            ? "¡El password debe tener al menos 2 caracteres!" : ""
+
+        errorsCopy.apellido = (nuevoUsuario.property.length < 2)
+            ? "¡El apellido debe tener al menos 2 caracteres!" : ""
+
+        errorsCopy.passwordValidation = (nuevoUsuario.password !== nuevoUsuario.password)
+            ? "Las contraseñas no concuerdan" : ""
+
+        errorsCopy.password = validPassword.test(nuevoUsuario.password)
+            ? "" : "La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
+
+        errorsCopy.email = validEmailRegex.test(nuevoUsuario.email)
+            ? "" : "Introduzca un correo electrónico válido"
+
+        setErrors(errorsCopy)
+        console.log(errors)
+
+        if (errors.usuario === "" && errors.passwordValidation === "" && errors.password === "" && errors.nombre=== "" && errors.apellido=== "" && errors.email=== "") {
+            const response = await props.crearCuenta(nuevoUsuario)
+            
+            if (!response.success) {
+                if (response.usuario !== ""){
+                    setErrors({
+                        ..,errors,
+                        user: response.usuario
+                    })
+                }
+                if (response.email !== ""){
+                    setErrors({
+                        ...errors,
+                        email:response.email
+                    })
+                }
+            }
+            
         }
     }
- 
-    // const responseGoogle = (response) => {
-    //     props.createAccountGoogle({
-    //         name: response.profileObj.givenName,
-    //         lastname: response.profileObj.familyName,
-    //         username: response.profileObj.email,
-    //         password: response.profileObj.googleId,
-    //         email: response.profileObj.email,
-    //         urlpic: response.profileObj.imageUrl,
-    //         logWithGoogle: true,
-    //     })
-    // }
 
     return (
         <>
@@ -105,6 +125,7 @@ const Registro = (props) => {
                         borderRadius: '3vw'
                     }} type='file' name='urlpic' id="urlpic"
                         onChange={readInput} /> */}
+                    <button onClick={sendInfo}>Enviar</button>
 
                 </div>
             </div>

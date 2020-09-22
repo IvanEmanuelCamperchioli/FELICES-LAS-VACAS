@@ -1,8 +1,13 @@
 import React, { useState }  from 'react'
+import {Link} from 'react-router-dom'
 
 const LogIn = (props) => {
 
-    const [newUser, setNewUser] = useState({})
+    const [newUser, setNewUser] = useState({
+        username: '',
+        password: '',
+    })
+
 
     const readInput = e => {
         setNewUser({
@@ -69,6 +74,7 @@ const LogIn = (props) => {
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     /> */}
+                    <p>No tienes cuenta? Presiona<Link to='/registro'>Aqui!</Link></p>
 
                 </div>
             </div>
