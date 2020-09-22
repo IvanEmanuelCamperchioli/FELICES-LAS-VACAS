@@ -9,9 +9,12 @@ const Registro = (props) => {
         apellido: '',
         usuario: '',
         password: '',
+        validacionPassword: "",
         email: '',
-        urlFoto: '',
+        DNI: '',
+        provincia: '',
         logInGoogle: false,
+
     })
 
     const readInput = e => {
@@ -49,17 +52,17 @@ const Registro = (props) => {
         }
     }
  
-    // const responseGoogle = (response) => {
-    //     props.createAccountGoogle({
-    //         name: response.profileObj.givenName,
-    //         lastname: response.profileObj.familyName,
-    //         username: response.profileObj.email,
-    //         password: response.profileObj.googleId,
-    //         email: response.profileObj.email,
-    //         urlpic: response.profileObj.imageUrl,
-    //         logWithGoogle: true,
-    //     })
-    // }
+     const responseGoogle = (response) => {
+        setNuevoUsuario({
+            ...nuevoUsuario,
+            usuario:response.profileObj.email,
+            password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
+            nombre:response.profileObj.givenName,
+            apellido:response.profileObj.familyName.trim(),
+            email: response.profileObj.email,
+            validacionPassword:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
+        })
+    }
 
     return (
         <>
@@ -100,11 +103,6 @@ const Registro = (props) => {
                         borderRadius: '3vw'
                     }} type='text' name='email' placeholder='Type an email correct'
                         onChange={readInput} />
-                    {/* <label htmlFor="urlpic">Select your profile pic</label>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='file' name='urlpic' id="urlpic"
-                        onChange={readInput} /> */}
 
                 </div>
             </div>
