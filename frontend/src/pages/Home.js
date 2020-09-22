@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import Header from '../components/Header'
 
-class Home extends Component {
+class Home extends React.Component {
+
+
     render() {
+
         return (
             <>
-                <Link to='/registro'>Registro</Link>
-                <Link to='/login'>Login</Link>
+                <Header />
             </>
-        );
+        )
     }
 }
 
-export default Home;
+export default Home

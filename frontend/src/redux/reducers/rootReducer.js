@@ -2,7 +2,7 @@ import usuariosReducer from '../reducers/usuariosReducer'
 const { combineReducers } = require('redux')
 
 const rootReducer = combineReducers({
-    usuariosReducer: usuariosReducer,
+    usuariosRed: usuariosReducer,
 })
 
 export default rootReducer

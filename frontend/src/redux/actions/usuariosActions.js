@@ -1,20 +1,14 @@
 import axios from "axios";
-
+import Swal from "sweetalert2"
 const usuariosActions = {
-  crearCuenta: (fd) => {
+
+  crearCuenta: (nuevoUsuario) => {
     return async (dispatch, getState) => {
       const response = await axios.post(
-        "http://127.0.0.1:4000/api/user",
-        fd /*, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-
-            }*/
-      );
+        "http://127.0.0.1:4000/api/usuario", nuevoUsuario )
 
       if (response.data.success !== true) {
-        alert("Lo siento no se pudo crear usuario correctamente");
+        alert("Lo siento no se pudo crear usuario correctamente")
         // Swal.fire({
         //     title: 'Im sorry :(',
         //     imageUrl: `${SadSquare}`,
@@ -40,11 +34,10 @@ const usuariosActions = {
             dispatch({
               type: "SET_USER",
               payload: {
-                usuario: action.payload.usuario,
-                urlFoto: action.payload.urlFoto,
-                nombre: action.payload.nombre,
-                apellido: action.payload.apellido,
-                token: action.payload.token,
+                usuario: response.payload.usuario,
+                nombre: response.payload.nombre,
+                apellido: response.payload.apellido,
+                token: response.payload.token,
               },
             });
           }, 2000);
@@ -53,33 +46,33 @@ const usuariosActions = {
     };
   },
 
-  crearCuentaConGoogle: (nuevoUsuario) => {
-    return async (dispatch, getState) => {
-      const response = await axios.post(
-        "http://127.0.0.1:4000/api/userGoogle",
-        nuevoUsuario
-      );
-      console.log("hola");
-      if (response.data.success !== true) {
-        console.log(response.data.message);
-        Swal.fire({
-          icon: "error",
-          title: "Error!",
-          text: response.data.message,
-        });
-      } else {
-        dispatch({
-          type: "SET_USER",
-          payload: {
-            nombre: response.data.nombre,
-            urlFoto: response.data.urlFoto,
-            token: response.data.token,
-            primeraVez: response.data.primeraVez,
-          },
-        });
-      }
-    };
-  },
+  // crearCuentaConGoogle: (nuevoUsuario) => {
+  //   return async (dispatch, getState) => {
+  //     const response = await axios.post(
+  //       "http://127.0.0.1:4000/api/userGoogle",
+  //       nuevoUsuario
+  //     );
+      
+  //     if (response.data.success !== true) {
+  //       console.log(response.data.message);
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Error!",
+  //         text: response.data.message,
+  //       });
+  //     } else {
+  //       dispatch({
+  //         type: "SET_USER",
+  //         payload: {
+  //           nombre: response.data.nombre,
+  //           urlFoto: response.data.urlFoto,
+  //           token: response.data.token,
+  //           primeraVez: response.data.primeraVez,
+  //         },
+  //       });
+  //     }
+  //   };
+  // },
 
   loguearUsuario: (nuevoUsuario) => {
     return async (dispatch, getState) => {
