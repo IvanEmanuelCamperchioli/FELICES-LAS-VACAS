@@ -1,5 +1,4 @@
 import axios from "axios";
-import Swal from "sweetalert2"
 const usuariosActions = {
   crearCuenta: (fd) => {
     return async (dispatch, getState) => {
