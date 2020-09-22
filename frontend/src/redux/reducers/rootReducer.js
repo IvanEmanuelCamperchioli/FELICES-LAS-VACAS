@@ -1,11 +1,8 @@
-import userReducer  from './userReducer'
-
-const {combineReducers} = require('redux')
+import usuariosReducer from '../reducers/usuariosReducer'
+const { combineReducers } = require('redux')
 
 const rootReducer = combineReducers({
-    userRed: userReducer,
-    /* productRed: productRed */
+    usuariosRed: usuariosReducer,
 })
-
 
 export default rootReducer
