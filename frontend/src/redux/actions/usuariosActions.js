@@ -3,7 +3,6 @@ import Swal from "sweetalert2"
 const usuariosActions = {
 
   loguearCuenta: (usuario) => {
-    console.log("hola")
     return async (dispatch, getState) => {
       const res = await axios.post(
         "http://127.0.0.1:4000/api/usuario", usuario )
