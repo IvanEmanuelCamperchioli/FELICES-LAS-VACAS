@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import '../styles/header.css'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Tooltip } from 'reactstrap';
-
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem,  Tooltip} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart, faUser} from '@fortawesome/free-solid-svg-icons'
 
 class Header extends React.Component {
 
@@ -22,7 +23,7 @@ class Header extends React.Component {
             <div className="header-sup">
                 <h5 className="titleHeader">Felices las vacas | Alimentación conciente</h5>
                 <div>
-                    <button id="TooltipExample" className="openbtn" ><i class="fas fa-shopping-cart"></i></button>
+                    <button id="TooltipExample" className="openbtn" ><FontAwesomeIcon icon={faShoppingCart} /></button>
                     <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="TooltipExample" toggle={this.toggle}>Tienda virtual</Tooltip>
                 </div>
             </div>
@@ -50,7 +51,7 @@ const MenuDesplegable = () => {
     return (
         <>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                <DropdownToggle className="desplegable"><i class="fas fa-user"></i> Cuenta </DropdownToggle>
+                <DropdownToggle className="desplegable"><FontAwesomeIcon icon={faUser} />Cuenta </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem header>Registrate</DropdownItem>
                     <DropdownItem>Crear Cuenta</DropdownItem>

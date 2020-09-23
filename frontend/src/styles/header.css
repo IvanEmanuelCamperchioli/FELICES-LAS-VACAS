@@ -7,8 +7,9 @@
     justify-content: space-around;
     align-items: center;
 }
+
 .titleHeader {
-  font-family: josefin;
+  font-family: 'Josefin Sans', sans-serif;
   letter-spacing: 2px;
   margin-top: 5px;
   text-shadow: 2px 2px 3px rgb(41, 115, 68);
@@ -24,13 +25,18 @@
     
   }
 
-  .dropdown-item {
-    color: white!important;
-  }
 
-  .dropdown-item:hover {
-    color: black!important;
-  }
+.titleHeader {
+font-family: 'Josefin Sans', sans-serif;
+letter-spacing: 2px;
+margin-top: 5px;
+text-shadow: 2px 2px 3px rgb(41, 115, 68);
+}
+
+.desplegable:hover {
+  transition: all 1s;
+  color: #09f!important;
+}
 
   .dropdown-header {
     color: black!important;
@@ -42,34 +48,105 @@
     justify-content: space-evenly!important;
   }
   
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: white!important;
-    text-align: center;
-    padding: 15px 16px;
-    text-decoration: none!important;
+
+.dropdown-item {
+  color: white!important;
 }
-    
+
+.dropdown-item:hover {
+  color: black!important;
+}
+
+.dropdown-header {
+  color: black!important;
+}
+
+.navbar {
+  background: black!important;
+  display: flex;
+  justify-content: space-evenly!important;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white!important;
+  text-align: center;
+  padding: 15px 16px;
+  text-decoration: none!important;
+}
+  
 .navbar a:hover {
-    background-color: #017FCB;
-    transition: all 1s;
+  background-color: #017FCB;
+  transition: all 1s;
 }
 
 .container-logo {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  background-image: linear-gradient(rgba(250, 250, 250, 0.363), #017ecbcc);
-  border-spacing: 0;
-  border-collapse: separate;
+display: flex;
+width: 100%;
+justify-content: center;
+background-image: linear-gradient(rgba(250, 250, 250, 0.363), #017ecbcc);
+border-spacing: 0;
+border-collapse: separate;
 }
 
 .logo {
-  width: 10vw;
-  height: 10vw;
-  background-size: cover;
+width: 10vw;
+height: 10vw;
+background-size: cover;
+background-position: center;
+}
+    
+.sidepanel  {
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color:#444;
+}
+
+.carrusel {
   background-position: center;
+  height: 70vh;
+  background-size: cover;
 }
       
   .sidepanel  {

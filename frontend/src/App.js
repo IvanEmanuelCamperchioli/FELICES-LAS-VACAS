@@ -5,7 +5,7 @@ import Registro from './pages/Registro';
 import Home from './pages/Home'
 
 import './styles/generalStyles.css'
-import './styles/css/all.css'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
