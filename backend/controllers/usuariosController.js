@@ -10,14 +10,22 @@ const usuariosController = {
         var {user, password } = req.body
         
         const usuarioExiste = await User.findOne({user})
+
         if (!usuarioExiste){
+
             res.json({success: false, response: "Nombre y/o contraseña incorrecta"})
+
         }else{
+
             const passwordMatches = bcryptjs.compareSync(password, usuarioExiste.password)
+
             if (!passwordMatches){
+
                 res.json({success: false, response: "Nombre y/o contraseña incorrecta"})
+
             }else{
                 jwt.sign({...userExist}, process.env.SECRETORKEY, {}, (error, token)=>{
+
                     if(error){
                         res.json({success:false, response: "Algo salió mal"})
                     }else{
@@ -28,8 +36,8 @@ const usuariosController = {
                             }
                         })
                     }
+                    
                 })
-                
             } 
         }
     },

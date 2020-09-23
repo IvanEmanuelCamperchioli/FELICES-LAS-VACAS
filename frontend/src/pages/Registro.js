@@ -1,65 +1,105 @@
 import React, { useState } from 'react'
 import { connect } from "react-redux"
 import usuariosActions from '../redux/actions/usuariosActions'
+import GoogleLogin from 'react-google-login'
 
 const Registro = (props) => {
+
+    const validacionMinLength = ['nombre', 'apellido', 'usuario']
     
     const [nuevoUsuario, setNuevoUsuario] = useState({
         nombre: '',
         apellido: '',
         usuario: '',
         password: '',
+        validacionPassword: "",
         email: '',
-        urlFoto: '',
-        logInGoogle: false,
+        DNI: '',
+        provincia: '',
+        logInGoogle: false,    
     })
 
-    const readInput = e => {
-        const value = e.target.value
-        //const value = e.target.name === "urlpic" ? e.target.files[0] : e.target.value
+    const [errors, setErrors] = useState({
+        nombre: '',
+        apellido: '',
+        usuario: '',
+        password: '',
+        validacionPassword: "",
+        email: '',
+        DNI: '',
+        provincia: '',
+        logInGoogle: false,
+
+    })
+
+    const readInput = e => {  
         setNuevoUsuario({
             ...nuevoUsuario,
-            [e.target.nombre]: value
+            [e.target.name]: e.target.value
         })
+        console.log(nuevoUsuario);
     }
+
+    const validEmailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+
+    const validPassword = RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/)
 
     const sendInfo = async e => {
         e.preventDefault()
-        if (nuevoUsuario.usuario === '' || nuevoUsuario.password === '' || nuevoUsuario.nombre === '' || nuevoUsuario.apellido === '' || nuevoUsuario.email === '') {
-            alert('Por favor, verifique que todos los campos estén llenos.')
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Error!',
-            //     text: 'All camps are required, please take a look again',
-            // })
-        } else {
 
-            // const fd = new FormData()
-            // fd.append("name", newUser.name)
-            // fd.append("lastname", newUser.lastname)
-            // fd.append("username", newUser.username)
-            // fd.append("password", newUser.password)
-            // fd.append("email", newUser.email)
-            // fd.append("urlpic", newUser.urlpic)
-            // fd.append("logWithGoogle", newUser.logWithGoogle)
-            // fd.append("firstTime", newUser.firstTime)
-            // fd.append("favConsole", newUser.favConsole)
+        const errorsCopy = errors
+        
+        validacionMinLength.map(property => {
+            errorsCopy[property] = ((nuevoUsuario[property].length < 2)
+            ? `¡El ${property} debe tener al menos 2 caracteres!`
+            : ""
+        )})
+        
+        errorsCopy.password = validPassword.test(nuevoUsuario.password)
+        ? "" : "La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
+        
+        errorsCopy.validacionPassword = (nuevoUsuario.password !== nuevoUsuario.validacionPassword)
+            ? "Las contraseñas no concuerdan" : ""
 
-            await props.crearCuenta(nuevoUsuario)
+        errorsCopy.email = validEmailRegex.test(nuevoUsuario.email)
+            ? "" : "Introduzca un correo electrónico válido"
+
+        setErrors({...errorsCopy})
+
+        if (errors.usuario === "" && errors.validacionPassword === "" && errors.password === "" && errors.nombre=== "" && errors.apellido=== "" && errors.email=== "") {
+            
+            const response = await props.crearCuenta(nuevoUsuario)
+            
+            if (!response.success) {
+                if (response.usuario !== ""){
+                    setErrors({
+                        ...errors,
+                        user: response.usuario
+                    })
+                }
+                if (response.email !== ""){
+                    setErrors({
+                        ...errors,
+                        email:response.email
+                    })
+                }
+            }
+            
         }
     }
  
-    // const responseGoogle = (response) => {
-    //     props.createAccountGoogle({
-    //         name: response.profileObj.givenName,
-    //         lastname: response.profileObj.familyName,
-    //         username: response.profileObj.email,
-    //         password: response.profileObj.googleId,
-    //         email: response.profileObj.email,
-    //         urlpic: response.profileObj.imageUrl,
-    //         logWithGoogle: true,
-    //     })
-    // }
+    const responseGoogle = (response) => {
+        setNuevoUsuario({
+            ...nuevoUsuario,
+            usuario:response.profileObj.email,
+            password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
+            nombre:response.profileObj.givenName,
+            apellido:response.profileObj.familyName.trim(),
+            email: response.profileObj.email,
+            validacionPassword:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
+            logInGoogle: true,
+        })
+    }
 
     return (
         <>
@@ -74,38 +114,61 @@ const Registro = (props) => {
 
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column'}}>
-                    <h1 className="text-center responsiveText">Create new account</h1>
-                    <label>Name</label>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='text' name='name' placeholder='Type your name'
-                        onChange={readInput} />
-                    <label>Lastname</label>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='text' name='lastname' placeholder='Type your lastname'
-                        onChange={readInput} />
-                    <label >Username</label>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='text' name='username' placeholder='Choose your username (Min 5 characters)'
-                        onChange={readInput} />
-                    <label>Password</label>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='password' name='password' placeholder='Choose your password (Min 5 characters)'
-                        onChange={readInput} />
-                    <label>Email</label>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='text' name='email' placeholder='Type an email correct'
-                        onChange={readInput} />
-                    {/* <label htmlFor="urlpic">Select your profile pic</label>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='file' name='urlpic' id="urlpic"
-                        onChange={readInput} /> */}
 
+                    <h1 className="text-center responsiveText">Create new account</h1>
+
+                    <label>Nombre</label>
+                    <span className='error'>{errors.nombre}</span>
+                    <input style={{
+                        borderRadius: '3vw'
+                    }} type='text' name='nombre' placeholder='Escriba su nombre'
+                        onChange={readInput} />
+
+                    <label>Apellido</label>
+                    <span className='error'>{errors.apellido}</span>
+                    <input style={{
+                        borderRadius: '3vw'
+                    }} type='text' name='apellido' placeholder='Escriba su apellido'
+                        onChange={readInput} />
+
+                    <label >Usuario</label>
+                    <span className='error'>{errors.usuario}</span>
+                    <input style={{
+                        borderRadius: '3vw'
+                    }} type='text' name='usuario' placeholder='Elija su usuario (Mínimo 5 caracteres)'
+                        onChange={readInput} />
+
+                    <label>Password</label>
+                    <span className='error'>{errors.password}</span>
+                    <input style={{
+                        borderRadius: '3vw'
+                    }} type='password' name='password' placeholder='Elija su contraseña (Mínimo 5 caracteres)'
+                        onChange={readInput} />
+
+                    <label>Validacion de Password</label>
+                    <span className='error'>{errors.validacionPassword}</span>
+                    <input style={{
+                        borderRadius: '3vw'
+                    }} type='password' name='validacionPassword' placeholder='Confirme contraseña'
+                        onChange={readInput} />
+
+                    <label>Email</label>
+                    <span className='error'>{errors.email}</span>
+                    <input style={{
+                        borderRadius: '3vw'
+                    }} type='text' name='email' placeholder='Escriba un email correcto'
+                        onChange={readInput} />
+                    
+                    <button onClick={sendInfo}>Enviar</button>
+                    
+                    <GoogleLogin
+                        className="googleBtn"
+                        clientId="410495293057-2vf4ipg2vojn0pdvjg2p4pc8269vcbbq.apps.googleusercontent.com"
+                        buttonText="Create account with Google"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    />
                 </div>
             </div>
         </>

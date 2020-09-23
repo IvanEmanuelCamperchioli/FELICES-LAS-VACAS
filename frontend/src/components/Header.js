@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/header.css'
+import {Link} from 'react-router-dom'
 
 class Header extends React.Component {
 
@@ -9,7 +10,7 @@ class Header extends React.Component {
             <>
             <div className="header-sup">
                 <div><h1>LeeSITECH</h1></div>
-                <div className="secion"><i class="fas fa-user"></i> Iniciar Seción</div>
+                <div className="secion"><i class="fas fa-user"></i><Link to='/login'>Iniciar Seción</Link></div>
             </div>
             <div class="navbar">
                 <a href="#">Inicio</a>
