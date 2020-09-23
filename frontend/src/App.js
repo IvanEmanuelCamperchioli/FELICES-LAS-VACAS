@@ -1,9 +1,11 @@
 import React from 'react';
-
+import Item from './components/item'
 
 function App() {
   return (
-    <h1>Componente app</h1>
+    <>
+    <Item/>
+    </>
   );
 }
 
