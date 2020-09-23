@@ -7,6 +7,10 @@ import HomeAdmin from './pages/HomeAdmin';
 import FormAdmin from './components/FormAdmin'
 import EditAdmin from './components/EditAdmin'
 
+import './styles/generalStyles.css'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 function App() {
   return (
     <>

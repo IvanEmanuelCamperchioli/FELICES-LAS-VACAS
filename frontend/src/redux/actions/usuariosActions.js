@@ -1,57 +1,28 @@
 import axios from "axios";
 const usuariosActions = {
-  crearCuenta: (fd) => {
+
+  loguearCuenta: (usuario) => {
+    console.log("hola")
     return async (dispatch, getState) => {
-      const response = await axios.post(
-        "http://127.0.0.1:4000/api/user",
-        fd /*, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-
-            }*/
-      )
-
-      if (response.data.success !== true) {
-        alert("Lo siento no se pudo crear usuario correctamente")
-        // Swal.fire({
-        //     title: 'Im sorry :(',
-        //     imageUrl: `${SadSquare}`,
-        //     imageWidth: 180,
-        //     imageHeight: 180,
-        //     imageAlt: 'Sad square :(',
-        //     text: response.data.message,
-        // })
+      const res = await axios.post(
+        "http://127.0.0.1:4000/api/usuario", usuario )
+        
+      if (res.data.success !== true) {
+        return res.data.message
       } else {
-        if (response.data.token) {
-          // Swal.fire({
-          //     title: 'Welcome!',
-          //     imageUrl: `${HappySquare}`,
-          //     imageWidth: 180,
-          //     imageHeight: 180,
-          //     imageAlt: 'Happy square :D',
-          //     animation: false,
-          //     text: 'I am very happy to meet you!',
-          //     timer: 2000,
-          //     showConfirmButton: false
-          // })
-          setTimeout(() => {
+        await Swal.fire({  title: 'Bienvenido!',  text: `Que bueno tenerte aqui nuevamente, ${res.data.response.nombre}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
             dispatch({
-              type: "SET_USER",
-              payload: {
-                usuario: response.payload.usuario,
-                urlFoto: response.payload.urlFoto,
-                nombre: response.payload.nombre,
-                apellido: response.payload.apellido,
-                token: response.payload.token,
-              },
-            });
-          }, 2000);
-        }
+                type: "SET_USER",
+                payload:res.data.response
+            })
+            return {
+              success: true,
+              nombre: res.data.response.nombre
+          }
       }
     };
   },
-
+  
   // crearCuentaConGoogle: (nuevoUsuario) => {
   //   return async (dispatch, getState) => {
   //     const response = await axios.post(
@@ -80,53 +51,73 @@ const usuariosActions = {
   //   };
   // },
 
-  loguearUsuario: (nuevoUsuario) => {
+  crearUsuario: (nuevoUsuario) => {
     return async (dispatch, getState) => {
-      const response = await axios.post(
-        "http://127.0.0.1:4000/api/login",
-        nuevoUsuario
-      );
-
-      if (!response.data.success) {
-        // Swal.fire({
-        //     title: 'Im sorry :(',
-        //     imageUrl: `${SadSquare}`,
-        //     imageWidth: 180,
-        //     imageHeight: 180,
-        //     imageAlt: 'Sad square :(',
-        //     text: response.data.message,
-        // })
-      } else {
-        if (response.data.token) {
-          // Swal.fire({
-          //     title: 'Welcome!',
-          //     imageUrl: `${HappySquare}`,
-          //     imageWidth: 180,
-          //     imageHeight: 180,
-          //     imageAlt: 'Custom image',
-          //     animation: false,
-          //     text: 'I miss you a lot!',
-          //     timer: 2000,
-          //     showConfirmButton: false
-          // })
-          setTimeout(() => {
-            dispatch({
-              type: "SET_USER",
-              payload: {
-                nombre: response.data.nombre,
-                urlFoto: response.data.urlFoto,
-                token: response.data.token,
-                usuario: response.data.usuario,
-                primeraVez: response.data.primeraVez,
-                apellido: response.data.apellido,
-                email: response.data.email,
-              },
-            });
-          }, 2000);
+      const res = await axios.post("http://127.0.0.1:4000/api/usuarios", nuevoUsuario);
+      const error ={
+        email:"",
+        usuario:""
+      }
+      console.log(res)
+      if(!res.data.success && res.data.response !== undefined){
+        if(res.data.response.errors.email !== undefined){
+          error.email = "Ese email ya esta en uso"
+        }
+        if(res.data.response.errors.usuario !== undefined){
+          error.usuario = "Ese nombre de usuario ya esta en uso"
+        }
+        return error
+        
+      }else{
+        
+        await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.nombre}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+        dispatch({
+          type: "SET_USER",
+          payload: {  
+            nombre: res.data.response.nombre,
+            token: res.data.response.token,
+            apellido: res.data.response.apellido,
+            rol: res.data.response.rol
+          },
+        });
+        return {
+            success: true,
+            user: res.data.response.name
         }
       }
+
     };
   },
+
+  forcedLogIn: token => {
+    return async (dispatch, getState) => {
+        const response = await axios.get('http://127.0.0.1:4000/api/verificadorToken', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        dispatch({
+            type: "SET_USER",
+            payload: {
+                nombre: response.data.nombre,
+                apellido: response.data.apellido,
+                token: token,
+                email: response.data.email,
+            }
+        })
+
+    }
+  },getUser: user =>{
+    return async (dispatch, getState) =>{
+        
+        const res = await axios.post("http://127.0.0.1:4000/api/getUser", user)
+        
+        dispatch({
+            type: "GET_USER_EXISTS"
+        })
+        return res.data.success
+    }
+},
 };
 
 export default usuariosActions;
