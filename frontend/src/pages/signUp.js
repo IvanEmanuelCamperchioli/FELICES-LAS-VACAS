@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import usuariosActions from '../redux/actions/usuariosActions'
 import GoogleLogin from 'react-google-login'
 
-const Registro = (props) => {
+const SignUp = (props) => {
 
     const validacionMinLength = ['nombre', 'apellido', 'usuario']
     
@@ -180,4 +180,4 @@ const mapDispatchToProps = {
     // createAccountGoogle: usersActions.createAccountGoogle,
 }
 
-export default connect(null, mapDispatchToProps)(Registro)
+export default connect(null, mapDispatchToProps)(SignUp)
