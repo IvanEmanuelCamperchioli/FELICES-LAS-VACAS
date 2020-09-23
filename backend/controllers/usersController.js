@@ -1,36 +1,37 @@
-const Usuario = require("../models/Usuario")
+const User = require("../models/User")
 const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 
 
-const usuariosController = {
+const usersController = {
 
     crearCuenta: async (req, res) => {
-        const { usuario, password, email, nombre, apellido, logInGoogle} = req.body
-        const passwordHasheada = bcryptjs.hashSync(password.trim(), 10)
-        const usuarioExistente = await Usuario.findOne({ usuario: usuario })
+        const { username, password, email, name, lastname, logInGoogle} = req.body
+        const hashedPassword = bcryptjs.hashSync(password.trim(), 10)
+        const userExists = await User.findOne({ username: username })
 
-        if (usuarioExistente) {
+        if (userExists) {
             res.json({ success: false, message: "Disculpe, ése usuario ya está en uso." })
         } else {
         
-            const nuevoUsuario = new Usuario({ nombre, apellido, email, usuario, password: passwordHasheada, logInGoogle})
+            const newUser = new User({ name, lastname, email, username, password: hashedPassword, logWithGoogle, urlpic: photoUrl, firstTime, favConsole })
 
-            const usuarioNuevo = await nuevoUsuario.save()
+            const user = await newUser.save()
 
-            jwt.sign({ ...usuarioNuevo }, process.env.SECRETORKEY, {}, (error, token) => {
+            jwt.sign({ ...newUser }, process.env.SECRETORKEY, {}, (error, token) => {
+
                 if (error) {
                     res.json({ success: false, error })
                 } else {
-                    res.json({ success: true, token, nombre: usuarioNuevo.nombre, apellido: usuarioNuevo.apellido })
+                    res.json({ success: true, token, name: newUser.name, lastname: newUser.lastname })
                 }
             }
             )
         }
     },
 
-    crearCuentaConGoogle: async (req, res) => {
+    createAccountGoogle: async (req, res) => {
         const { usuario, password, email, urlFoto, nombre, apellido, logInGoogle, primeraVez } = req.body
 
         const passwordHasheada = bcryptjs.hashSync(password.trim(), 10)
@@ -52,41 +53,40 @@ const usuariosController = {
         }
     },
 
-    loguearUsuario: async (req, res) => {
-        const { usuario, password } = req.body
+    userLogin: async (req, res) => {
+        const { username, password } = req.body
 
-        const usuarioExistente = await Usuario.findOne({ usuario })
+        const userExist = await User.findOne({ username })
 
-        if (!usuarioExistente) {
+        if (!userExist) {
             res.json({
                 success: false, message: "Usuario y/o contraseña incorrectos"
             })
         } else {
-            const passwordCoincidente = bcryptjs.compareSync(password, usuarioExistente.password)
+            const passwordMatches = bcryptjs.compareSync(password, userExist.password)
 
-            if (!passwordCoincidente) {
+            if (!passwordMatches) {
                 res.json({
                     success: false, message: "Usuario y/o contraseña incorrectos"
                 })
-            } else if (usuarioExistente.logInGoogle && !req.body.logInMethod) {
+            } else if (userExist.logWithGoogle && !req.body.logInMethod) {
                 res.json({
                     success: false, message: "Su cuenta fué creada por otro medio."
                 })
             }
             else {
-                jwt.sign({ ...usuarioExistente }, process.env.SECRETORKEY, {}, (error, token) => {
+                jwt.sign({ ...userExist }, process.env.SECRETORKEY, {}, (error, token) => {
                     if (error) {
                         res.json({ success: false, error: "Ha ocurrido un error" })
                     } else {
                         res.json({ 
                             success: true, 
                             token,
-                            urlFoto: usuarioExistente.urlFoto,
-                            usuario: usuarioExistente.usuario,
-                            nombre: usuarioExistente.nombre,
-                            apellido: usuarioExistente.apellido,
-                            primeraVez: usuarioExistente.primeraVez,
-                            email: usuarioExistente.email })
+                            urlPic: userExist.urlPic,
+                            username: userExist.username,
+                            name: userExist.name,
+                            lastName: userExist.lastName,
+                            email: userExist.email })
                     }
                 })
             }
@@ -94,16 +94,24 @@ const usuariosController = {
         }
     },
 
+    userLogOut: () => {
+        return (dispatch, getState) => {
+            dispatch({
+                type: "LOGOUT_USER"
+            })
+        }
+    },
 
-    verificadorDeToken: (req, res) => {
-        const { nombre, urlFoto, usuario, apellido, primeraVez } = req.user
+    tokenVerificator: (req, res) => {
+        const { name, urlpic, username, firstTime, lastname, favConsole } = req.user
         res.json({
             success: true,
-            nombre,
-            urlFoto,
-            usuario,
-            apellido,
-            primeraVez,
+            name,
+            urlpic,
+            username,
+            firstTime,
+            lastname,
+            favConsole
         })
     },
 
@@ -135,4 +143,4 @@ const usuariosController = {
 }
 
 
-module.exports = usuariosController
+module.exports = usersController

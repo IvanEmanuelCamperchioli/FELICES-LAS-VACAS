@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from "react-redux"
-import usuariosActions from '../redux/actions/usuariosActions'
+import usuariosActions from '../redux/actions/usersActions'
 import GoogleLogin from 'react-google-login'
 
 const Registro = (props) => {
