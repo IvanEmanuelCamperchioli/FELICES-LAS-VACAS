@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../styles/header.css'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
 
 class Header extends React.Component {
 
@@ -8,41 +10,15 @@ class Header extends React.Component {
         return (
             <>
             <div className="header-sup">
-                <div><h1>LeeSITECH</h1></div>
-                <div className="secion"><i class="fas fa-user"></i> Iniciar Seción</div>
+                <button className="openbtn" ><i class="fas fa-shopping-cart"></i></button>
             </div>
             <div class="navbar">
+                <div className="div"></div>
                 <a href="#">Inicio</a>
-                <a href="#">Novedades</a>
-                <div class="dropdown">
-                    <button class="dropbtn">Tecnologías</button>
-                    <div class="dropdown-content">
-                        <div class="header">
-                            <h2>Mega Menu</h2>
-                        </div>   
-                        <div class="row">
-                            <div class="column">
-                                <h3>Equipos</h3>
-                                <a href="#">Notebook</a>
-                                <a href="#">PCs Gamer</a>
-                                <a href="#">Tablets</a>
-                                <a href="#">PCs sin monitor</a>
-                            </div>
-                            <div class="column">
-                                <h3>Imagen</h3>
-                                <a href="#">Link 1</a>
-                                <a href="#">Link 2</a>
-                                <a href="#">Link 3</a>
-                            </div>
-                            <div class="column">
-                                <h3>Category 3</h3>
-                                <a href="#">Link 1</a>
-                                <a href="#">Link 2</a>
-                                <a href="#">Link 3</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
+                <a href="#">Productos</a>
+                <a href="#">Como comprar</a>
+                <MenuDesplegable />
+                <div className="div"></div>
             </div>            
             </>
         )
@@ -50,3 +26,26 @@ class Header extends React.Component {
 }
 
 export default Header
+
+const MenuDesplegable = () => {
+
+    const [dropdownOpen, setDropdownOpen] = useState(false)
+  
+    const toggle = () => setDropdownOpen(prevState => !prevState)
+  
+    return (
+        <>
+            <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                <DropdownToggle className="desplegable"><i class="fas fa-user"></i> Cuenta </DropdownToggle>
+                <DropdownMenu>
+                    <DropdownItem header>Registrate</DropdownItem>
+                    <DropdownItem>Crear Cuenta</DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem header>Accede</DropdownItem>
+                    <DropdownItem>Iniciar Seción</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
+        </>
+    )
+}
+
