@@ -1,11 +1,23 @@
 .header-sup {
-    height: 8vh;
+    height: 6.3vh;
     width: 100%;
     background-color: #017FCB;
     color: white;
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+@font-face {
+  font-family: josefin;
+  src: url(JosefinSans-VariableFont_wght.ttf)
+}
+
+.titleHeader {
+  font-family: josefin;
+  letter-spacing: 2px;
+  margin-top: 5px;
+  text-shadow: 2px 2px 3px rgb(41, 115, 68);
 }
 
 .navbar {
@@ -30,6 +42,10 @@
   }
 
   .dropdown-item:hover {
+    color: black!important;
+  }
+
+  .dropdown-header {
     color: black!important;
   }
 
@@ -104,7 +120,6 @@
     color: white;
     padding: 10px 15px;
     border: none;
-    margin-left: 63%;
   }
   
   .openbtn:hover {

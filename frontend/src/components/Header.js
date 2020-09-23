@@ -10,6 +10,7 @@ class Header extends React.Component {
         return (
             <>
             <div className="header-sup">
+                <h5 className="titleHeader">Felices las vacas | Alimentación conciente</h5>
                 <button className="openbtn" ><i class="fas fa-shopping-cart"></i></button>
             </div>
             <div class="navbar">
