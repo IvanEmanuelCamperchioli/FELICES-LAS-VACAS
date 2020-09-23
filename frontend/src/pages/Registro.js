@@ -37,7 +37,6 @@ const Registro = (props) => {
             ...nuevoUsuario,
             [e.target.name]: e.target.value
         })
-        console.log(nuevoUsuario);
     }
 
     const validEmailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
@@ -56,7 +55,7 @@ const Registro = (props) => {
         )})
         
         errorsCopy.password = validPassword.test(nuevoUsuario.password)
-        ? "" : "La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
+            ? "" : "La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
         
         errorsCopy.validacionPassword = (nuevoUsuario.password !== nuevoUsuario.validacionPassword)
             ? "Las contraseñas no concuerdan" : ""
