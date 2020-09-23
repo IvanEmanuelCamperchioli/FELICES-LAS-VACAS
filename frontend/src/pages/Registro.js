@@ -88,7 +88,7 @@ const Registro = (props) => {
     }
  
     const responseGoogle = async (response) => {
-        setNuevoUsuario({
+        await setNuevoUsuario({
             ...nuevoUsuario,
             usuario:response.profileObj.email,
             password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
