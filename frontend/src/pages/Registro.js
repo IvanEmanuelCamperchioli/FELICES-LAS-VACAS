@@ -12,7 +12,7 @@ const Registro = (props) => {
         apellido: '',
         usuario: '',
         password: '',
-        validacionPassword: "",
+        verificacionPassword: "",
         email: '',
         DNI: '',
         provincia: '',
@@ -24,7 +24,7 @@ const Registro = (props) => {
         apellido: '',
         usuario: '',
         password: '',
-        validacionPassword: "",
+        verificacionPassword: "",
         email: '',
         DNI: '',
         provincia: '',
@@ -37,7 +37,6 @@ const Registro = (props) => {
             ...nuevoUsuario,
             [e.target.name]: e.target.value
         })
-        console.log(nuevoUsuario);
     }
 
     const validEmailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
@@ -46,7 +45,6 @@ const Registro = (props) => {
 
     const sendInfo = async e => {
         e.preventDefault()
-
         const errorsCopy = errors
         
         validacionMinLength.map(property => {
@@ -58,18 +56,18 @@ const Registro = (props) => {
         errorsCopy.password = validPassword.test(nuevoUsuario.password)
         ? "" : "La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
         
-        errorsCopy.validacionPassword = (nuevoUsuario.password !== nuevoUsuario.validacionPassword)
-            ? "Las contraseñas no concuerdan" : ""
+        errorsCopy.verificacionPassword = (nuevoUsuario.password !== nuevoUsuario.verificacionPassword)
+            ? "Las contraseñas no coinciden" : ""
 
         errorsCopy.email = validEmailRegex.test(nuevoUsuario.email)
             ? "" : "Introduzca un correo electrónico válido"
 
         setErrors({...errorsCopy})
 
-        if (errors.usuario === "" && errors.validacionPassword === "" && errors.password === "" && errors.nombre=== "" && errors.apellido=== "" && errors.email=== "") {
+        if (errors.usuario === "" && errors.verificacionPassword === "" && errors.password === "" && errors.nombre=== "" && errors.apellido=== "" && errors.email=== "") {
             
             const response = await props.crearCuenta(nuevoUsuario)
-            
+            console.log(nuevoUsuario)
             if (!response.success) {
                 if (response.usuario !== ""){
                     setErrors({
@@ -96,7 +94,7 @@ const Registro = (props) => {
             nombre:response.profileObj.givenName,
             apellido:response.profileObj.familyName.trim(),
             email: response.profileObj.email,
-            validacionPassword:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
+            verificacionPassword:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
             logInGoogle: true,
         })
     }
@@ -113,6 +111,7 @@ const Registro = (props) => {
                     }}>
 
                 </div>
+
                 <div style={{ display: 'flex', flexDirection: 'column'}}>
 
                     <h1 className="text-center responsiveText">Create new account</h1>
@@ -138,18 +137,18 @@ const Registro = (props) => {
                     }} type='text' name='usuario' placeholder='Elija su usuario (Mínimo 5 caracteres)'
                         onChange={readInput} />
 
-                    <label>Password</label>
+                    <label>Contraseña</label>
                     <span className='error'>{errors.password}</span>
                     <input style={{
                         borderRadius: '3vw'
                     }} type='password' name='password' placeholder='Elija su contraseña (Mínimo 5 caracteres)'
                         onChange={readInput} />
 
-                    <label>Validacion de Password</label>
-                    <span className='error'>{errors.validacionPassword}</span>
+                    <label>Reingrese la contraseña</label>
+                    <span className='error'>{errors.verificacionPassword}</span>
                     <input style={{
                         borderRadius: '3vw'
-                    }} type='password' name='validacionPassword' placeholder='Confirme contraseña'
+                    }} type='password' name='verificacionPassword' placeholder='Confirme contraseña'
                         onChange={readInput} />
 
                     <label>Email</label>

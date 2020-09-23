@@ -8,6 +8,7 @@ const usuariosReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_USER':
             localStorage.setItem('token', action.payload.token)
+            console.log(action.payload)
             return {
                 ...state,
                 nombre: action.payload.nombre,

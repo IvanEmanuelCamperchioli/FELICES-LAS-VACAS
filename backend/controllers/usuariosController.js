@@ -6,56 +6,131 @@ const jwt = require("jsonwebtoken")
 
 const usuariosController = {
 
-    logUsuario: async (req, res) => {
-        var {user, password } = req.body
+    crearCuenta: async (req, res) => {
+        const { usuario, password, email, nombre, apellido, logInGoogle} = req.body
+        const passwordHasheada = bcryptjs.hashSync(password.trim(), 10)
+        const usuarioExistente = await Usuario.findOne({ usuario: usuario })
+
+        if (usuarioExistente) {
+            res.json({ success: false, message: "Disculpe, ése usuario ya está en uso." })
+        } else {
         
-        const usuarioExiste = await User.findOne({user})
+            const nuevoUsuario = new Usuario({ nombre, apellido, email, usuario, password: passwordHasheada, logInGoogle})
 
-        if (!usuarioExiste){
+            const usuarioNuevo = await nuevoUsuario.save()
 
-            res.json({success: false, response: "Nombre y/o contraseña incorrecta"})
+            jwt.sign({ ...usuarioNuevo }, process.env.SECRETORKEY, {}, (error, token) => {
+                if (error) {
+                    res.json({ success: false, error })
+                } else {
+                    res.json({ success: true, token, nombre: usuarioNuevo.nombre, apellido: usuarioNuevo.apellido })
+                }
+            }
+            )
+        }
+    },
 
-        }else{
+    crearCuentaConGoogle: async (req, res) => {
+        const { usuario, password, email, urlFoto, nombre, apellido, logInGoogle, primeraVez } = req.body
 
-            const passwordMatches = bcryptjs.compareSync(password, usuarioExiste.password)
+        const passwordHasheada = bcryptjs.hashSync(password.trim(), 10)
+        const usuarioExistente = await Usuario.findOne({ usuario: usuario })
+        if (usuarioExistente) {
+            res.json({ success: false, message: "Lo siento, el usuario ya está en uso." })
+        } else {
+            const nuevoUsuario = new User({ nombre, apellido, email, urlFoto, usuario, password: passwordHasheada, logInGoogle, primeraVez })
 
-            if (!passwordMatches){
+            const usuario = await nuevoUsuario.save()
+            jwt.sign({ ...nuevoUsuario }, process.env.SECRETORKEY, {}, (error, token) => {
+                if (error) {
+                    res.json({ success: false, error })
+                } else {
+                    res.json({ success: true, token, urlFoto: nuevoUsuario.urlFoto, nombre: nuevoUsuario.nombre })
+                }
+            }
+            )
+        }
+    },
 
-                res.json({success: false, response: "Nombre y/o contraseña incorrecta"})
+    loguearUsuario: async (req, res) => {
+        const { usuario, password } = req.body
 
-            }else{
-                jwt.sign({...userExist}, process.env.SECRETORKEY, {}, (error, token)=>{
+        const usuarioExistente = await Usuario.findOne({ usuario })
 
-                    if(error){
-                        res.json({success:false, response: "Algo salió mal"})
-                    }else{
-                        res.json({success: true, response:{
-                            token,
-                            nombre: usuarioExiste.nombre,
-                            foto: usuarioExiste.foto
-                            }
-                        })
-                    }
-                    
+        if (!usuarioExistente) {
+            res.json({
+                success: false, message: "Usuario y/o contraseña incorrectos"
+            })
+        } else {
+            const passwordCoincidente = bcryptjs.compareSync(password, usuarioExistente.password)
+
+            if (!passwordCoincidente) {
+                res.json({
+                    success: false, message: "Usuario y/o contraseña incorrectos"
                 })
-            } 
+            } else if (usuarioExistente.logInGoogle && !req.body.logInMethod) {
+                res.json({
+                    success: false, message: "Su cuenta fué creada por otro medio."
+                })
+            }
+            else {
+                jwt.sign({ ...usuarioExistente }, process.env.SECRETORKEY, {}, (error, token) => {
+                    if (error) {
+                        res.json({ success: false, error: "Ha ocurrido un error" })
+                    } else {
+                        res.json({ 
+                            success: true, 
+                            token,
+                            urlFoto: usuarioExistente.urlFoto,
+                            usuario: usuarioExistente.usuario,
+                            nombre: usuarioExistente.nombre,
+                            apellido: usuarioExistente.apellido,
+                            primeraVez: usuarioExistente.primeraVez,
+                            email: usuarioExistente.email })
+                    }
+                })
+            }
+
         }
     },
-    getUsuarioExist: async (req,res) =>{
+
+
+    verificadorDeToken: (req, res) => {
+        const { nombre, urlFoto, usuario, apellido, primeraVez } = req.user
+        res.json({
+            success: true,
+            nombre,
+            urlFoto,
+            usuario,
+            apellido,
+            primeraVez,
+        })
+    },
+
+    modificarUsuario: async (req, res) => {
+        const { usuario, nombre, apellido, urlFoto } = req.body
         
-        const user = req.body.user
-        const usuarioExiste = await User.findOne({user})
-        if (usuarioExiste){
-            res.json({
-                success:true
-            })
-        }else{
-            res.json({
-                success:false
-            })
+        if (req.files) {
+            var archivo = req.files.urlFoto
+            // var extension = archivo.nombre.split('.')[1]
+            // var nombreArchivo = req.body.usuario + '.' + extension
+            var nombreArchivo = archivo.nombre
+            var serverURL = `uploads/${nombreArchivo}`
+            archivo.mv(serverURL)
+            var fotoUrl = `http://localhost:4000/uploads/${nombreArchivo}`
+        } else {
+            var fotoUrl = urlFoto
         }
-    },
-    
+
+        const modificarUsuario = await Usuario.findOneAndUpdate({ usuario: usuario }, { nombre, urlFoto: fotoUrl, apellido }, { returnNewDocument: true })
+        res.json({
+            success: true,
+            nombre,
+            apellido,
+            fotoUrl
+        })
+
+    }
 
 }
 
