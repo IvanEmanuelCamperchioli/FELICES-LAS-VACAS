@@ -1,13 +1,8 @@
 const initialState = {
-    usuario: "",
-    password: "",
-    email: "",
+    token:"",
     nombre: "",
-    apellido: "",
-    urlFoto: "",
-    idComentario: "", 
-    logInGoogle: false,
-    primeraVez: false,
+    apellido: ""
+
 }
 
 const usuariosReducer = (state = initialState, action) => {
