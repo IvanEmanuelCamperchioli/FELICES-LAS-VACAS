@@ -1,9 +1,19 @@
 import React, {useState} from 'react'
 import '../styles/header.css'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Tooltip } from 'reactstrap';
 
 
 class Header extends React.Component {
+
+    state = {
+        tooltipOpen: false
+    }
+
+    // toggle = () => {
+    //     this.setState({
+
+    //     })
+    // }
 
     render() {
 
@@ -11,7 +21,10 @@ class Header extends React.Component {
             <>
             <div className="header-sup">
                 <h5 className="titleHeader">Felices las vacas | Alimentación conciente</h5>
-                <button className="openbtn" ><i class="fas fa-shopping-cart"></i></button>
+                <div>
+                    <button id="TooltipExample" className="openbtn" ><i class="fas fa-shopping-cart"></i></button>
+                    {/* <Tooltip placement="right" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>Tienda virtual</Tooltip> */}
+                </div>
             </div>
             <div class="navbar">
                 <div className="div"></div>
