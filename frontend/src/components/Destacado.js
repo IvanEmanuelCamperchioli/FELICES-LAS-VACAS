@@ -12,8 +12,8 @@ class Destacado extends React.Component {
                     <div className="logo" style={{backgroundImage: `url(${logo})`}}></div>
                 </div> 
                 <div style={{height: '10vh', width: '100%'}}></div>
-
                 <h1 className="titulo">Destacado</h1>
+                
             </>
         )
     }

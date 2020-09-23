@@ -9,11 +9,11 @@ class Header extends React.Component {
         tooltipOpen: false
     }
 
-    // toggle = () => {
-    //     this.setState({
-
-    //     })
-    // }
+    toggle = () => {
+        this.setState({
+            tooltipOpen: !this.state.tooltipOpen
+        })
+    }
 
     render() {
 
@@ -23,7 +23,7 @@ class Header extends React.Component {
                 <h5 className="titleHeader">Felices las vacas | Alimentación conciente</h5>
                 <div>
                     <button id="TooltipExample" className="openbtn" ><i class="fas fa-shopping-cart"></i></button>
-                    {/* <Tooltip placement="right" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>Tienda virtual</Tooltip> */}
+                    <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="TooltipExample" toggle={this.toggle}>Tienda virtual</Tooltip>
                 </div>
             </div>
             <div class="navbar">
