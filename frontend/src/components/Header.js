@@ -15,7 +15,7 @@ class Header extends React.Component {
                 <h5 className="titleHeader">Felices las vacas | Alimentación conciente</h5>
                 <button className="openbtn" ><FontAwesomeIcon icon={faShoppingCart} /></button>
             </div>
-            <div class="navbar">
+            <div className="navbar">
                 <div className="div"></div>
                 <a href="#">Inicio</a>
                 <a href="#">Productos</a>

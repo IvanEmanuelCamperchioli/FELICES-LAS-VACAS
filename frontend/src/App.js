@@ -21,7 +21,7 @@ function App() {
           <Route path='/registro' component={Registro}/>
           <Route path='/homeadmin' component={HomeAdmin}/>
           <Route path='/formadmin' component={FormAdmin}/>
-          <Route path='editadmin' component={EditAdmin}/>
+          <Route path='/editadmin' component={EditAdmin}/>
           <Redirect to='/'/>
         </Switch>
       </BrowserRouter>

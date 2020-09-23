@@ -20,18 +20,7 @@ const Registro = (props) => {
         logInGoogle: false,    
     })
 
-    const [errors, setErrors] = useState({
-        nombre: '',
-        apellido: '',
-        usuario: '',
-        password: '',
-        verificacionPassword: "",
-        email: '',
-        DNI: '',
-        provincia: '',
-        logInGoogle: false,
-
-    })
+    const [errors, setErrors] = useState(nuevoUsuario)
 
     const readInput = e => {  
         setNuevoUsuario({
@@ -68,7 +57,7 @@ const Registro = (props) => {
         if (errors.usuario === "" && errors.verificacionPassword === "" && errors.password === "" && errors.nombre=== "" && errors.apellido=== "" && errors.email=== "") {
             
             const response = await props.crearCuenta(nuevoUsuario)
-            console.log(nuevoUsuario)
+            
             if (!response.success) {
                 if (response.usuario !== ""){
                     setErrors({
@@ -188,7 +177,6 @@ const Registro = (props) => {
 
 const mapDispatchToProps = {
     crearCuenta: usuariosActions.crearUsuario,
-    // createAccountGoogle: usersActions.createAccountGoogle,
 }
 
 export default connect(null, mapDispatchToProps)(Registro)
