@@ -1,18 +1,23 @@
 const initialState = {
+<<<<<<< HEAD
     token:"",
     nombre: "",
     apellido: ""
 
+=======
+    token: "",
+    nombre: "",
+    apellido: "",
+>>>>>>> e6498a9c97e20cfa4bba99200a4326d672a8de9f
 }
 
 const usuariosReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_USER':
             localStorage.setItem('token', action.payload.token)
+            console.log(action.payload)
             return {
                 ...state,
-                usuario: action.payload.usuario,
-                urlFoto: action.payload.urlFoto,
                 nombre: action.payload.nombre,
                 apellido: action.payload.apellido,
                 token: action.payload.token,
@@ -22,7 +27,6 @@ const usuariosReducer = (state = initialState, action) => {
                 ...state,
                 nombre: action.payload.nombre,
                 apellido: action.payload.apellido,
-                urlFoto: action.payload.urlFoto,
             }
 
         case 'LOGOUT_USER':
