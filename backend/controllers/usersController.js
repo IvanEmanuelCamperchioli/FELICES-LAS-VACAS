@@ -94,13 +94,7 @@ const usersController = {
         }
     },
 
-    userLogOut: () => {
-        return (dispatch, getState) => {
-            dispatch({
-                type: "LOGOUT_USER"
-            })
-        }
-    },
+    
 
     tokenVerificator: (req, res) => {
         const { name, urlpic, username, firstTime, lastname, favConsole } = req.user

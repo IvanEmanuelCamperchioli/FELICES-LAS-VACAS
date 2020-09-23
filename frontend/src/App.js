@@ -8,6 +8,10 @@ import usersActions from './redux/actions/usersActions'
 
 import { prependOnceListener } from '../../backend/models/Usuario';
 
+import './styles/generalStyles.css'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 function App() {
 
   if(localStorage.getItem('token')) {
