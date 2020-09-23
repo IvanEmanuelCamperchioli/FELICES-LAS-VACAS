@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import { connect } from "react-redux"
-import usuariosActions from '../redux/actions/usersActions'
+import usersActions from '../redux/actions/usersActions'
 import GoogleLogin from 'react-google-login'
 import Swal from   'sweetalert2'
 
 const Registro = (props) => {
 
-    const validacionMinLength = ['nombre', 'apellido', 'usuario']
+    const minimunValidationLength = ['name', 'lastname', 'username']
     
-    const [nuevoUsuario, setNuevoUsuario] = useState({
-        nombre: '',
-        apellido: '',
-        usuario: '',
+    const [newUser, setNewUser] = useState({
+        name: '',
+        lastname: '',
+        username: '',
         password: '',
-        verificacionPassword: "",
+        passwordVerificated: "",
         email: '',
         DNI: '',
         provincia: '',
@@ -21,11 +21,11 @@ const Registro = (props) => {
     })
 
     const [errors, setErrors] = useState({
-        nombre: '',
-        apellido: '',
-        usuario: '',
+        name: '',
+        lastname: '',
+        username: '',
         password: '',
-        verificacionPassword: "",
+        passwordVerificated: "",
         email: '',
         DNI: '',
         provincia: '',
@@ -34,8 +34,8 @@ const Registro = (props) => {
     })
 
     const readInput = e => {  
-        setNuevoUsuario({
-            ...nuevoUsuario,
+        setNewUser({
+            ...newUser,
             [e.target.name]: e.target.value
         })
     }
@@ -48,32 +48,32 @@ const Registro = (props) => {
         e.preventDefault()
         const errorsCopy = errors
         
-        validacionMinLength.map(property => {
-            errorsCopy[property] = ((nuevoUsuario[property].length < 2)
+        minimunValidationLength.map(property => {
+            errorsCopy[property] = ((newUser[property].length < 2)
             ? `¡El ${property} debe tener al menos 2 caracteres!`
             : ""
         )})
         
-        errorsCopy.password = validPassword.test(nuevoUsuario.password)
+        errorsCopy.password = validPassword.test(newUser.password)
         ? "" : "La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
         
-        errorsCopy.verificacionPassword = (nuevoUsuario.password !== nuevoUsuario.verificacionPassword)
+        errorsCopy.passwordVerificated = (newUser.password !== newUser.passwordVerificated)
             ? "Las contraseñas no coinciden" : ""
 
-        errorsCopy.email = validEmailRegex.test(nuevoUsuario.email)
+        errorsCopy.email = validEmailRegex.test(newUser.email)
             ? "" : "Introduzca un correo electrónico válido"
 
         setErrors({...errorsCopy})
 
-        if (errors.usuario === "" && errors.verificacionPassword === "" && errors.password === "" && errors.nombre=== "" && errors.apellido=== "" && errors.email=== "") {
+        if (errors.username === "" && errors.passwordVerificated === "" && errors.password === "" && errors.name=== "" && errors.lastname=== "" && errors.email=== "") {
             
-            const response = await props.crearCuenta(nuevoUsuario)
-            console.log(nuevoUsuario)
+            const response = await props.createAccount(newUser)
+            console.log(newUser)
             if (!response.success) {
-                if (response.usuario !== ""){
+                if (response.username !== ""){
                     setErrors({
                         ...errors,
-                        usuario: response.usuario
+                        username: response.username
                     })
                 }
                 if (response.email !== ""){
@@ -88,17 +88,17 @@ const Registro = (props) => {
     }
  
     const responseGoogle = async (response) => {
-        await setNuevoUsuario({
-            ...nuevoUsuario,
-            usuario:response.profileObj.email,
+        await setNewUser({
+            ...newUser,
+            username:response.profileObj.email,
             password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
-            nombre:response.profileObj.givenName,
-            apellido:response.profileObj.familyName.trim(),
+            name:response.profileObj.givenName,
+            lastname:response.profileObj.familyName.trim(),
             email: response.profileObj.email,
-            verificacionPassword:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
+            passwordVerificated:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
             logInGoogle: true,
         })
-        const res = await props.crearCuenta(nuevoUsuario)
+        const res = await props.createAccount(newUser)
        
         if (res.success === true){
             
@@ -128,25 +128,25 @@ const Registro = (props) => {
 
                     <h1 className="text-center responsiveText">Create new account</h1>
 
-                    <label>Nombre</label>
-                    <span className='error'>{errors.nombre}</span>
+                    <label>Name</label>
+                    <span className='error'>{errors.name}</span>
                     <input style={{
                         borderRadius: '3vw'
-                    }} type='text' name='nombre' placeholder='Escriba su nombre'
+                    }} type='text' name='name' placeholder='Escriba su nombre'
                         onChange={readInput} />
 
-                    <label>Apellido</label>
-                    <span className='error'>{errors.apellido}</span>
+                    <label>lastname</label>
+                    <span className='error'>{errors.lastname}</span>
                     <input style={{
                         borderRadius: '3vw'
-                    }} type='text' name='apellido' placeholder='Escriba su apellido'
+                    }} type='text' name='lastname' placeholder='Escriba su apellido'
                         onChange={readInput} />
 
                     <label >Usuario</label>
-                    <span className='error'>{errors.usuario}</span>
+                    <span className='error'>{errors.username}</span>
                     <input style={{
                         borderRadius: '3vw'
-                    }} type='text' name='usuario' placeholder='Elija su usuario (Mínimo 5 caracteres)'
+                    }} type='text' name='username' placeholder='Elija su usuario (Mínimo 5 caracteres)'
                         onChange={readInput} />
 
                     <label>Contraseña</label>
@@ -157,10 +157,10 @@ const Registro = (props) => {
                         onChange={readInput} />
 
                     <label>Reingrese la contraseña</label>
-                    <span className='error'>{errors.verificacionPassword}</span>
+                    <span className='error'>{errors.passwordVerificated}</span>
                     <input style={{
                         borderRadius: '3vw'
-                    }} type='password' name='verificacionPassword' placeholder='Confirme contraseña'
+                    }} type='password' name='passwordVerificated' placeholder='Confirme contraseña'
                         onChange={readInput} />
 
                     <label>Email</label>
@@ -187,7 +187,7 @@ const Registro = (props) => {
 }
 
 const mapDispatchToProps = {
-    crearCuenta: usuariosActions.crearUsuario,
+    createAccount: usersActions.createAccount,
     // createAccountGoogle: usersActions.createAccountGoogle,
 }
 

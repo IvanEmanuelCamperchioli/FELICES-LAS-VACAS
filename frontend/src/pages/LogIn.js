@@ -1,7 +1,7 @@
 import React, { useState }  from 'react'
 import {Link} from 'react-router-dom'
 import GoogleLogin from 'react-google-login'
-import usuariosActions from '../redux/actions/usuariosActions';
+import usersActions from '../redux/actions/usersActions';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2'
 
@@ -115,8 +115,8 @@ const LogIn = (props) => {
 };
 
 const mapDispatchToProps = {
-    userLogIn: usuariosActions.loguearCuenta,
-    getUser: usuariosActions.getUser
+    userLogIn: usersActions.userLogIn,
+    getUser: usersActions.getUser
 }
 
 export default connect(null, mapDispatchToProps)(LogIn)

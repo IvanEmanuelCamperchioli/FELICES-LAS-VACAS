@@ -6,52 +6,45 @@ const jwt = require("jsonwebtoken")
 
 const usersController = {
 
-    crearCuenta: async (req, res) => {
+    createAccount: async (req, res) => {
         const { username, password, email, name, lastname, logInGoogle} = req.body
+        let error = false
         const hashedPassword = bcryptjs.hashSync(password.trim(), 10)
-        const userExists = await User.findOne({ username: username })
-
-        if (userExists) {
-            res.json({ success: false, message: "Disculpe, ése usuario ya está en uso." })
-        } else {
         
-            const newUser = new User({ name, lastname, email, username, password: hashedPassword, logWithGoogle, urlpic: photoUrl, firstTime, favConsole })
+            const newUser = new User({ 
+                name: name.trim().charAt(0).toUpperCase() + name.slice(1), 
+                lastname: lastname.trim().charAt(0).toUpperCase() + lastname.slice(1), 
+                email: email.trim(), 
+                username: username.trim(), 
+                password: hashedPassword, 
+                logInGoogle})
 
-            const user = await newUser.save()
-
+            try{
+                const res = await newUser.save()
+                console.log(res)
+            }
+            catch(err){
+                error = err
+            }
+            finally{
+            if (error){
+                res.json({
+                    success: false,
+                    response: error
+                })
+            }else{
             jwt.sign({ ...newUser }, process.env.SECRETORKEY, {}, (error, token) => {
-
                 if (error) {
                     res.json({ success: false, error })
                 } else {
-                    res.json({ success: true, token, name: newUser.name, lastname: newUser.lastname })
+                    res.json({ success: true, response:{token, name: newUser.name, apellido: newUser.apellido, rol: newUser.rol} })
                 }
+            })
             }
-            )
         }
+        
     },
 
-    createAccountGoogle: async (req, res) => {
-        const { usuario, password, email, urlFoto, nombre, apellido, logInGoogle, primeraVez } = req.body
-
-        const passwordHasheada = bcryptjs.hashSync(password.trim(), 10)
-        const usuarioExistente = await Usuario.findOne({ usuario: usuario })
-        if (usuarioExistente) {
-            res.json({ success: false, message: "Lo siento, el usuario ya está en uso." })
-        } else {
-            const nuevoUsuario = new User({ nombre, apellido, email, urlFoto, usuario, password: passwordHasheada, logInGoogle, primeraVez })
-
-            const usuario = await nuevoUsuario.save()
-            jwt.sign({ ...nuevoUsuario }, process.env.SECRETORKEY, {}, (error, token) => {
-                if (error) {
-                    res.json({ success: false, error })
-                } else {
-                    res.json({ success: true, token, urlFoto: nuevoUsuario.urlFoto, nombre: nuevoUsuario.nombre })
-                }
-            }
-            )
-        }
-    },
 
     userLogin: async (req, res) => {
         const { username, password } = req.body
@@ -69,24 +62,19 @@ const usersController = {
                 res.json({
                     success: false, message: "Usuario y/o contraseña incorrectos"
                 })
-            } else if (userExist.logWithGoogle && !req.body.logInMethod) {
-                res.json({
-                    success: false, message: "Su cuenta fué creada por otro medio."
-                })
-            }
-            else {
+            } else {
                 jwt.sign({ ...userExist }, process.env.SECRETORKEY, {}, (error, token) => {
                     if (error) {
                         res.json({ success: false, error: "Ha ocurrido un error" })
                     } else {
-                        res.json({ 
-                            success: true, 
+                        res.json({success: true, 
+                            response:{
                             token,
-                            urlPic: userExist.urlPic,
-                            username: userExist.username,
                             name: userExist.name,
-                            lastName: userExist.lastName,
-                            email: userExist.email })
+                            lastname: userExist.lastname,
+                            rol: userExist.rol
+                            }
+                        })
                     }
                 })
             }
@@ -109,13 +97,13 @@ const usersController = {
         })
     },
 
-    modificarUsuario: async (req, res) => {
-        const { usuario, nombre, apellido, urlFoto } = req.body
+    /* modificarUsuario: async (req, res) => {
+        const { usuario, name, apellido, urlFoto } = req.body
         
         if (req.files) {
             var archivo = req.files.urlFoto
-            // var extension = archivo.nombre.split('.')[1]
-            // var nombreArchivo = req.body.usuario + '.' + extension
+            // var extension = archivo.name.split('.')[1]
+            // var nameArchivo = req.body.usuario + '.' + extension
             var nombreArchivo = archivo.nombre
             var serverURL = `uploads/${nombreArchivo}`
             archivo.mv(serverURL)
@@ -132,7 +120,22 @@ const usersController = {
             fotoUrl
         })
 
-    }
+    } */
+
+    getUser: async (req,res) =>{
+        
+        const user = req.body.user
+        const userExist = await User.findOne({user})
+        if (userExist){
+            res.json({
+                success:true
+            })
+        }else{
+            res.json({
+                success:false
+            })
+        }
+    },
 
 }
 

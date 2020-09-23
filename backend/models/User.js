@@ -1,10 +1,10 @@
 const mongoose = require("mongoose")
 
 
-const UsuarioSchema = new mongoose.Schema({
-    usuario: {type:String, required:true, 
+const UserSchema = new mongoose.Schema({
+    username: {type:String, required:true, 
         validate:{
-            validator: async usuario => await Usuario.find({usuario}).countDocuments()===0,
+            validator: async user => await User.find({user}).countDocuments()===0,
             message: () => "El nombre de usuario ya ha sido utilizado"
         }
     },
@@ -15,8 +15,8 @@ const UsuarioSchema = new mongoose.Schema({
             message: () => "That email is already used"
         }
     },
-    nombre: {type: String, required: true},
-    apellido: {type: String, required: true},
+    name: {type: String, required: true},
+    lastname: {type: String, required: true},
     DNI: {type: Number, default: null},
     provincia: {type: String, default: null},
     direccion: {type: String, default: null},
@@ -26,6 +26,6 @@ const UsuarioSchema = new mongoose.Schema({
 })
 
 
-const Usuario = mongoose.model("Usuario", UsuarioSchema)
+const User = mongoose.model("User", UserSchema)
 
-module.exports = Usuario
+module.exports = User
