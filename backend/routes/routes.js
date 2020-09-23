@@ -5,11 +5,16 @@ const router = express.Router()
 
 
 
-router.route('/usuario')
+router.route('/usuarios')
 .post(usuariosController.crearCuenta)
 
-router.route('/usuarioGoogle')
-.post(usuariosController.crearCuentaConGoogle)
+router.route('/usuario')
+.post(usuariosController.loguearUsuario)
+/* router.route('/usuarioGoogle')
+.post(usuariosController.crearCuentaConGoogle) */
+
+router.route('/getUser')
+.post(usuariosController.getUsersExist)
 
 router.route('/login')
 .post(usuariosController.loguearUsuario)

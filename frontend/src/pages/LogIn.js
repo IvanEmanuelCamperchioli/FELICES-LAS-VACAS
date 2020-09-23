@@ -1,6 +1,9 @@
 import React, { useState }  from 'react'
 import {Link} from 'react-router-dom'
 import GoogleLogin from 'react-google-login'
+import usuariosActions from '../redux/actions/usuariosActions';
+import { connect } from 'react-redux';
+import Swal from 'sweetalert2'
 
 const LogIn = (props) => {
 
@@ -11,9 +14,7 @@ const LogIn = (props) => {
     })
 
     const [errors, setErrors] = useState({
-        usuario: '',
-        password: '',
-        logInGoogle: false,
+        error:"",
     })
 
     const readInput = e => {
@@ -23,33 +24,44 @@ const LogIn = (props) => {
         })
     }
 
-    const sendInfo = e => {
+    const sendInfo = async e => {
         e.preventDefault()
 
-        const errorsCopy = errors
-        
-        errorsCopy.usuario = (nuevoUsuario.usuario.length < 2)
-            ? "¡La contraseño o el usuario son incorrectos!" : ""
+        if (nuevoUsuario.nombre ==="" || nuevoUsuario.password === "" ){
+            setErrors({
+                error: "Both fields are required"
+            }) 
 
-        errorsCopy.password = (nuevoUsuario.password.length < 2)
-            ? "¡La contraseño o el usuario son incorrectos!" : ""
+        }else{
+            const userToLogIn = { usuario: nuevoUsuario.usuario, password: nuevoUsuario.password }
 
-        setErrors({...errorsCopy})
+            const res = await props.userLogIn(userToLogIn)
+            console.log(res)
+            if (res.success){
 
-        if (errors.usuario === "" && errors.password === ""){
-            const userToLogIn = { username: nuevoUsuario.nombre, password: nuevoUsuario.password }
-
-            props.userLogIn(userToLogIn)
+            }
+            else{
+                setErrors({
+                    error: res
+                })    
+            }
         }
     }
 
-    const responseGoogle = (response) => {
+    const responseGoogle = async (response) => {
+        console.log(response.profileObj)
         setNuevoUsuario({
             ...nuevoUsuario,
             usuario:response.profileObj.email,
             password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
             logInGoogle: true,
         })
+        const res = await props.getUser(nuevoUsuario)
+        if(res === true){
+            const resp =  await props.userLogIn(nuevoUsuario)
+            }else{
+                Swal.fire({  title: 'You must sign up!',  text: `Please go to create an account, ${response.profileObj.givenName}.`,  icon: 'warning',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+            }
     }
 
     return (
@@ -67,11 +79,11 @@ const LogIn = (props) => {
                 <div style={{ display: 'flex', flexDirection: 'column'}}>
 
                     <h1>Please, choose your account</h1>
-
+                    <span>{errors.error}</span>
                     <label>Usuario</label>
                     <input style={{
                         borderRadius: '3vw'
-                    }} type='text' name='username' placeholder='Type your username'
+                    }} type='text' name='usuario' placeholder='Type your username'
                         onChange={readInput} />
 
                     <label>Password</label>
@@ -102,4 +114,9 @@ const LogIn = (props) => {
     );
 };
 
-export default LogIn
+const mapDispatchToProps = {
+    userLogIn: usuariosActions.loguearCuenta,
+    getUser: usuariosActions.getUser
+}
+
+export default connect(null, mapDispatchToProps)(LogIn)

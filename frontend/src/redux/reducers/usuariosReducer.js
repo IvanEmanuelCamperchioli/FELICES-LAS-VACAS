@@ -1,14 +1,8 @@
 const initialState = {
-<<<<<<< HEAD
-    token:"",
-    nombre: "",
-    apellido: ""
-
-=======
     token: "",
     nombre: "",
     apellido: "",
->>>>>>> e6498a9c97e20cfa4bba99200a4326d672a8de9f
+    rol:""
 }
 
 const usuariosReducer = (state = initialState, action) => {
@@ -21,6 +15,7 @@ const usuariosReducer = (state = initialState, action) => {
                 nombre: action.payload.nombre,
                 apellido: action.payload.apellido,
                 token: action.payload.token,
+                rol: action.payload.rol
             }
         case 'UPDATE_USER':
             return {

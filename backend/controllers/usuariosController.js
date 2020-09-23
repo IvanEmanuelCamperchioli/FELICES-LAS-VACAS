@@ -8,53 +8,47 @@ const usuariosController = {
 
     crearCuenta: async (req, res) => {
         const { usuario, password, email, nombre, apellido, logInGoogle} = req.body
+        let error = false
         const passwordHasheada = bcryptjs.hashSync(password.trim(), 10)
-        const usuarioExistente = await Usuario.findOne({ usuario: usuario })
-
-        if (usuarioExistente) {
-            res.json({ success: false, message: "Disculpe, ése usuario ya está en uso." })
-        } else {
         
-            const nuevoUsuario = new Usuario({ nombre, apellido, email, usuario, password: passwordHasheada, logInGoogle})
+            const nuevoUsuario = new Usuario({ 
+                nombre: nombre.trim().charAt(0).toUpperCase() + nombre.slice(1), 
+                apellido: apellido.trim().charAt(0).toUpperCase() + apellido.slice(1), 
+                email: email.trim(), 
+                usuario: usuario.trim(), 
+                password: passwordHasheada, 
+                logInGoogle})
 
-            const usuarioNuevo = await nuevoUsuario.save()
-
-            jwt.sign({ ...usuarioNuevo }, process.env.SECRETORKEY, {}, (error, token) => {
-                if (error) {
-                    res.json({ success: false, error })
-                } else {
-                    res.json({ success: true, token, nombre: usuarioNuevo.nombre, apellido: usuarioNuevo.apellido })
-                }
+            try{
+                const res = await nuevoUsuario.save()
+                console.log(res)
             }
-            )
-        }
-    },
-
-    crearCuentaConGoogle: async (req, res) => {
-        const { usuario, password, email, urlFoto, nombre, apellido, logInGoogle, primeraVez } = req.body
-
-        const passwordHasheada = bcryptjs.hashSync(password.trim(), 10)
-        const usuarioExistente = await Usuario.findOne({ usuario: usuario })
-        if (usuarioExistente) {
-            res.json({ success: false, message: "Lo siento, el usuario ya está en uso." })
-        } else {
-            const nuevoUsuario = new User({ nombre, apellido, email, urlFoto, usuario, password: passwordHasheada, logInGoogle, primeraVez })
-
-            const usuario = await nuevoUsuario.save()
+            catch(err){
+                error = err
+            }
+            finally{
+            if (error){
+                res.json({
+                    success: false,
+                    response: error
+                })
+            }else{
             jwt.sign({ ...nuevoUsuario }, process.env.SECRETORKEY, {}, (error, token) => {
                 if (error) {
                     res.json({ success: false, error })
                 } else {
-                    res.json({ success: true, token, urlFoto: nuevoUsuario.urlFoto, nombre: nuevoUsuario.nombre })
+                    res.json({ success: true, response:{token, nombre: nuevoUsuario.nombre, apellido: nuevoUsuario.apellido, rol: nuevoUsuario.rol} })
                 }
+            })
             }
-            )
         }
+        
     },
+
 
     loguearUsuario: async (req, res) => {
         const { usuario, password } = req.body
-
+        console.log(req.body)
         const usuarioExistente = await Usuario.findOne({ usuario })
 
         if (!usuarioExistente) {
@@ -68,25 +62,20 @@ const usuariosController = {
                 res.json({
                     success: false, message: "Usuario y/o contraseña incorrectos"
                 })
-            } else if (usuarioExistente.logInGoogle && !req.body.logInMethod) {
-                res.json({
-                    success: false, message: "Su cuenta fué creada por otro medio."
-                })
-            }
+            } 
             else {
                 jwt.sign({ ...usuarioExistente }, process.env.SECRETORKEY, {}, (error, token) => {
                     if (error) {
                         res.json({ success: false, error: "Ha ocurrido un error" })
                     } else {
-                        res.json({ 
-                            success: true, 
+                        res.json({success: true, 
+                            response:{
                             token,
-                            urlFoto: usuarioExistente.urlFoto,
-                            usuario: usuarioExistente.usuario,
                             nombre: usuarioExistente.nombre,
                             apellido: usuarioExistente.apellido,
-                            primeraVez: usuarioExistente.primeraVez,
-                            email: usuarioExistente.email })
+                            rol: usuarioExistente.rol
+                            }
+                        })
                     }
                 })
             }
@@ -106,7 +95,21 @@ const usuariosController = {
             primeraVez,
         })
     },
-
+    
+    getUsersExist: async (req,res) =>{
+        
+        const usuario = req.body.usuario
+        const usuarioExiste = await Usuario.findOne({usuario})
+        if (usuarioExiste){
+            res.json({
+                success:true
+            })
+        }else{
+            res.json({
+                success:false
+            })
+        }
+    },
     modificarUsuario: async (req, res) => {
         const { usuario, nombre, apellido, urlFoto } = req.body
         

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from "react-redux"
 import usuariosActions from '../redux/actions/usuariosActions'
 import GoogleLogin from 'react-google-login'
+import Swal from   'sweetalert2'
 
 const Registro = (props) => {
 
@@ -72,7 +73,7 @@ const Registro = (props) => {
                 if (response.usuario !== ""){
                     setErrors({
                         ...errors,
-                        user: response.usuario
+                        usuario: response.usuario
                     })
                 }
                 if (response.email !== ""){
@@ -86,7 +87,7 @@ const Registro = (props) => {
         }
     }
  
-    const responseGoogle = (response) => {
+    const responseGoogle = async (response) => {
         setNuevoUsuario({
             ...nuevoUsuario,
             usuario:response.profileObj.email,
@@ -97,6 +98,17 @@ const Registro = (props) => {
             verificacionPassword:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
             logInGoogle: true,
         })
+        const res = await props.crearCuenta(nuevoUsuario)
+       
+        if (res.success === true){
+            
+            
+        }else{
+            if (res.user !== ""){
+                Swal.fire({  title: 'Please sign into your account!',  text: `You are already register with this Google account`,  icon: 'warning',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
+            }
+            
+        }
     }
 
     return (
@@ -175,7 +187,7 @@ const Registro = (props) => {
 }
 
 const mapDispatchToProps = {
-    crearCuenta: usuariosActions.crearCuenta,
+    crearCuenta: usuariosActions.crearUsuario,
     // createAccountGoogle: usersActions.createAccountGoogle,
 }
 
