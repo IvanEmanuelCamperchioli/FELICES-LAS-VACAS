@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import './styles/generalStyles.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Productos from './pages/Productos';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path='/login' component={LogIn}/>
           <Route path='/registro' component={Registro}/>
           <Route path='/como-comprar' component={LogIn}/>
-          <Route path='/productos' component={LogIn}/>
+          <Route path='/productos' component={Productos}/>
           <Route exact path='/carrito' component={Carrito}/>
           <Redirect to='/'/>
         </Switch>
