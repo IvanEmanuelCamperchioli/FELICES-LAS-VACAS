@@ -56,7 +56,7 @@ const MenuDesplegable = () => {
                 <DropdownMenu>
                     <DropdownItem header>Registrate o accede a tu cuenta</DropdownItem>
                     <DropdownItem divider />
-                    <NavLink to='/registro' style={{width: '100%'}}><DropdownItem>Crear Cuenta</DropdownItem></NavLink>
+                    <NavLink to='/signup' style={{width: '100%'}}><DropdownItem>Crear Cuenta</DropdownItem></NavLink>
                     <NavLink to='/login' style={{width: '100%'}}><DropdownItem>Iniciar Seción</DropdownItem></NavLink>
                 </DropdownMenu>
             </Dropdown>

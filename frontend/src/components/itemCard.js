@@ -6,7 +6,6 @@ import {
   } from 'reactstrap';
 
 const ItemCard = (item) => {
-  console.log(item)
     return (
         <>
       <Card className={{margin:"2vw"}}>

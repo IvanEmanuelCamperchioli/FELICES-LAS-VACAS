@@ -23,6 +23,7 @@ router.route("/items")
 
 router.route("/items/:id")
 .get(itemsController.getProductById)
+.put(itemsController.modifyStockProduct)
 .delete(itemsController.deleteProductById)
 
 module.exports = router;

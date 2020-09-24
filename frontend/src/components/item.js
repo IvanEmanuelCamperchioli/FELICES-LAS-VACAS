@@ -1,11 +1,8 @@
 import React from 'react';
 import '../styles/itemsprofile.css';
-import axios from 'axios'
 
 const Item = () => {
-    const response = ()=>{
-        
-    }
+    
     return (
         <><div className='container'>
             <div className='inf'></div>

@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux"
 import adminActions from '../redux/actions/adminActions'
+import CardEdit from './CardEdit'
 
 const EditAdmin = (props) => {
 
@@ -11,16 +12,15 @@ const EditAdmin = (props) => {
     return (
         <>
             <div style={{
-                height:'inherit',
                 display:'flex',
                 flexDirection:'column',
                 justifyContent: 'center',
             }}>
-                {props.products.map((product,index) => {
-                    return(
-                    <p key={index}>{product.name}</p>
-                    )
-                })}
+                
+                {props.products.map((product,index) => 
+                    <CardEdit key={index} product={product}/>
+                )}
+                    
             </div>
         </>
     )
