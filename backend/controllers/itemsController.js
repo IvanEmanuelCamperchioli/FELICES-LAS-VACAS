@@ -26,5 +26,21 @@ const itemsController = {
             product
         })
     },
+    modifyStockProduct: async (req,res) => {
+
+        const idProduct = req.params.id
+        const { cantStock } = req.body
+
+        const productModify = await Product.findOne({ _id: idProduct })
+
+        const newCantStock = productModify.stock + cantStock
+
+        await Product.findOneAndUpdate({ _id: idProduct }, { stock: newCantStock })
+        
+        res.json({
+            success:true,
+            productModify
+        })
+    }
 }
 module.exports= itemsController

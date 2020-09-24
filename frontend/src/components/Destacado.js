@@ -25,27 +25,27 @@ class Destacado extends React.Component {
 
 
                 <div className="conteiner-card">
-                    <div class="card">
+                    <div className="card">
                         <div style={{backgroundImage: `url()`}}></div>
                         <p>imagen</p>
                         <h1>producto</h1>
-                        <p class="price">$ 99.99</p>
+                        <p className="price">$ 99.99</p>
                         <p>descripcion del producto</p>
                         <p><button>Agregar al carrito</button></p>
                     </div>
-                    <div class="card">
+                    <div className="card">
                         <div style={{backgroundImage: `url()`}}></div>
                         <p>imagen</p>
                         <h1>producto</h1>
-                        <p class="price">$ 99.99</p>
+                        <p className="price">$ 99.99</p>
                         <p>descripcion del producto</p>
                         <p><button>Agregar al carrito</button></p>
                     </div>
-                    <div class="card">
+                    <div className="card">
                         <div style={{backgroundImage: `url()`}}></div>
                         <p>imagen</p>
                         <h1>producto</h1>
-                        <p class="price">$ 99.99</p>
+                        <p className="price">$ 99.99</p>
                         <p>descripcion del producto</p>
                         <p><button>Agregar al carrito</button></p>
                     </div>
