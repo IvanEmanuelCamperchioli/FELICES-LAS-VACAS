@@ -10,7 +10,7 @@ const usuariosActions = {
       if (res.data.success !== true) {
         return res.data.message
       } else {
-        await Swal.fire({  title: 'Bienvenido!',  text: `Que bueno tenerte aqui nuevamente, ${res.data.response.nombre}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+        // await Swal.fire({  title: 'Bienvenido!',  text: `Que bueno tenerte aqui nuevamente, ${res.data.response.nombre}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
             dispatch({
                 type: "SET_USER",
                 payload:res.data.response
@@ -25,12 +25,12 @@ const usuariosActions = {
   
   crearUsuario: (nuevoUsuario) => {
     return async (dispatch, getState) => {
-      const res = await axios.post("http://127.0.0.1:4000/api/usuarios", nuevoUsuario);
+      const res = await axios.post("http://127.0.0.1:4000/api/usuarios", nuevoUsuario)
       const error ={
         email:"",
         usuario:""
       }
-      console.log(res)
+      
       if(!res.data.success && res.data.response !== undefined){
         if(res.data.response.errors.email !== undefined){
           error.email = "Ese email ya esta en uso"

@@ -28,7 +28,7 @@ class Header extends React.Component {
                     <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="TooltipExample" toggle={this.toggle}>Tienda virtual</Tooltip>
                 </div>
             </div>
-            <div class="navbar">
+            <div className="navbar">
                 <div className="div"></div>
                 <NavLink to='/'>Inicio</NavLink>
                 <NavLink to='/productos'>Productos</NavLink>

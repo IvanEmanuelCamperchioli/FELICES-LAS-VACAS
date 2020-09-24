@@ -20,18 +20,7 @@ const SignUp = (props) => {
         logInGoogle: false,    
     })
 
-    const [errors, setErrors] = useState({
-        nombre: '',
-        apellido: '',
-        usuario: '',
-        password: '',
-        verificacionPassword: "",
-        email: '',
-        DNI: '',
-        provincia: '',
-        logInGoogle: false,
-
-    })
+    const [errors, setErrors] = useState(nuevoUsuario)
 
     const readInput = e => {  
         setNuevoUsuario({
@@ -55,7 +44,7 @@ const SignUp = (props) => {
         )})
         
         errorsCopy.password = validPassword.test(nuevoUsuario.password)
-        ? "" : "La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
+            ? "" : "La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
         
         errorsCopy.verificacionPassword = (nuevoUsuario.password !== nuevoUsuario.verificacionPassword)
             ? "Las contraseñas no coinciden" : ""
@@ -68,7 +57,7 @@ const SignUp = (props) => {
         if (errors.usuario === "" && errors.verificacionPassword === "" && errors.password === "" && errors.nombre=== "" && errors.apellido=== "" && errors.email=== "") {
             
             const response = await props.crearCuenta(nuevoUsuario)
-            console.log(nuevoUsuario)
+            
             if (!response.success) {
                 if (response.usuario !== ""){
                     setErrors({
@@ -188,7 +177,6 @@ const SignUp = (props) => {
 
 const mapDispatchToProps = {
     crearCuenta: usuariosActions.crearUsuario,
-    // createAccountGoogle: usersActions.createAccountGoogle,
 }
 
 export default connect(null, mapDispatchToProps)(SignUp)
