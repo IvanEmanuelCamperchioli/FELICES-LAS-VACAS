@@ -1,41 +1,39 @@
 .header-sup {
-  height: 6.3vh;
-  width: 100%;
-  background-color: #017FCB;
-  color: white;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    height: 6.3vh;
+    width: 100%;
+    background-color: #017FCB;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
-
-
 
 .titleHeader {
-font-family: 'Josefin Sans', sans-serif;
-letter-spacing: 2px;
-margin-top: 5px;
-text-shadow: 2px 2px 3px rgb(41, 115, 68);
+  font-family: 'Josefin Sans', sans-serif;
+  letter-spacing: 2px;
+  margin-top: 5px;
+  text-shadow: 2px 2px 3px rgb(41, 115, 68);
 }
 
-.desplegable:hover {
-  transition: all 1s;
-  color: #09f!important;
-}
+  .desplegable:hover {
+    transition: all 1s;
+    color: #09f!important;
+  }
 
-.dropdown-menu.show {
-  background-color: #09f;
+  .dropdown-menu.show {
+    background-color: #09f;
+    
+  }
+
+  .dropdown-header {
+    color: black!important;
+  }
   
-}
-
 .dropdown-item {
   color: white!important;
 }
 
 .dropdown-item:hover {
-  color: black!important;
-}
-
-.dropdown-header {
   color: black!important;
 }
 
@@ -74,51 +72,9 @@ height: 10vw;
 background-size: cover;
 background-position: center;
 }
-    
-.sidepanel  {
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
 
-.sidepanel a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidepanel a:hover {
-  color: #f1f1f1;
-}
-
-.sidepanel .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-}
-
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-
-.openbtn:hover {
-  background-color:#444;
+.carrito:hover {
+  color:rgb(255, 255, 255);
 }
 
 .carrusel {
@@ -126,7 +82,57 @@ background-position: center;
   height: 70vh;
   background-size: cover;
 }
+      
+  .sidepanel  {
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
 
-.div {
-  width: 30%;
-}
+  .sidepanel  h4{
+    color: black;
+  }
+  
+  .sidepanel a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidepanel a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color:#444;
+  }
+
+  .div {
+    width: 30%;
+  }
