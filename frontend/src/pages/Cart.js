@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/header.css'
 
-class Carrito extends React.Component {
+class Cart extends React.Component {
 
     state = {
         open: "0",
@@ -54,4 +54,4 @@ class Carrito extends React.Component {
     }
 }
 
-export default Carrito
+export default Cart

@@ -24,14 +24,14 @@ class Header extends React.Component {
             <div className="header-sup">
                 <h5 className="titleHeader">Felices las vacas | Alimentación conciente</h5>
                 <div>
-                    <NavLink to="/carrito" id="TooltipExample" className="openbtn" ><FontAwesomeIcon className="carrito" icon={faShoppingCart} /></NavLink>
+                    <NavLink to="/cart" id="TooltipExample" className="openbtn" ><FontAwesomeIcon className="carrito" icon={faShoppingCart} /></NavLink>
                     <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="TooltipExample" toggle={this.toggle}>Tienda virtual</Tooltip>
                 </div>
             </div>
             <div className="navbar">
                 <div className="div"></div>
                 <NavLink to='/'>Inicio</NavLink>
-                <NavLink to='/productos'>Productos</NavLink>
+                <NavLink to='/products'>Productos</NavLink>
                 <NavLink to='/como-comprar'>Como comprar</NavLink>
                 <MenuDesplegable />
                 <div className="div"></div>
@@ -56,7 +56,7 @@ const MenuDesplegable = () => {
                 <DropdownMenu>
                     <DropdownItem header>Registrate o accede a tu cuenta</DropdownItem>
                     <DropdownItem divider />
-                    <NavLink to='/registro' style={{width: '100%'}}><DropdownItem>Crear Cuenta</DropdownItem></NavLink>
+                    <NavLink to='/sign-up' style={{width: '100%'}}><DropdownItem>Crear Cuenta</DropdownItem></NavLink>
                     <NavLink to='/login' style={{width: '100%'}}><DropdownItem>Iniciar Seción</DropdownItem></NavLink>
                 </DropdownMenu>
             </Dropdown>

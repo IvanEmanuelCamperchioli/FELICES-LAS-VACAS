@@ -7,7 +7,7 @@ import GoogleLogin from 'react-google-login';
 
 
 import Swal from 'sweetalert2'
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 import { NavLink } from 'react-router-dom';
 
 

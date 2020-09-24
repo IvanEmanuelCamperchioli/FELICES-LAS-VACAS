@@ -1,7 +1,7 @@
 .header-sup {
     height: 6.3vh;
     width: 100%;
-    background-color: #017FCB;
+    background-color: #3bc45b;
     color: white;
     display: flex;
     justify-content: space-around;
@@ -11,22 +11,31 @@
 .titleHeader {
   font-family: 'Josefin Sans', sans-serif;
   letter-spacing: 2px;
-  margin-top: 5px;
+  margin: 0;
   text-shadow: 2px 2px 3px rgb(41, 115, 68);
+  text-align: center;
+}
+
+.desplegable{
+  background-color: whitesmoke!important;
+  border: solid 2px #3bc45b!important;
+  color: #3bc45b!important;
 }
 
   .desplegable:hover {
     transition: all 1s;
-    color: #09f!important;
+    color: whitesmoke!important;
+    background-color: #3bc45b!important;
   }
 
   .dropdown-menu.show {
-    background-color: #09f;
+    background-color: #16993579;
     
   }
 
   .dropdown-header {
-    color: black!important;
+    color: rgb(2, 252, 98)!important;
+    font-size: 20px!important;
   }
   
 .dropdown-item {
@@ -38,7 +47,7 @@
 }
 
 .navbar {
-  background: black!important;
+  background: whitesmoke!important;
   display: flex;
   justify-content: space-evenly!important;
 }
@@ -46,40 +55,93 @@
 .navbar a {
   float: left;
   font-size: 16px;
-  color: white!important;
   text-align: center;
   padding: 15px 16px;
   text-decoration: none!important;
+  color: #3bc45b!important;
 }
   
 .navbar a:hover {
-  background-color: #017FCB;
+  background-color: #3bc45b;
+  color: whitesmoke!important;
   transition: all 1s;
 }
+.tituloC{
+  width: 35%;
+  padding: 20px;
+  border-radius: 50px;
+  margin: auto 0 70px auto;
+ background-color: rgba(68, 68, 68, 0.356);
+}
+.tituloC h3{
+  font-size: 50px;
+  text-align: right;
+  font-weight: 700;
+  color:  #5ff181be;
+}
+
 
 .container-logo {
 display: flex;
+flex-direction: column;
 width: 100%;
 justify-content: center;
-background-image: linear-gradient(rgba(250, 250, 250, 0.363), #017ecbcc);
+align-items: center;
+background-image: linear-gradient(rgba(250, 250, 250, 0.363), #a2c037);
 border-spacing: 0;
 border-collapse: separate;
+padding: 1rem;
 }
 
 .logo {
-width: 10vw;
-height: 10vw;
+width: 15vw;
+height: 15vw;
 background-size: cover;
 background-position: center;
+margin-bottom: 2rem;
 }
 
+.containerTitle{
+  background-image: url('../images/BANDA.png');
+  height: 60vh;
+  background-position: center center;
+  background-size: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerTitle h3{
+  color: whitesmoke;
+  font-weight: 600;
+  font-size: 40px
+}
+.containerTitle h4{
+  color: whitesmoke;
+  font-weight: 500;
+  font-size: 30px;
+}
+.containerTitle h5{
+  color: whitesmoke;
+  margin: 0!important;
+  font-weight: 500;
+  font-size: 20px
+}
+.containerProductsImg{
+  height: 60vh;
+  background-image: url('../images/productos.jpg');
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 .carrito:hover {
-  color:rgb(255, 255, 255);
+  color: #3bc45b;;
 }
 
 .carrusel {
   background-position: center;
-  height: 70vh;
+  height: 85vh;
   background-size: cover;
 }
       
@@ -97,7 +159,7 @@ background-position: center;
   }
 
   .sidepanel  h4{
-    color: black;
+    color:  #5ff181be;
   }
   
   .sidepanel a {
@@ -110,7 +172,7 @@ background-position: center;
   }
   
   .sidepanel a:hover {
-    color: #f1f1f1;
+    color: #3bc45b;
   }
   
   .sidepanel .closebtn {
@@ -123,14 +185,15 @@ background-position: center;
   .openbtn {
     font-size: 20px;
     cursor: pointer;
-    background-color: #111;
+    background-color:  #3f9b55be;
     color: white;
     padding: 10px 15px;
     border: none;
   }
   
   .openbtn:hover {
-    background-color:#444;
+    background-color: whitesmoke;
+    color: #3bc45b;
   }
 
   .div {

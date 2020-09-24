@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import '../styles/itemsprofile.css';
 import axios from 'axios'
 import Header from '../components/Header'
-import ItemCard from '../components/itemCard';
+import ItemCard from '../components/ItemCard';
 
-const Productos = () => {
+const Products = () => {
     const [items, setResponseData] = useState([])
 	useEffect(() => {
 		stuffData()
@@ -32,4 +32,4 @@ const Productos = () => {
     );
 };
 
-export default Productos;
+export default Products;
