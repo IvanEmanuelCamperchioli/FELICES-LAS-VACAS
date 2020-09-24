@@ -4,7 +4,7 @@ import axios from 'axios'
 import Header from '../components/Header'
 import ItemCard from '../components/itemCard';
 
-const Productos = () => {
+const Items = () => {
     const [items, setResponseData] = useState([])
 	useEffect(() => {
 		stuffData()
@@ -32,4 +32,4 @@ const Productos = () => {
     );
 };
 
-export default Productos;
+export default Items;

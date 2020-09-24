@@ -5,7 +5,8 @@ import SignUp from './pages/signUp';
 import Home from './pages/Home';
 import './styles/app.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Productos from './pages/Productos';
+import Items from './pages/Items';
+import Item from './components/item';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Route exact path='/' component={Home}/>
           <Route path='/login' component={LogIn}/>
           <Route path='/signup' component={SignUp}/>
-          <Route path='/productos' component={Productos}/>
+          <Route path='/productos' component={Items}/>
+          <Route path='/item' component={Item}/>
           <Redirect to='/'/>
         </Switch>
       </BrowserRouter>
