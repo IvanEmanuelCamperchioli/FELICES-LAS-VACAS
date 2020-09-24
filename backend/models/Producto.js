@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
     description:{type: String},
     stock:{type: String},
     category:{type:String},
-    views:{type: Number},
+    views:{type: Number, default: 0},
     rating:{type: Number, default: 5}
 },{timestamps:true})
 

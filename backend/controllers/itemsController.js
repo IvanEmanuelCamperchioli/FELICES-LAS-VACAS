@@ -5,7 +5,7 @@ const itemsController = {
         const newProduct = new Product({...req.body})
         newProduct
         .save()
-        .then(resp => res.json({ success: true, resp }))
+        .then(resp => res.json({ success: true, response: newProduct }))
         .catch(error => res.json({ success: false, error }))
     },
     getProducts: async (req, res) => {
