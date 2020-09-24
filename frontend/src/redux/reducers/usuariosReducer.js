@@ -14,7 +14,7 @@ const usuariosReducer = (state = initialState, action) => {
                 nombre: action.payload.nombre,
                 apellido: action.payload.apellido,
                 token: action.payload.token,
-                rol: action.payload.rol
+                role: action.payload.role
             }
         case 'UPDATE_USER':
             return {

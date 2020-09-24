@@ -1,18 +1,18 @@
 const passport = require("passport")
 const ExtraJwt = require("passport-jwt").ExtractJwt
 const jwtStrategy = require("passport-jwt").Strategy
-const Usuario = require("../models/usuario")
+const User = require("../models/userModel")
 
 module.exports = passport.use(new jwtStrategy({
     jwtFromRequest: ExtraJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.SECRETORKEY
 }, (payload, done) => {
-    Usuario.findById(payload._doc._id)
-        .then(Usuario => {
-            if (!Usuario) {
+    User.findById(payload._doc._id)
+        .then(user => {
+            if (!user) {
                 return done(null, false)
             } else {
-                return done(null, Usuario)
+                return done(null, user)
 
             }
         })

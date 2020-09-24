@@ -8,7 +8,7 @@ import HomeAdmin from './pages/HomeAdmin';
 import FormAdmin from './components/FormAdmin'
 import EditAdmin from './components/EditAdmin'
 
-import './styles/generalStyles.css'
+import './styles/app.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Productos from './pages/Productos';
@@ -24,9 +24,9 @@ function App() {
           <Route path='/como-comprar' component={LogIn}/>
           <Route path='/productos' component={Productos}/>
           <Route exact path='/carrito' component={Carrito}/>
-          <Route path='/homeadmin' component={HomeAdmin}/>
-          <Route path='/formadmin' component={FormAdmin}/>
-          <Route path='/editadmin' component={EditAdmin}/>
+          <Route path='/home-admin' component={HomeAdmin}/>
+          <Route path='/form-admin' component={FormAdmin}/>
+          <Route path='/edit-admin' component={EditAdmin}/>
           <Redirect to='/'/>
         </Switch>
       </BrowserRouter>

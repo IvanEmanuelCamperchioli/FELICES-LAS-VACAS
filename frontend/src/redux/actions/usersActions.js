@@ -1,16 +1,16 @@
 import axios from "axios";
 import Swal from "sweetalert2"
-const usuariosActions = {
+const usersActions = {
 
-  loguearCuenta: (usuario) => {
+  logUser: (user) => {
     return async (dispatch, getState) => {
       const res = await axios.post(
-        "http://127.0.0.1:4000/api/usuario", usuario )
-        
+        "http://127.0.0.1:4000/api/user", user )
+        console.log(res)
       if (res.data.success !== true) {
         return res.data.message
       } else {
-        // await Swal.fire({  title: 'Bienvenido!',  text: `Que bueno tenerte aqui nuevamente, ${res.data.response.nombre}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+        await Swal.fire({  title: 'Bienvenido!',  text: `Que bueno tenerte aqui nuevamente, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
             dispatch({
                 type: "SET_USER",
                 payload:res.data.response
@@ -23,33 +23,34 @@ const usuariosActions = {
     };
   },
   
-  crearUsuario: (nuevoUsuario) => {
+  createUser: (newUser) => {
+    console.log(newUser)
     return async (dispatch, getState) => {
-      const res = await axios.post("http://127.0.0.1:4000/api/usuarios", nuevoUsuario)
+      const res = await axios.post("http://127.0.0.1:4000/api/users", newUser)
       const error ={
-        email:"",
-        usuario:""
+        mail:"",
+        user:""
       }
-      
+      console.log(res)
       if(!res.data.success && res.data.response !== undefined){
-        if(res.data.response.errors.email !== undefined){
-          error.email = "Ese email ya esta en uso"
+        if(res.data.response.errors.mail !== undefined){
+          error.mail = "Ese email ya esta en uso"
         }
-        if(res.data.response.errors.usuario !== undefined){
-          error.usuario = "Ese nombre de usuario ya esta en uso"
+        if(res.data.response.errors.user !== undefined){
+          error.user = "Ese nombre de usuario ya esta en uso"
         }
         return error
         
       }else{
         
-        await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.nombre}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+        await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
         dispatch({
           type: "SET_USER",
           payload: {  
-            nombre: res.data.response.nombre,
+            name: res.data.response.name,
             token: res.data.response.token,
-            apellido: res.data.response.apellido,
-            rol: res.data.response.rol
+            surname: res.data.response.surname,
+            role: res.data.response.role
           },
         });
         return {
@@ -63,7 +64,7 @@ const usuariosActions = {
 
   forcedLogIn: token => {
     return async (dispatch, getState) => {
-        const response = await axios.get('http://127.0.0.1:4000/api/verificadorToken', {
+        const response = await axios.get('http://127.0.0.1:4000/api/tokenVerificator', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -89,7 +90,14 @@ const usuariosActions = {
         })
         return res.data.success
     }
-},
+  },
+  userLogOut: () => {
+    return (dispatch, getState) => {
+        dispatch({
+            type: "LOGOUT_USER"
+        })
+    }
+  }
 };
 
-export default usuariosActions;
+export default usersActions;

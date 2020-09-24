@@ -1,93 +1,133 @@
-import React, { useState } from 'react'
-import { connect } from "react-redux"
-import usuariosActions from '../redux/actions/usuariosActions'
-import GoogleLogin from 'react-google-login'
-import Swal from   'sweetalert2'
 
-const SignUp = (props) => {
+import Header from '../components/Header'
+import React from 'react'
+import {connect} from 'react-redux'
+import userActions from '../redux/actions/usersActions'
+import Swal from 'sweetalert2'
+import GoogleLogin from 'react-google-login';
+import Footer from '../components/footer'
+import LogIn from './LogIn'
+/* import'../styles/logs.css' */
 
-    const validacionMinLength = ['nombre', 'apellido', 'usuario']
+
+class SignUp extends React.Component{
     
-    const [nuevoUsuario, setNuevoUsuario] = useState({
-        nombre: '',
-        apellido: '',
-        usuario: '',
-        password: '',
-        verificacionPassword: "",
-        email: '',
-        DNI: '',
-        provincia: '',
-        logInGoogle: false,    
-    })
-
-    const [errors, setErrors] = useState(nuevoUsuario)
-
-    const readInput = e => {  
-        setNuevoUsuario({
-            ...nuevoUsuario,
-            [e.target.name]: e.target.value
-        })
+    state={
+        newUser:{
+            user:"",
+            password:"",
+            name:"",
+            surname:"",
+            mail:"",
+            passwordValidation: "",
+            role:"",
+            loginGoogle:"false"
+        },
+        errors:{
+            user:"",
+            password:"",
+            name:"",
+            surname:"",
+            mail:"",
+            passwordValidation: ""
+        } 
     }
-
-    const validEmailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-
-    const validPassword = RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/)
-
-    const sendInfo = async e => {
-        e.preventDefault()
-        const errorsCopy = errors
+    
+    getForm = async e =>{
+        const property = e.target.name
+        const value = e.target.value
+        await this.setState({
+            newUser:{
+                ...this.state.newUser,
+                [property]: value
+            }
+        })
+   
+    }
+    submit = async e =>{
         
-        validacionMinLength.map(property => {
-            errorsCopy[property] = ((nuevoUsuario[property].length < 2)
-            ? `¡El ${property} debe tener al menos 2 caracteres!`
+        const errors = this.state.errors
+        
+        const validEmailRegex = RegExp( 	
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        const validPassword = RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/)
+
+        errors.user =
+            this.state.newUser.user.length < 2
+            ? "The user must be at least 2 characters long! "
             : ""
-        )})
+        errors.passwordValidation =
+            this.state.newUser.password !== this.state.newUser.passwordValidation
+            ? "The entered passwords do not match"
+            : ""
+        errors.password = 
+            validPassword.test(this.state.newUser.password)
+            ?""
+            :"Password must be at least 6 characters, and must include one upper case letter, one lower case letter, and one numeric digit"
+        errors.name =
+            this.state.newUser.name.length < 2
+            ? "The name must be 2 at least characters long! "
+            : ""
+        errors.surname =
+            this.state.newUser.surname.length < 2
+            ? "The surname must be at least 2 characters long! "
+            : ""
+        errors.mail = 
+            validEmailRegex.test(this.state.newUser.mail)
+            ? ""
+            : "Enter a valid email"
         
-        errorsCopy.password = validPassword.test(nuevoUsuario.password)
-            ? "" : "La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
-        
-        errorsCopy.verificacionPassword = (nuevoUsuario.password !== nuevoUsuario.verificacionPassword)
-            ? "Las contraseñas no coinciden" : ""
-
-        errorsCopy.email = validEmailRegex.test(nuevoUsuario.email)
-            ? "" : "Introduzca un correo electrónico válido"
-
-        setErrors({...errorsCopy})
-
-        if (errors.usuario === "" && errors.verificacionPassword === "" && errors.password === "" && errors.nombre=== "" && errors.apellido=== "" && errors.email=== "") {
+        this.setState({
+            errors
+        })
+        if (this.state.errors.user === "" && this.state.errors.passwordValidation === "" && this.state.errors.password === "" && this.state.errors.name=== "" && this.state.errors.surname=== "" && this.state.errors.mail=== "" ){
+             const response = await this.props.createAccount(this.state.newUser)
             
-            const response = await props.crearCuenta(nuevoUsuario)
-            
-            if (!response.success) {
-                if (response.usuario !== ""){
-                    setErrors({
-                        ...errors,
-                        usuario: response.usuario
+             if (response.success === true){
+               
+                
+                
+            }else{
+                if (response.user !== ""){
+                    this.setState({
+                        errors:{
+                            ...this.state.errors,
+                            user:response.user
+                        } 
                     })
                 }
-                if (response.email !== ""){
-                    setErrors({
-                        ...errors,
-                        email:response.email
+                if (response.mail !== ""){
+                    this.setState({
+                        errors:{
+                            ...this.state.errors,
+                            mail:response.mail
+                        } 
                     })
                 }
             }
-            
+             
         }
+        
+        
+        //
     }
- 
-    const responseGoogle = async (response) => {
-        await setNuevoUsuario({
-            ...nuevoUsuario,
-            usuario:response.profileObj.email,
-            password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
-            nombre:response.profileObj.givenName,
-            apellido:response.profileObj.familyName.trim(),
-            email: response.profileObj.email,
-            verificacionPassword:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
-            logInGoogle: true,
+    
+    responseGoogle = async (response) =>{
+
+        this.setState({
+            ...this.state,
+            newUser:{
+                user:response.profileObj.email,
+                password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
+                name:response.profileObj.givenName,
+                surname:response.profileObj.familyName.trim(),
+                mail: response.profileObj.email,
+                passwordValidation:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
+                loginGoogle: true
+                
+            }
         })
-        const res = await props.crearCuenta(nuevoUsuario)
+        const res = await this.props.createAccount(this.state.newUser)
        
         if (res.success === true){
             
@@ -100,83 +140,65 @@ const SignUp = (props) => {
         }
     }
 
-    return (
-        <>
-            <div >
-                <div style={{
-                    backgroundImage:'url(https://cdn.vox-cdn.com/thumbor/huKShwndQtYTHqv9DutaVj_WLcw=/cdn.vox-cdn.com/uploads/chorus_asset/file/4231919/apple-imac-0130.0.0.jpg)',
-                    backgroundRepeat:'no-reapeat',
-                    backgroundSize:'cover',
-                    backgroundPositionY:'90%',
-                    padding: '20vh 0vh'
-                    }}>
-
+    
+    render(){
+        return (
+            <>
+            <Header />
+            <h3 className="titleHouses">Create an account</h3>
+            
+            <div className="signContainer">
+                    
+                <div className="inputs">
+                    <span className={this.state.errors.mail === "" ? "" : "logError"}>{this.state.errors.mail}</span>
+                    <input className="mail" type="mail" placeholder="Enter your email" name="mail" onChange={this.getForm}></input>
+                    
+                    <span className={this.state.errors.user === "" ? "" : "logError"}>{this.state.errors.user}</span>
+                    <input className="account" type="text" placeholder="Enter your user" name="user" onChange={this.getForm}></input>
+                    
+                    <span className={this.state.errors.password === "" ? "" : "logError"}>{this.state.errors.password}</span>
+                    <input className="password" type="password" placeholder="Enter your password" name="password" onChange={this.getForm}></input>
+                    
+                    <span className={this.state.errors.passwordValidation === "" ? "" : "logError"}>{this.state.errors.passwordValidation}</span>
+                    <input className="passwordCheck" type="password" placeholder="Enter your password again" name="passwordValidation" onChange={this.getForm} ></input>
+                    
+                    <span className={this.state.errors.name === "" ? "" : "logError"}>{this.state.errors.name}</span>
+                    <input className="name" type="text" placeholder="Enter your name" name="name" onChange={this.getForm} ></input>
+                    
+                    <span className={this.state.errors.surname === "" ? "" : "logError"}>{this.state.errors.surname}</span>
+                    <input className="surname" type="text" placeholder="Enter your surname" name="surname" onChange={this.getForm}></input>
+                    
+                    
+                        
                 </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column'}}>
-
-                    <h1 className="text-center responsiveText">Create new account</h1>
-
-                    <label>Nombre</label>
-                    <span className='error'>{errors.nombre}</span>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='text' name='nombre' placeholder='Escriba su nombre'
-                        onChange={readInput} />
-
-                    <label>Apellido</label>
-                    <span className='error'>{errors.apellido}</span>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='text' name='apellido' placeholder='Escriba su apellido'
-                        onChange={readInput} />
-
-                    <label >Usuario</label>
-                    <span className='error'>{errors.usuario}</span>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='text' name='usuario' placeholder='Elija su usuario (Mínimo 5 caracteres)'
-                        onChange={readInput} />
-
-                    <label>Contraseña</label>
-                    <span className='error'>{errors.password}</span>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='password' name='password' placeholder='Elija su contraseña (Mínimo 5 caracteres)'
-                        onChange={readInput} />
-
-                    <label>Reingrese la contraseña</label>
-                    <span className='error'>{errors.verificacionPassword}</span>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='password' name='verificacionPassword' placeholder='Confirme contraseña'
-                        onChange={readInput} />
-
-                    <label>Email</label>
-                    <span className='error'>{errors.email}</span>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='text' name='email' placeholder='Escriba un email correcto'
-                        onChange={readInput} />
-                    
-                    <button onClick={sendInfo}>Enviar</button>
-                    
+                    <button className="send" onClick={this.submit}>Sign Up</button>
+                    <p className="or">or</p>
                     <GoogleLogin
                         className="googleBtn"
                         clientId="410495293057-2vf4ipg2vojn0pdvjg2p4pc8269vcbbq.apps.googleusercontent.com"
                         buttonText="Create account with Google"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
+                        onSuccess={this.responseGoogle}
+                        onFailure={this.responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-                </div>
+                
             </div>
-        </>
-    )
+            
+            <Footer/>
+
+            </>
+        )
+    }
 }
 
 const mapDispatchToProps = {
-    crearCuenta: usuariosActions.crearUsuario,
+    createAccount: userActions.createUser
 }
 
-export default connect(null, mapDispatchToProps)(SignUp)
+const mapStateToProps = (state) =>{
+    return{
+        userLog: state
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
