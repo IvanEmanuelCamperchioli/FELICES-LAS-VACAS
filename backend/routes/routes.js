@@ -10,12 +10,13 @@ router.route('/users')
 
 router.route('/user')
 .post(usersController.userLogin)
-/* router.route('/usuarioGoogle')
-.post(usuariosController.crearCuentaConGoogle) */
+
 
 router.route('/getUser')
 .post(usersController.getUsersExist)
-
+/* 
+router.route('/tokenVerificator')
+.get(passport.authenticate('jwt', { session: false }), usersController.tokenVerificator) */
 
 router.route("/items")
 .get(itemsController.getProducts)

@@ -89,9 +89,10 @@ const usersController = {
         const name = req.user.name
         const surname = req.user.surname
         const role = req.user.role
+        const token = req.user.token
         res.json({
             success: true, 
-            response: {name, surname, role}
+            response: {name, surname, role, token}
         })
     
     },
