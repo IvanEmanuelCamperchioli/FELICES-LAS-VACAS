@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import '../styles/header.css'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem,  Tooltip} from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem,  Tooltip} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faUser} from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom';

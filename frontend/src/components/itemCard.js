@@ -8,7 +8,6 @@ import {
 const ItemCard = (props) => {
   
     return (
-        <>
       <Card className={{margin:"2vw"}}>
         <CardImg top width="100%" src={props.item.photo}/>
         <CardBody>
@@ -21,7 +20,6 @@ const ItemCard = (props) => {
          </div>
           </CardBody>
       </Card>
-    </>
     );
 };
 
