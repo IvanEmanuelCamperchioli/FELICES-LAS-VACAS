@@ -1,7 +1,18 @@
 import React from 'react'
 import '../styles/home.css'
+import ProductosDestacados from './ProductosDestacados'
 
 class Destacado extends React.Component {
+
+    state = {
+        products: []
+    }
+
+    componentDidMount() {
+        fetch("http://127.0.0.1:4000/api/items")
+            .then(response => response.json())
+            .then(json => this.setState({ products: json.products }))
+    }
 
     render() {
 
@@ -15,35 +26,14 @@ class Destacado extends React.Component {
                 <div style={{height: '10vh', width: '100%'}}></div>
                 <h1 className="titulo">Destacado</h1>
                 <h5>QUEDATE EN CASA, HACÉ TU PEDIDO Y NOSOTROS TE LO LLEVAMOS</h5>
-                <div className="conteiner-card">
-                    <div class="card">
-                        <div style={{backgroundImage: `url()`}}></div>
-                        <p>imagen</p>
-                        <h1>producto</h1>
-                        <p class="price">$ 99.99</p>
-                        <p>descripcion del producto</p>
-                        <p><button>Agregar al carrito</button></p>
-                    </div>
-                    <div class="card">
-                        <div style={{backgroundImage: `url()`}}></div>
-                        <p>imagen</p>
-                        <h1>producto</h1>
-                        <p class="price">$ 99.99</p>
-                        <p>descripcion del producto</p>
-                        <p><button>Agregar al carrito</button></p>
-                    </div>
-                    <div class="card">
-                        <div style={{backgroundImage: `url()`}}></div>
-                        <p>imagen</p>
-                        <h1>producto</h1>
-                        <p class="price">$ 99.99</p>
-                        <p>descripcion del producto</p>
-                        <p><button>Agregar al carrito</button></p>
-                    </div>
-                </div>
+                    {this.state.products.length === 0 
+                        ?   <h1>Lodading</h1>
+                        :   <ProductosDestacados products={this.state.products}/>
+                    }
             </div>
         )
     }
 }
 
 export default Destacado
+

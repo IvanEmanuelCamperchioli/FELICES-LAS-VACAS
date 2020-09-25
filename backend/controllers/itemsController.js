@@ -9,7 +9,7 @@ const itemsController = {
         .catch(error => res.json({ success: false, error }))
     },
     getProducts: async (req, res) => {
-		const products = await Product.find()
+        const products = await Product.find()
 		res.json({ success: true, products })
     },
     deleteProductById: (req, res) => {
