@@ -62,8 +62,6 @@ const FormAdmin = (props) => {
         }
     }
 
-    console.log(newProduct);
-
     return (
         <>
             <div style={{

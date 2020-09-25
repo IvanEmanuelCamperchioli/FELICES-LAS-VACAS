@@ -32,7 +32,13 @@ const adminActions = {
 
     modifyStock: (cantStock, idProduct) => {
         return async(dispatch, getState) => {
-            const res = await axios.put(`http://127.0.0.1:4000/api/items/${idProduct}`, {cantStock})
+            const res = await axios.put(`http://127.0.0.1:4000/api/items/stocks/${idProduct}`, {cantStock})
+        }
+    },
+
+    modifyPrice: (cantPrice, idProduct) => {
+        return async(dispatch, getState) => {
+            const res = await axios.put(`http://127.0.0.1:4000/api/items/prices/${idProduct}`, {cantPrice})
         }
     }
 }
