@@ -1,122 +1,132 @@
-import React, { useState }  from 'react'
-import {Link} from 'react-router-dom'
-import GoogleLogin from 'react-google-login'
-import usersActions from '../redux/actions/usersActions';
-import { connect } from 'react-redux';
+
+import Header from '../components/Header'
+import React from 'react'
+import usersActions from '../redux/actions/usersActions'
+import {connect} from 'react-redux'
+import GoogleLogin from 'react-google-login';
 import Swal from 'sweetalert2'
+import Footer from '../components/Footer';
+import { NavLink } from 'react-router-dom';
 
-const LogIn = (props) => {
 
-    const [nuevoUsuario, setNuevoUsuario] = useState({
-        usuario: '',
-        password: '',
-        logInGoogle: false,
-    })
-
-    const [errors, setErrors] = useState({
-        error:"",
-    })
-
-    const readInput = e => {
-        setNuevoUsuario({
-            ...nuevoUsuario,
-            [e.target.name]: e.target.value
+class SignIn extends React.Component{
+    state={
+        logUser:{
+            username:"",
+            password:"",    
+        },
+        error:""
+    }
+    getForm = e =>{
+        e.preventDefault()
+        const property = e.target.name
+        const value = e.target.value
+        this.setState({
+            
+            logUser:{
+                ...this.state.logUser,
+                [property]: value
+            }
         })
+        
+        
     }
 
-    const sendInfo = async e => {
-        e.preventDefault()
 
-        if (nuevoUsuario.nombre ==="" || nuevoUsuario.password === "" ){
-            setErrors({
+    submit =  async e => {
+ 
+        e.preventDefault()
+        if (this.state.logUser.name ==="" || this.state.logUser.password === "" ){
+            this.setState({
                 error: "Both fields are required"
             }) 
-
         }else{
-            const userToLogIn = { usuario: nuevoUsuario.usuario, password: nuevoUsuario.password }
-
-            const res = await props.userLogIn(userToLogIn)
-            console.log(res)
-            if (res.success){
-
-            }
-            else{
-                setErrors({
-                    error: res
+            const logUser= {user:this.state.logUser.username , password: this.state.logUser.password}
+            const response =  await this.props.logUser(logUser)
+            
+            if (response.success === true){
+                
+            }else{
+                this.setState({
+                    error: response
                 })    
             }
         }
     }
 
-    const responseGoogle = async (response) => {
-        console.log(response.profileObj)
-        setNuevoUsuario({
-            ...nuevoUsuario,
-            usuario:response.profileObj.email,
-            password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
-            logInGoogle: true,
-        })
-        const res = await props.getUser(nuevoUsuario)
-        if(res === true){
-            const resp =  await props.userLogIn(nuevoUsuario)
-            }else{
-                Swal.fire({  title: 'You must sign up!',  text: `Please go to create an account, ${response.profileObj.givenName}.`,  icon: 'warning',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+    responseGoogle = async (response) =>{
+        this.setState({
+            ...this.state,
+            logUser:{
+                username:response.profileObj.email,
+                password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase()
             }
+        })
+        const res = await this.props.getUser(this.state.logUser)
+        
+        if(res === true){
+            const resp =  await this.props.logUser(this.state.logUser)
+
+            
+        }else{
+            Swal.fire({  title: 'You must sign up!',  text: `Please go to create an account, ${response.profileObj.givenName}.`,  icon: 'warning',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+        }
+        this.setState({
+            ...this.state,
+            logUser:{
+                username:"",
+                password:""
+            }
+        })    
     }
 
-    return (
-        <>
-            <div >
-                <div style={{
-                    backgroundImage:'url(https://cdn.vox-cdn.com/thumbor/huKShwndQtYTHqv9DutaVj_WLcw=/cdn.vox-cdn.com/uploads/chorus_asset/file/4231919/apple-imac-0130.0.0.jpg)',
-                    backgroundRepeat:'no-reapeat',
-                    backgroundSize:'cover',
-                    backgroundPositionY:'90%',
-                    padding: '20vh 0vh'
-                    }}>
+    
+    render(){
 
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column'}}>
-
-                    <h1>Please, choose your account</h1>
-                    <span>{errors.error}</span>
-                    <label>Usuario</label>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='text' name='usuario' placeholder='Type your username'
-                        onChange={readInput} />
-
-                    <label>Password</label>
-                    <input style={{
-                        borderRadius: '3vw'
-                    }} type='password' name='password' placeholder='Type your password'
-                        onChange={readInput} />
-
-                    <span className='error'>{errors.password}</span>
-
-                    <button onClick={sendInfo}>Enviar</button>
+        return (
+            <>
+            <Header />
+            <h3 className="titleHouses">Enter into your account</h3>
+            
+            <div className="signContainer">
+                
+                <div className="inputs">
+                    <span className = {this.state.error === "" ? "" : "logError"}>{this.state.error}</span>
+                    <input className="account" name="username" type="text" placeholder="Enter your user" onChange={this.getForm}></input>
+                    <input className="password" type="password" name="password" placeholder="Enter your password" onChange={this.getForm}></input>
+                 </div>
                     
-                    <p>No tienes cuenta? Presiona<Link to='/registro'>Aqui!</Link></p>
-                    
+                    <button onClick={this.submit} className="send">Sign In</button>
+                    <NavLink to="/forgotPass" style={{fontSize:"1.4rem"}}>I forgot my password</NavLink>
+                    <p className="or">Or</p>
                     <GoogleLogin
                         className="googleBtn"
-                        clientId="410495293057-2vf4ipg2vojn0pdvjg2p4pc8269vcbbq.apps.googleusercontent.com"
-                        buttonText="Create account with Google"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
+                        clientId="204753879301-qflivfpgiqk2v57hne24iu8j2acnmimn.apps.googleusercontent.com"
+                        buttonText="Sign in with Google"
+                        onSuccess={this.responseGoogle}
+                        onFailure={this.responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-
-
-                </div>
+                
             </div>
-        </>
-    );
-};
+           
+            
+            <Footer/>
+
+            </>
+        )
+    }
+}
 
 const mapDispatchToProps = {
-    userLogIn: usersActions.userLogIn,
+    logUser: usersActions.logUser,
     getUser: usersActions.getUser
 }
 
-export default connect(null, mapDispatchToProps)(LogIn)
+const mapStateToProps = (state)=>{
+    return{
+        userLog: state.usersRed
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

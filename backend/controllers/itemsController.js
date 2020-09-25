@@ -1,15 +1,15 @@
-const Product = require('../models/Product');
+const Product = require('../models/itemModel');
 
 const itemsController = {
     newProduct: async (req, res) => {
         const newProduct = new Product({...req.body})
         newProduct
         .save()
-        .then(resp => res.json({ success: true, resp }))
+        .then(resp => res.json({ success: true, response: newProduct }))
         .catch(error => res.json({ success: false, error }))
     },
     getProducts: async (req, res) => {
-		const products = await Product.find({ _id:id })
+		const products = await Product.find()
 		res.json({ success: true, products })
     },
     deleteProductById: (req, res) => {

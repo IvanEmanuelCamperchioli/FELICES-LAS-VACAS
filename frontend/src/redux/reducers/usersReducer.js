@@ -1,27 +1,26 @@
 const initialState = {
+    name: "",
+    username: "",
     token: "",
-    nombre: "",
-    apellido: "",
-    rol:""
+    role:""
 }
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_USER':
             localStorage.setItem('token', action.payload.token)
-            console.log(action.payload)
             return {
                 ...state,
                 name: action.payload.name,
-                lastname: action.payload.lastname,
+                username: action.payload.username,
                 token: action.payload.token,
-                rol: action.payload.rol
+                role: action.payload.role
             }
         case 'UPDATE_USER':
             return {
                 ...state,
                 name: action.payload.name,
-                lastname: action.payload.lastname,
+                surname: action.payload.surname,
             }
 
         case 'LOGOUT_USER':
@@ -31,7 +30,7 @@ const usersReducer = (state = initialState, action) => {
                 ...initialState
             }
         default:
-            return state;
+            return state
     }
 }
 

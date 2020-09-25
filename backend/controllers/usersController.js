@@ -1,4 +1,4 @@
-const User = require("../models/User")
+const User = require("../models/userModel")
 const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
@@ -7,21 +7,21 @@ const jwt = require("jsonwebtoken")
 const usersController = {
 
     createAccount: async (req, res) => {
-        const { username, password, email, name, lastname, logInGoogle} = req.body
+        const { username, password, mail, name, surname, logInGoogle} = req.body
         let error = false
-        const hashedPassword = bcryptjs.hashSync(password.trim(), 10)
+        const passwordHash = bcryptjs.hashSync(password.trim(), 10)
         
             const newUser = new User({ 
                 name: name.trim().charAt(0).toUpperCase() + name.slice(1), 
-                lastname: lastname.trim().charAt(0).toUpperCase() + lastname.slice(1), 
-                email: email.trim(), 
+                surname: surname.trim().charAt(0).toUpperCase() + surname.slice(1), 
+                mail: mail.trim(), 
                 username: username.trim(), 
-                password: hashedPassword, 
+                password: passwordHash, 
                 logInGoogle})
 
             try{
                 const res = await newUser.save()
-                console.log(res)
+                
             }
             catch(err){
                 error = err
@@ -37,7 +37,7 @@ const usersController = {
                 if (error) {
                     res.json({ success: false, error })
                 } else {
-                    res.json({ success: true, response:{token, name: newUser.name, apellido: newUser.apellido, rol: newUser.rol} })
+                    res.json({ success: true, response:{token, name: newUser.name, surname: newUser.surname, role: newUser.role} })
                 }
             })
             }
@@ -47,9 +47,9 @@ const usersController = {
 
 
     userLogin: async (req, res) => {
-        const { username, password } = req.body
-
-        const userExist = await User.findOne({ username })
+        const { user, password } = req.body
+        console.log(req.body)
+        const userExist = await User.findOne({ user })
 
         if (!userExist) {
             res.json({
@@ -62,7 +62,8 @@ const usersController = {
                 res.json({
                     success: false, message: "Usuario y/o contraseña incorrectos"
                 })
-            } else {
+            } 
+            else {
                 jwt.sign({ ...userExist }, process.env.SECRETORKEY, {}, (error, token) => {
                     if (error) {
                         res.json({ success: false, error: "Ha ocurrido un error" })
@@ -71,8 +72,9 @@ const usersController = {
                             response:{
                             token,
                             name: userExist.name,
-                            lastname: userExist.lastname,
-                            rol: userExist.rol
+                            username: userExist.username,
+                            surname: userExist.surname,
+                            role: userExist.role
                             }
                         })
                     }
@@ -82,47 +84,23 @@ const usersController = {
         }
     },
 
-    
 
     tokenVerificator: (req, res) => {
-        const { name, urlpic, username, firstTime, lastname, favConsole } = req.user
-        res.json({
-            success: true,
-            name,
-            urlpic,
-            username,
-            firstTime,
-            lastname,
-            favConsole
-        })
-    },
-
-    /* modificarUsuario: async (req, res) => {
-        const { usuario, name, apellido, urlFoto } = req.body
         
-        if (req.files) {
-            var archivo = req.files.urlFoto
-            // var extension = archivo.name.split('.')[1]
-            // var nameArchivo = req.body.usuario + '.' + extension
-            var nombreArchivo = archivo.nombre
-            var serverURL = `uploads/${nombreArchivo}`
-            archivo.mv(serverURL)
-            var fotoUrl = `http://localhost:4000/uploads/${nombreArchivo}`
-        } else {
-            var fotoUrl = urlFoto
-        }
-
-        const modificarUsuario = await Usuario.findOneAndUpdate({ usuario: usuario }, { nombre, urlFoto: fotoUrl, apellido }, { returnNewDocument: true })
+        const name = req.user.name
+        const username = req.user.username
+        const token = req.user.token
+        const mail = req.user.name
+        const role = req.user.role
+        
         res.json({
-            success: true,
-            nombre,
-            apellido,
-            fotoUrl
+            success: true, 
+            response: {name, username, token, mail, role}
         })
-
-    } */
-
-    getUser: async (req,res) =>{
+    
+    },
+    
+    getUsersExist: async (req,res) =>{
         
         const user = req.body.user
         const userExist = await User.findOne({user})
@@ -135,7 +113,7 @@ const usersController = {
                 success:false
             })
         }
-    },
+    }
 
 }
 

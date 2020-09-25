@@ -1,31 +1,31 @@
 const mongoose = require("mongoose")
 
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username: {type:String, required:true, 
         validate:{
             validator: async user => await User.find({user}).countDocuments()===0,
-            message: () => "El nombre de usuario ya ha sido utilizado"
+            message: () => "That user name is already used"
         }
     },
     password: {type: String, required: true},
-    email:{type:String, required: true,
+    mail:{type:String, required: true,
         validate:{
-            validator: async email => await Usuario.find({email}).countDocuments()===0,
+            validator: async mail => await User.find({mail}).countDocuments()===0,
             message: () => "That email is already used"
         }
     },
     name: {type: String, required: true},
-    lastname: {type: String, required: true},
+    surname: {type: String, required: true},
     DNI: {type: Number, default: null},
-    provincia: {type: String, default: null},
-    direccion: {type: String, default: null},
-    rol: {type: String, default: "comprador"},
+    province: {type: String, default: null},
+    address: {type: String, default: null},
+    role: {type: String, default: "comprador"},
     loginGoogle: {type: Boolean, default: false}
     
 })
 
 
-const User = mongoose.model("User", UserSchema)
+const User = mongoose.model("user", userSchema)
 
 module.exports = User

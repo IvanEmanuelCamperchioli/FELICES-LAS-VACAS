@@ -4,11 +4,11 @@ const Joi = require("@hapi/joi")
 const validador = {
     validarDatos: (req, res, next) => {
         const schema = Joi.object({
-            nombre: Joi.string().min(4).required().trim().error(() => { return res.json ({ message: 'Lo siento, el nombre debe contener más de 3 caracteres', });}),
-            apellido: Joi.string().min(4).required().trim().error(() => { return res.json ({ message: 'Lo siento, el apellido debe contener más de 3 caracteres.', });}),
-            usuario: Joi.string().min(4).trim().required().error(() => { return res.json ({ message: 'Lo siento, el usuario debe contener más de 3 caracteres.', });}),
+            name: Joi.string().min(4).required().trim().error(() => { return res.json ({ message: 'Lo siento, el nombre debe contener más de 3 caracteres', });}),
+            surname: Joi.string().min(4).required().trim().error(() => { return res.json ({ message: 'Lo siento, el apellido debe contener más de 3 caracteres.', });}),
+            user: Joi.string().min(4).trim().required().error(() => { return res.json ({ message: 'Lo siento, el usuario debe contener más de 3 caracteres.', });}),
             password: Joi.string().min(6).trim().required().error(() => { return res.json ({ message: 'La clave debe contener más de 6 caracteres.', });}),
-            email: Joi.string().email().required().trim().error(() => { return res.json ({ message: 'El email debe contener "@" y ".com, .net ..."', });}),
+            mail: Joi.string().email().required().trim().error(() => { return res.json ({ message: 'El email debe contener "@" y ".com, .net ..."', });}),
             logInGoogle: Joi.boolean()
         })
 

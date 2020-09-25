@@ -6,21 +6,16 @@ const router = express.Router()
 
 
 
-router.route('/usuarios')
+router.route('/users')
 .post(usersController.createAccount)
 
-router.route('/usuario')
+router.route('/user')
 .post(usersController.userLogin)
-
+/* router.route('/usuarioGoogle')
+.post(usuariosController.crearCuentaConGoogle) */
 
 router.route('/getUser')
-.post(usersController.getUser)
- 
-router.route('/login')
-.post(usersController.userLogin)
-
-/* router.route('/modificarUsuario')
-.put(usersController.modificarUsuario) */
+.post(usersController.getUsersExist)
 
 router.route('/tokenVerificator')
 .get(passport.authenticate('jwt', { session: false }), usersController.tokenVerificator)

@@ -6,9 +6,9 @@ const productSchema = new mongoose.Schema({
     photo:{type: String, required: true},
     photo1:{type:String, required: true},
     description:{type: String},
-    stock:{type: String},
+    stock:{type: Number},
     category:{type:String},
-    views:{type: Number},
+    views:{type: Number, default: 0},
     rating:{type: Number, default: 5}
 },{timestamps:true})
 
