@@ -21,9 +21,14 @@ router.route("/items")
 .get(itemsController.getProducts)
 .post(itemsController.newProduct)
 
+router.route("/items/stocks/:id")
+.put(itemsController.modifyStockProduct)
+
+router.route("/items/prices/:id")
+.put(itemsController.modifyPriceProduct)
+
 router.route("/items/:id")
 .get(itemsController.getProductById)
-.put(itemsController.modifyStockProduct)
 .delete(itemsController.deleteProductById)
 
 module.exports = router;

@@ -21,17 +21,13 @@ class SignIn extends React.Component{
     }
     getForm = e =>{
         e.preventDefault()
-        const property = e.target.name
-        const value = e.target.value
+       
         this.setState({
-            
             logUser:{
                 ...this.state.logUser,
-                [property]: value
+                [e.target.name]: e.target.value
             }
         })
-        
-        
     }
 
 
@@ -68,7 +64,6 @@ class SignIn extends React.Component{
         
         if(res === true){
             const resp =  await this.props.logUser(this.state.logUser)
-
             
         }else{
             Swal.fire({  title: 'You must sign up!',  text: `Please go to create an account, ${response.profileObj.givenName}.`,  icon: 'warning',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})

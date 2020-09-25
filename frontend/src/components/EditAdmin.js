@@ -11,17 +11,9 @@ const EditAdmin = (props) => {
 
     return (
         <>
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                justifyContent: 'center',
-            }}>
-                
-                {props.products.map((product,index) => 
-                    <CardEdit key={index} product={product}/>
-                )}
-                    
-            </div>
+            {props.products.map((product,index) => 
+                <CardEdit key={index} product={product}/>
+            )}
         </>
     )
 }
