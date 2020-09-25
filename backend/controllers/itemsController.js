@@ -42,15 +42,15 @@ const itemsController = {
             productModify
         })
     },
-    modifyPriceProduct: async (req, res) => {
+    modifyPropertyTotalProduct: async (req, res) => {
         const idProduct = req.params.id
-        const { cantPrice } = req.body
+        const { cantModify, aProperty } = req.body
 
-        const newPrice = await Product.findOneAndUpdate({ _id: idProduct }, { price: cantPrice })
+        const newModify = await Product.findOneAndUpdate({ _id: idProduct }, { [aProperty]: cantModify })
 
         res.json({
             success:true,
-            newPrice
+            newModify
         })
     }
 }

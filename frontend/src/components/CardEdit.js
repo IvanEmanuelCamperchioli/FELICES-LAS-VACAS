@@ -1,61 +1,59 @@
 import React, {useState} from 'react'
 import { connect } from "react-redux"
 import adminActions from '../redux/actions/adminActions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretLeft, faCaretRight, faCheck} from '@fortawesome/free-solid-svg-icons'
 
 const CardEdit = (props) => {
 
-    const [modifyStock, setModifyStock] = useState({
-        cantModify: 0,
+    const [modify, setModify] = useState({
+        cantModifyStock: 0,
+        cantModifyPrice: 0,
         viewMoreStock: false,
-    })
-
-    const [modifyPrice, setModifyPrice] = useState({
-        cantModify: 0,
         viewMorePrice: false,
     })
 
-    const viewSwitchStock = () => {
-        setModifyStock({
-            ...modifyStock,
-            viewMoreStock: !modifyStock.viewMoreStock,
+    const viewSwitch = (aProperty) => {
+        
+        if(aProperty === 'stock') {
+            setModify({
+                ...modify,
+                viewMoreStock: !modify.viewMoreStock,
+            })}
+
+        if(aProperty === 'price'){
+            setModify({
+                ...modify,
+                viewMorePrice: !modify.viewMorePrice,
+            })}
+
+    }
+
+    const readInput = e => {
+        
+        setModify({
+            ...modify,
+            [e.target.name]: (e.target.name === 'cantModifyStock') ? parseInt(e.target.value) : e.target.value
         })
     }
 
-    const viewSwitchPrice = () => {
-        setModifyPrice({
-            ...modifyPrice,
-            viewMorePrice: !modifyPrice.viewMorePrice,
-        })
-    }
+    const editCant = async (cantModify, aProperty) => {
+        
 
-    const readInputStock = e => {
-        setModifyStock({
-            ...modifyStock,
-            [e.target.name]: (e.target.name === 'cantModify') ? parseInt(e.target.value) : e.target.value
-        })
-    }
+        if(aProperty === 'oneStock') {
+            (props.product.stock + cantModify < 0) 
+                ? await props.modifyStock( (-props.product.stock), props.product._id ) 
+                : await props.modifyStock( cantModify, props.product._id )
+        }
+        else{
+            (cantModify < 0) 
+                ? await props.modifyTotal( 0, props.product._id, aProperty) 
+                : await props.modifyTotal( cantModify, props.product._id, aProperty )
+            viewSwitch(aProperty)
+        }
 
-    const readInputPrice = e => {
-        setModifyPrice({
-            ...modifyPrice,
-            [e.target.name]: parseInt(e.target.value)
-        })
-    }
-
-    const editStock = async (cantModify) => {
-
-        (props.product.stock + cantModify < 0) 
-            ? await props.modifyStock( (-props.product.stock), props.product._id ) 
-            : await props.modifyStock( cantModify, props.product._id )
         props.getProducts()
-    }
-
-    const editPrice = async (cantModify) => {
-
-        (cantModify < 0) 
-            ? await props.modifyPrice( 0, props.product._id ) 
-            : await props.modifyPrice( cantModify, props.product._id )
-        props.getProducts()
+            
     }
 
     const styleProperty = {
@@ -65,6 +63,7 @@ const CardEdit = (props) => {
         background: "white",
         justifyContent: "space-between",
         marginBottom: "10px",
+        marginLeft: "10px"
     }
 
     return (
@@ -103,6 +102,7 @@ const CardEdit = (props) => {
                                 <div className="flex text-primary">{props.product.name}</div>
                             </div>
                         </div>
+                        
                         <div style={styleProperty} className="row col-md-12" >
                             <div style={{
                                 display: "flex",
@@ -129,14 +129,15 @@ const CardEdit = (props) => {
                             }}>
                                 <div className="flex">Stock: {props.product.stock}</div>
                             </div>
-                            {modifyStock.viewMoreStock && 
+                            {modify.viewMoreStock && 
                                 <>
-                                    <input type='number' name='cantModify' onChange={readInputStock} placeholder='Quantity to modify'/>
-                                    <span className="flex"><button onClick={() => editStock(modifyStock.cantModify)} className='btn btn-secondary'>Increase stock</button></span>
-                                    <span className="flex"><button onClick={() => editStock(-modifyStock.cantModify)} className='btn btn-secondary'>Decrease stock</button></span>
+                                    <span className="flex"><button onClick={() => editCant(-1, 'oneStock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCaretLeft}></FontAwesomeIcon></button></span>
+                                    <span className="flex"><button onClick={() => editCant(1, 'oneStock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCaretRight}></FontAwesomeIcon></button></span>
+                                    <input type='number' name='cantModifyStock' onChange={readInput} placeholder='Quantity to modify'/>
+                                    <span className="flex"><button onClick={() => editCant(modify.cantModifyStock, 'stock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCheck}></FontAwesomeIcon></button></span>
                                 </>
                             }
-                            <span><button onClick={viewSwitchStock} className='btn btn-primary'>{modifyStock.viewMore ? "Don't modify stock" : 'Modify stock'}</button></span>
+                            <button onClick={() => viewSwitch('stock')} className='btn btn-primary'>{modify.viewMoreStock ? "Cancel" : 'Modify stock'}</button>
                         </div>
                         <div style={styleProperty} className="row col-md-12" >
                             <div style={{
@@ -146,13 +147,13 @@ const CardEdit = (props) => {
                             }}>
                                 <div className="flex">Price: {props.product.price}$</div>
                             </div>
-                            {modifyPrice.viewMorePrice && 
+                            {modify.viewMorePrice && 
                                 <>
-                                    <input type='number' name='cantModify' onChange={readInputPrice} placeholder='New price'/>
-                                    <span className="flex"><button onClick={() => editPrice(modifyPrice.cantModify)} className='btn btn-secondary'>New price</button></span>
+                                    <input type='number' name='cantModifyPrice' onChange={readInput} placeholder='New price'/>
+                                    <span className="flex"><button onClick={() => editCant(modify.cantModifyPrice, 'price')} className='btn btn-secondary'>New price</button></span>
                                 </>
                             }
-                            <span><button onClick={viewSwitchPrice} className='btn btn-primary'>{modifyPrice.viewMore ? "Don't modify price" : 'Modify price'}</button></span>
+                            <span><button onClick={() => viewSwitch('price')} className='btn btn-primary'>{modify.viewMorePrice ? "Cancel" : 'Modify price'}</button></span>
                         </div>
                         <div className="row">
                             <div className="col-md-6">
@@ -170,34 +171,13 @@ const CardEdit = (props) => {
                 </div>
 
             </div>
-
-            {/* <div className="conteiner-card">
-                <div className="card">
-                    <div className="card-header">
-                        <h1>{props.product.name}</h1>
-                    </div>
-                    <img src={props.product.photo} className="card-img-top" alt="photo1" />
-                    <p>{props.product.price}</p>
-                    <p>{props.product.description}</p>
-                    <p>{props.product.stock}</p>
-                    {modifyStock.viewMore && 
-                        <>
-                            <input type='number' name='cantModify' onChange={readInput} placeholder='Cant Modify'/>
-                            <p><button onClick={() => editStock(modifyStock.cantModify)}>Increase stock</button></p>
-                            <p><button onClick={() => editStock(-modifyStock.cantModify)}>Decrease stock</button></p>
-                        </>
-                    }
-                    <p><button onClick={viewSwitch}>{modifyStock.viewMore ? "Don't modify stock" : 'Modify Stock'}</button></p>
-                    
-                </div>
-            </div> */}
         </>
     )
 }
 
 const mapDispatchToProps = {
     modifyStock: adminActions.modifyStock,
-    modifyPrice: adminActions.modifyPrice,
+    modifyTotal: adminActions.modifyTotal,
     getProducts: adminActions.getProducts
 }
 
