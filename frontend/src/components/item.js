@@ -1,23 +1,39 @@
-import React from 'react';
-import '../styles/itemsprofile.css';
-
+import React, {useState,useEffect} from 'react';
+import Header from './Header'
+import axios from 'axios'
 const Item = () => {
+    const [item, setItem] = useState([])
+	useEffect(() => {
+		stuffData()
+	}, [])
+	const stuffData = async () => {
+        const response = await axios.get("http://127.0.0.1:4000/api/items/5f6ba4176d1dfe1834ddab9d")	
+        setItem(response.data.product)
+       
+    }
+    console.log(item)
     
+
     return (
-        <><div className='container'>
-            <div className='inf'></div>
-            <div className='stuff'>
-                <div className='img'></div>
-                <div className='data'>
-                    <div></div>
-                    <div className='buy_details'>
-                        <button>agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
+    <>
+    <Header/>
+    <div style={{display:"flex", flexDirection:"column", marginLeft:"5%"}}>
+    <div><h5>inicio | productos | {item.name}</h5></div>
+      <div style={{display:"flex", marginLeft:"5%"}}>
+        <div>
+          <div><img style={{width:"30vw", margin:"3%"}} src={item.photo}></img></div>
+          <button style={{width:"60%", color:"white", backgroundColor:"black",alignSelf:"center",padding:"0.3%",marginLeft:"25%", borderStyle:"none"}}>Add to cart</button>
         </div>
-        </>
+        <div  style={{display:"flex", flexDirection:"column", margin:"4%", width:"40vw"}} >
+          <h2>{item.name}</h2>
+          <p>{item.description}</p>
+          <img style={{width:"18vw"}} src={item.photo1}></img>
+        </div>
+      </div>
+    </div>
+    </>  
     );
 };
 
 export default Item;
+

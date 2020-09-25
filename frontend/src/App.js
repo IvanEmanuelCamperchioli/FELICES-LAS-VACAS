@@ -12,6 +12,8 @@ import './styles/app.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Products from './pages/Products';
+import Items from './pages/Items';
+import Item from './components/Item';
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
           <Route path='/home-admin' component={HomeAdmin}/>
           <Route path='/form-admin' component={FormAdmin}/>
           <Route path='/edit-admin' component={EditAdmin}/>
+          <Route path='/signup' component={SignUp}/>
+          <Route path='/productos' component={Items}/>
+          <Route path='/item' component={Item}/>
           <Redirect to='/'/>
         </Switch>
       </BrowserRouter>
