@@ -31,12 +31,13 @@ class Destacado extends React.Component {
                     <div className="logo" style={{backgroundImage: `url(${logo})`}}></div>
                 
                 
-                <h1 className="titulo">Destacado</h1>
-                <h5>QUEDATE EN CASA, HACÉ TU PEDIDO Y NOSOTROS TE LO LLEVAMOS</h5>
-                    {this.state.products.length === 0 
-                        ?   <h1>Lodading</h1>
-                        :   <ProductosDestacados products={this.state.products}/>}
+                    <h1 className="titulo">Destacado</h1>
+                    <h5>QUEDATE EN CASA, HACÉ TU PEDIDO Y NOSOTROS TE LO LLEVAMOS</h5>
+                        {this.state.products.length === 0 
+                            ?   <h1>Lodading</h1>
+                            :   <ProductosDestacados products={this.state.products}/>}
                 </div>
+                
             </div>
         )
     }

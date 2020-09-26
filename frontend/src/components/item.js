@@ -1,17 +1,22 @@
 import React, {useState,useEffect} from 'react';
 import Header from './Header'
 import axios from 'axios'
-const Item = () => {
-    const [item, setItem] = useState([])
-	useEffect(() => {
-		stuffData()
-	}, [])
-	const stuffData = async () => {
-        const response = await axios.get("http://127.0.0.1:4000/api/items/5f6ba4176d1dfe1834ddab9d")	
-        setItem(response.data.product)
-       
-    }
+import { connect } from 'react-redux';
+import productsActions from '../redux/actions/productsActions'
+
+
+const Item = (props) => {
+    const [item, setItem] = useState({})
+  
+  
+    useEffect(async () => {
+    var idProduct = props.match.params.id
+    const res = await props.getProduct(idProduct)
+    setItem(res)
     console.log(item)
+	  }, [])
+	
+    
     
 
     return (
@@ -35,5 +40,9 @@ const Item = () => {
     );
 };
 
-export default Item;
+const mapDispatchToProps = {
+  getProduct : productsActions.getProductById
+}
+
+export default connect (null, mapDispatchToProps)  (Item);
 

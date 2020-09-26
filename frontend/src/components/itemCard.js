@@ -14,7 +14,7 @@ const ItemCard = (props) => {
           <CardTitle>{props.item.name}</CardTitle>
           <CardSubtitle>${props.item.price}</CardSubtitle>
          <div style={{display:"flex", flexDirection:"column", margin:"0.3vw"}}>
-         <Button style={{margin:"0.3vw"}}><NavLink to="item" style={{color:"white", textDecoration:"none", textAlign:"center", width: "10vw"}}>ver más</NavLink> 
+         <Button style={{margin:"0.3vw"}}><NavLink to={`/producto/${props.item._id}`} style={{color:"white", textDecoration:"none", textAlign:"center", width: "10vw"}}>ver más</NavLink> 
         </Button>
         <Button>Añadir al carrito</Button>
          </div>

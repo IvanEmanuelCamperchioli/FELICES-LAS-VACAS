@@ -6,6 +6,8 @@ import Footer from '../components/Footer';
 import { Button } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux';
+import productsActions from '../redux/actions/productsActions';
 
 
 class Products extends React.Component {
@@ -17,15 +19,16 @@ class Products extends React.Component {
         filteredItems:[]
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         window.scrollTo({top: 0, behavior: 'smooth'})
-        fetch("http://127.0.0.1:4000/api/items")	
-            .then(response => response.json())
-            .then(json => this.setState({
-                ...this.state,
-                items: json.products,
-                filteredItems: json.products
-        }))
+        await this.props.getProducts()
+        const products = this.props.products
+        this.setState({
+            ...this.state,
+            items:products,
+            filteredItems:products
+        })
+        
     }
 
     filterItem = e => {
@@ -66,7 +69,7 @@ class Products extends React.Component {
     }
 
     orderF = (filtered) =>{
-        console.log(filtered)
+       
         if(this.state.order !==""){
             switch (this.state.order){
                 case "MasStock":
@@ -146,5 +149,14 @@ class Products extends React.Component {
     }
 }
 
+const mapDispatchToProps = {
+    getProducts: productsActions.getProducts
+}
 
-export default Products;
+const  mapStateToProps = (state) =>{
+    return {
+        products: state.productsRed.products
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (Products);

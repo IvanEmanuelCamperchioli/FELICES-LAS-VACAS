@@ -20,11 +20,20 @@ const itemsController = {
     },
     getProductById: async (req,res) => {
         var id = req.params.id
+        console.log(id)
+        try{
         const product= await Product.findOne({_id:id})
+        console.log(product)
         res.json({
             success: true,
-            product
+            response: {product}
         })
+        }catch(error){
+            res.json({
+                success: false,
+                error
+            })
+        }
     },
     modifyStockProduct: async (req,res) => {
 

@@ -46,16 +46,16 @@ const FormAdmin = (props) => {
 
         setErrors({...errorsCopy})
 
-        console.log(errors);
+        
 
         if (errors.name === "" && errors.price === 0 && errors.description === "" && errors.stock=== "" && errors.category=== "" && errors.rating=== 0 && errors.views === 0) {
             
-            console.log(errors)
+          
 
             const response = await props.newProduct(newProduct)
 
             if (response.success) {
-                console.log('ok')
+                
                 
             }
             
