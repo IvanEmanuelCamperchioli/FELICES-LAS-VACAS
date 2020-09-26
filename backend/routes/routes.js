@@ -26,8 +26,8 @@ router.route("/items")
 router.route("/items/stocks/:id")
 .put(itemsController.modifyStockProduct)
 
-router.route("/items/prices/:id")
-.put(itemsController.modifyPriceProduct)
+router.route("/items/total/:id")
+.put(itemsController.modifyPropertyTotalProduct)
 
 router.route("/items/:id")
 .get(itemsController.getProductById)

@@ -36,9 +36,9 @@ const adminActions = {
         }
     },
 
-    modifyPrice: (cantPrice, idProduct) => {
+    modifyTotal: (cantModify, idProduct, aProperty) => {
         return async(dispatch, getState) => {
-            const res = await axios.put(`http://127.0.0.1:4000/api/items/prices/${idProduct}`, {cantPrice})
+            const res = await axios.put(`http://127.0.0.1:4000/api/items/total/${idProduct}`, {cantModify, aProperty})
         }
     }
 }
