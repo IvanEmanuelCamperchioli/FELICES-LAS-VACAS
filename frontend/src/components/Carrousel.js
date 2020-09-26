@@ -12,7 +12,9 @@ const slide_uno = require('../images/slider_uno.jpg')
 const slide_dos = require('../images/slider_dos.jpg')
 const slide_tres = require('../images/slider_tres.jpg')
 
-const items = [ {src: slide_uno}, {src: slide_dos}, {src: slide_tres} ]
+const texto_uno = "Primera hamburguesa vegana simil carne"
+
+const items = [ {src: slide_uno, caption:"Primera hamburguesa vegana simil carne"}, {src: slide_dos,caption:"Helados veganos sabor chocolate y dulce de leche" }, {src: slide_tres,caption:"Alfajores de maicena con dulce de leche de almendras" } ]
 
 const Carrousel = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -43,7 +45,7 @@ const Carrousel = (props) => {
         key={item.src}
       >
         <div className="carrusel" style={{backgroundImage: `url(${item.src})`}} alt={item.altText} ></div>
-        <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+        <CarouselCaption className="tituloC" /* captionText={item.caption} */ captionHeader={item.caption} />
       </CarouselItem>
     );
   });

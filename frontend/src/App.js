@@ -1,37 +1,96 @@
 import React from 'react';
+import './styles/app.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import LogIn from './pages/LogIn';
-import SignUp from './pages/SignUp';
-import Carrito from './pages/Carrito';
-import Home from './pages/Home'
-import HomeAdmin from './pages/HomeAdmin';
+import Home from "./pages/Home"
+import Products from './pages/Products';
+import Cart from './pages/Cart'
+import HomeAdmin from './pages/HomeAdmin'
 import FormAdmin from './components/FormAdmin'
 import EditAdmin from './components/EditAdmin'
+import LogIn from './pages/LogIn'
+import SignUp from './pages/SignUp'
+import LogOut from './pages/LogOut'
+import Item from './components/Item';
+import {connect} from 'react-redux'
+import usersActions from './redux/actions/usersActions'
 
-import './styles/app.css'
+class App extends React.Component{
+  
+  render(){
+    console.log(this.props)
+    var normalRoutes = (
+      <Switch>
+        <Route exact path ="/" component={Home}/>
+        <Route path = "/productos" component={Products}/>
+        <Route path = "/producto/:id" component={Item}/>
+        <Route path = "/faqs" component={Home} />
+        <Route path = "/carrito" component={Cart} />
+        <Route path = "/mi-cuenta" component={Home} />
+        <Route path = "/log-out" component={LogOut}/>
+        <Redirect to = "/" />
+      </Switch>
+    )
+    var adminRoutes = (
+      <Switch>
+        <Route exact path ="/admin-home" component={HomeAdmin}/>
+        <Route path = "/admin-form" component={FormAdmin} />
+        <Route path = "/admin-edit" component={EditAdmin}/>
+        <Route path = "/log-out" component={LogOut}/>
+        <Redirect to = "/admin-home" component={HomeAdmin}/>
+      </Switch>
+    ) 
+    var unlogedRoutes = (
+      <Switch>
+        <Route exact path ="/" component={Home}/>
+        <Route path = "/productos" component={Products}/>
+        <Route path = "/producto/:id" component={Item}/>
+        <Route path = "/faqs" component={Home} />
+        <Route path = "/sign-in" component={LogIn} />
+        <Route path = "/sign-up" component={SignUp} />
+        <Redirect to = "/" />
+      </Switch>
+    ) 
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Productos from './pages/Productos';
+    if(this.props.token){
+      if(this.props.role === "admin"){
+        var routes = adminRoutes
+      }else{
+        var routes = normalRoutes
+      }
+    }else if(localStorage.getItem('token')){
+      this.props.forcedLogIn(localStorage.getItem('token'))
+      
+      if(this.props.role === "admin"){
+        var routes = adminRoutes
+      }else{
+        var routes = normalRoutes
+      }
+      
+    }else{
+      var routes = unlogedRoutes
+    }
 
-function App() {
-  return (
-    <>
+
+
+    return(
       <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route path='/login' component={LogIn}/>
-          <Route path='/signup' component={SignUp}/>
-          <Route path='/como-comprar' component={LogIn}/>
-          <Route path='/productos' component={Productos}/>
-          <Route exact path='/carrito' component={Carrito}/>
-          <Route path='/home-admin' component={HomeAdmin}/>
-          <Route path='/form-admin' component={FormAdmin}/>
-          <Route path='/edit-admin' component={EditAdmin}/>
-          <Redirect to='/'/>
-        </Switch>
+        {routes}
       </BrowserRouter>
-    </>
-  );
+    )
+  }
+
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  
+  return {
+    token: state.usersRed.token,
+    role: state.usersRed.role
+  }
+}
+const mapDispatchToProps = {
+  forcedLogIn: usersActions.forcedLogIn
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

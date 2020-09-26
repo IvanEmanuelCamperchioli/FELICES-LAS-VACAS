@@ -2,10 +2,10 @@
 import Header from '../components/Header'
 import React from 'react'
 import {connect} from 'react-redux'
-import userActions from '../redux/actions/usersActions'
+import usersActions from '../redux/actions/usersActions'
 import Swal from 'sweetalert2'
 import GoogleLogin from 'react-google-login';
-import Footer from '../components/footer'
+import Footer from '../components/Footer'
 import LogIn from './LogIn'
 /* import'../styles/logs.css' */
 
@@ -14,7 +14,7 @@ class SignUp extends React.Component{
     
     state={
         newUser:{
-            user:"",
+            username:"",
             password:"",
             name:"",
             surname:"",
@@ -24,7 +24,7 @@ class SignUp extends React.Component{
             loginGoogle:"false"
         },
         errors:{
-            user:"",
+            username:"",
             password:"",
             name:"",
             surname:"",
@@ -52,9 +52,9 @@ class SignUp extends React.Component{
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         const validPassword = RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/)
 
-        errors.user =
-            this.state.newUser.user.length < 2
-            ? "The user must be at least 2 characters long! "
+        errors.username =
+            this.state.newUser.username.length < 2
+            ? "The username must be at least 2 characters long! "
             : ""
         errors.passwordValidation =
             this.state.newUser.password !== this.state.newUser.passwordValidation
@@ -80,7 +80,7 @@ class SignUp extends React.Component{
         this.setState({
             errors
         })
-        if (this.state.errors.user === "" && this.state.errors.passwordValidation === "" && this.state.errors.password === "" && this.state.errors.name=== "" && this.state.errors.surname=== "" && this.state.errors.mail=== "" ){
+        if (this.state.errors.username === "" && this.state.errors.passwordValidation === "" && this.state.errors.password === "" && this.state.errors.name=== "" && this.state.errors.surname=== "" && this.state.errors.mail=== "" ){
              const response = await this.props.createAccount(this.state.newUser)
             
              if (response.success === true){
@@ -88,11 +88,11 @@ class SignUp extends React.Component{
                 
                 
             }else{
-                if (response.user !== ""){
+                if (response.username !== ""){
                     this.setState({
                         errors:{
                             ...this.state.errors,
-                            user:response.user
+                            username:response.username
                         } 
                     })
                 }
@@ -117,7 +117,7 @@ class SignUp extends React.Component{
         this.setState({
             ...this.state,
             newUser:{
-                user:response.profileObj.email,
+                username:response.profileObj.email,
                 password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
                 name:response.profileObj.givenName,
                 surname:response.profileObj.familyName.trim(),
@@ -133,7 +133,7 @@ class SignUp extends React.Component{
             
             
         }else{
-            if (res.user !== ""){
+            if (res.username !== ""){
                 Swal.fire({  title: 'Please sign into your account!',  text: `You are already register with this Google account`,  icon: 'warning',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
             }
             
@@ -153,8 +153,8 @@ class SignUp extends React.Component{
                     <span className={this.state.errors.mail === "" ? "" : "logError"}>{this.state.errors.mail}</span>
                     <input className="mail" type="mail" placeholder="Enter your email" name="mail" onChange={this.getForm}></input>
                     
-                    <span className={this.state.errors.user === "" ? "" : "logError"}>{this.state.errors.user}</span>
-                    <input className="account" type="text" placeholder="Enter your user" name="user" onChange={this.getForm}></input>
+                    <span className={this.state.errors.username === "" ? "" : "logError"}>{this.state.errors.username}</span>
+                    <input className="account" type="text" placeholder="Enter your username" name="username" onChange={this.getForm}></input>
                     
                     <span className={this.state.errors.password === "" ? "" : "logError"}>{this.state.errors.password}</span>
                     <input className="password" type="password" placeholder="Enter your password" name="password" onChange={this.getForm}></input>
@@ -192,7 +192,7 @@ class SignUp extends React.Component{
 }
 
 const mapDispatchToProps = {
-    createAccount: userActions.createUser
+    createAccount: usersActions.createUser
 }
 
 const mapStateToProps = (state) =>{

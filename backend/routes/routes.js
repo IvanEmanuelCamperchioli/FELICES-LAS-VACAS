@@ -1,4 +1,5 @@
 const express = require("express")
+const passport = require("../config/passport")
 const itemsController = require("../controllers/itemsController")
 const usersController = require("../controllers/usersController")
 const router = express.Router()
@@ -10,12 +11,13 @@ router.route('/users')
 
 router.route('/user')
 .post(usersController.userLogin)
-/* router.route('/usuarioGoogle')
-.post(usuariosController.crearCuentaConGoogle) */
+
 
 router.route('/getUser')
 .post(usersController.getUsersExist)
 
+router.route('/tokenVerificator')
+.get(passport.authenticate('jwt', { session: false }), usersController.tokenVerificator)
 
 router.route("/items")
 .get(itemsController.getProducts)

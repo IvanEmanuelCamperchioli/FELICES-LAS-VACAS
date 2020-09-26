@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import '../styles/header.css'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem,  Tooltip} from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem,  Tooltip} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faUser} from '@fortawesome/free-solid-svg-icons'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import usersActions from "../redux/actions/usersActions";
 
 class Header extends React.Component {
 
@@ -17,8 +19,11 @@ class Header extends React.Component {
         })
     }
 
+   
+    
+    
     render() {
-
+        console.log(this.props)
         return (
             <>
             <div className="header-sup">
@@ -32,8 +37,8 @@ class Header extends React.Component {
                 <div className="div"></div>
                 <NavLink to='/'>Inicio</NavLink>
                 <NavLink to='/productos'>Productos</NavLink>
-                <NavLink to='/como-comprar'>Como comprar</NavLink>
-                <MenuDesplegable />
+                <NavLink to='/faqs'>Como comprar</NavLink>
+                <MenuDesplegable userLogued={this.props} />
                 <div className="div"></div>
             </div>            
             </>
@@ -41,23 +46,51 @@ class Header extends React.Component {
     }
 }
 
-export default Header
+const mapStateToProps = (state) => {
+    
+    return {
+      username: state.usersRed.username,
+      token: state.usersRed.token,
+    };
+  };
+  
+  const mapDispatchToProps = {
+    forcedLogIn: usersActions.forcedLogIn,
+  };
+  
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
-const MenuDesplegable = () => {
 
+
+const MenuDesplegable = (props) => {
+    
     const [dropdownOpen, setDropdownOpen] = useState(false)
   
     const toggle = () => setDropdownOpen(prevState => !prevState)
-  
+    
+    
+
     return (
         <>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                <DropdownToggle className="desplegable"><FontAwesomeIcon icon={faUser} /> Cuenta </DropdownToggle>
+                <DropdownToggle className="desplegable"><FontAwesomeIcon icon={faUser} /> 
+                {props.userLogued.token ? `${props.userLogued.username}` : 'Cuenta'}</DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem header>Registrate o accede a tu cuenta</DropdownItem>
-                    <DropdownItem divider />
-                    <NavLink to='/signup' style={{width: '100%'}}><DropdownItem>Crear Cuenta</DropdownItem></NavLink>
-                    <NavLink to='/login' style={{width: '100%'}}><DropdownItem>Iniciar Seción</DropdownItem></NavLink>
+                    {props.userLogued.token ?   
+                        (
+                            <>
+                            <DropdownItem><NavLink to='/' style={{width: '100%'}}>Mi cuenta</NavLink></DropdownItem>
+                            <DropdownItem><NavLink to="/log-out">Cerrar sesión</NavLink></DropdownItem>
+                            </>
+                        )
+                        :   
+                        (
+                            <>
+                            <DropdownItem><NavLink to='/sign-in' style={{width: '100%'}}>Iniciar sesión</NavLink></DropdownItem>
+                            <DropdownItem><NavLink to='/sign-up' style={{width: '100%'}}>Crear cuenta</NavLink></DropdownItem>
+                            </>
+                        )
+                    }
                 </DropdownMenu>
             </Dropdown>
         </>

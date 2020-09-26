@@ -6,7 +6,7 @@ const usersActions = {
     return async (dispatch, getState) => {
       const res = await axios.post(
         "http://127.0.0.1:4000/api/user", user )
-        console.log(res)
+      
       if (res.data.success !== true) {
         return res.data.message
       } else {
@@ -17,27 +17,27 @@ const usersActions = {
             })
             return {
               success: true,
-              nombre: res.data.response.nombre
+              name: res.data.response.name
           }
       }
     };
   },
   
   createUser: (newUser) => {
-    console.log(newUser)
+  
     return async (dispatch, getState) => {
       const res = await axios.post("http://127.0.0.1:4000/api/users", newUser)
       const error ={
         mail:"",
-        user:""
+        username:""
       }
-      console.log(res)
+ 
       if(!res.data.success && res.data.response !== undefined){
         if(res.data.response.errors.mail !== undefined){
           error.mail = "Ese email ya esta en uso"
         }
-        if(res.data.response.errors.user !== undefined){
-          error.user = "Ese nombre de usuario ya esta en uso"
+        if(res.data.response.errors.username !== undefined){
+          error.username = "Ese nombre de usuario ya esta en uso"
         }
         return error
         
@@ -47,15 +47,14 @@ const usersActions = {
         dispatch({
           type: "SET_USER",
           payload: {  
-            name: res.data.response.name,
+            username: res.data.response.username,
             token: res.data.response.token,
-            surname: res.data.response.surname,
             role: res.data.response.role
           },
         });
         return {
             success: true,
-            user: res.data.response.name
+            username: res.data.response.name
         }
       }
 
@@ -64,23 +63,26 @@ const usersActions = {
 
   forcedLogIn: token => {
     return async (dispatch, getState) => {
-        const response = await axios.get('http://127.0.0.1:4000/api/tokenVerificator', {
+        const res = await axios.get('http://127.0.0.1:4000/api/tokenVerificator', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
+        
         dispatch({
             type: "SET_USER",
             payload: {
-                nombre: response.data.nombre,
-                apellido: response.data.apellido,
-                token: token,
-                email: response.data.email,
+                username: res.data.response.username,
+                token: token, 
+                role: res.data.response.role, 
+                name: res.data.response.name
             }
         })
-
+        return res.data.response.username
     }
-  },getUser: user =>{
+  },
+  
+  getUser: user =>{
     return async (dispatch, getState) =>{
         
         const res = await axios.post("http://127.0.0.1:4000/api/getUser", user)
@@ -91,13 +93,13 @@ const usersActions = {
         return res.data.success
     }
   },
-  userLogOut: () => {
-    return (dispatch, getState) => {
+  unlogUser : () => {
+    return (dispatch, getState) =>{
         dispatch({
-            type: "LOGOUT_USER"
+            type: "UNLOG_USER_FROM_APP"
         })
     }
-  }
+},
 };
 
 export default usersActions;
