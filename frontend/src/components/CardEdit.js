@@ -11,6 +11,7 @@ const CardEdit = (props) => {
     const [tooltipOpenConfirmPrice, setTooltipOpenConfirmPrice] = useState(false)
     const [tooltipOpenPlus, setTooltipOpenPlus] = useState(false)
     const [tooltipOpenLess, setTooltipOpenLess] = useState(false)
+    const [tooltipOpenConfirmDelete, setTooltipOpenConfirmDelete] = useState(false)
 
     const toggleConfirm = () => {
         setTooltipOpenConfirm(!tooltipOpenConfirm)
@@ -24,12 +25,16 @@ const CardEdit = (props) => {
     const toggleConfirmPrice = () => {
         setTooltipOpenConfirmPrice(!tooltipOpenConfirmPrice)
     }
+    const toggleConfirmDelete = () => {
+        setTooltipOpenConfirmDelete(!tooltipOpenConfirmDelete)
+    }
 
     const [modify, setModify] = useState({
         cantModifyStock: 0,
         cantModifyPrice: 0,
         viewMoreStock: false,
         viewMorePrice: false,
+        viewMoreDelete: false,
     })
 
     const viewSwitch = (aProperty) => {
@@ -46,6 +51,11 @@ const CardEdit = (props) => {
                 viewMorePrice: !modify.viewMorePrice,
             })}
 
+        if(aProperty === 'delete')
+            setModify({
+                ...modify,
+                viewMoreDelete: !modify.viewMoreDelete,
+            })
     }
 
     const readInput = e => {
@@ -73,6 +83,11 @@ const CardEdit = (props) => {
 
         props.getProducts()
             
+    }
+
+    const deleteProduct = async() => {
+        await props.deleteProduct(props.product._id)
+        props.getProducts()
     }
 
     const styleProperty = {
@@ -195,6 +210,15 @@ const CardEdit = (props) => {
                                 </div>
                             </div>
                         </div>
+                        <div className="row col-md-12 justify-content-center">
+                            {modify.viewMoreDelete && 
+                                <>
+                                    <span  id="TooltipConfirmDelete" className="flex"><button onClick={() => deleteProduct()} className='btn btn-secondary'><FontAwesomeIcon icon={faCheck}/></button></span>
+                                    <Tooltip placement="top" isOpen={tooltipOpenConfirmDelete} target="TooltipConfirmDelete" toggle={toggleConfirmDelete}>Confirm</Tooltip>
+                                </>
+                            }
+                            <button onClick={() => viewSwitch('delete')} className='btn btn-danger ml-1'>{modify.viewMoreDelete ? "Cancel" : 'Delete'}</button>
+                        </div>
                     </div>
                 </div>
 
@@ -204,6 +228,7 @@ const CardEdit = (props) => {
 }
 
 const mapDispatchToProps = {
+    deleteProduct: adminActions.deleteProduct,
     modifyStock: adminActions.modifyStock,
     modifyTotal: adminActions.modifyTotal,
     getProducts: adminActions.getProducts
