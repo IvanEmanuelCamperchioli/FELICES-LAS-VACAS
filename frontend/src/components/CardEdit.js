@@ -3,8 +3,27 @@ import { connect } from "react-redux"
 import adminActions from '../redux/actions/adminActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretLeft, faCaretRight, faCheck} from '@fortawesome/free-solid-svg-icons'
+import { Tooltip } from 'reactstrap'
 
 const CardEdit = (props) => {
+
+    const [tooltipOpenConfirm, setTooltipOpenConfirm] = useState(false)
+    const [tooltipOpenConfirmPrice, setTooltipOpenConfirmPrice] = useState(false)
+    const [tooltipOpenPlus, setTooltipOpenPlus] = useState(false)
+    const [tooltipOpenLess, setTooltipOpenLess] = useState(false)
+
+    const toggleConfirm = () => {
+        setTooltipOpenConfirm(!tooltipOpenConfirm)
+    }
+    const togglePlus = () => {
+        setTooltipOpenPlus(!tooltipOpenPlus)
+    }
+    const toggleLess = () => {
+        setTooltipOpenLess(!tooltipOpenLess)
+    }
+    const toggleConfirmPrice = () => {
+        setTooltipOpenConfirmPrice(!tooltipOpenConfirmPrice)
+    }
 
     const [modify, setModify] = useState({
         cantModifyStock: 0,
@@ -131,10 +150,18 @@ const CardEdit = (props) => {
                             </div>
                             {modify.viewMoreStock && 
                                 <>
-                                    <span className="flex"><button onClick={() => editCant(-1, 'oneStock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCaretLeft}></FontAwesomeIcon></button></span>
-                                    <span className="flex"><button onClick={() => editCant(1, 'oneStock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCaretRight}></FontAwesomeIcon></button></span>
+                                    <div>
+                                        <span id="TooltipPlus" className="flex"><button onClick={() => editCant(-1, 'oneStock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCaretLeft}/></button></span>
+                                        <Tooltip placement="top" isOpen={tooltipOpenPlus} target="TooltipPlus" toggle={togglePlus}>-1</Tooltip>
+                                    
+                                        <span id="TooltipLess" className="flex ml-1"><button onClick={() => editCant(1, 'oneStock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCaretRight}/></button></span>
+                                        <Tooltip placement="top" isOpen={tooltipOpenLess} target="TooltipLess" toggle={toggleLess}>+1</Tooltip>
+                                    </div>    
                                     <input type='number' name='cantModifyStock' onChange={readInput} placeholder='Quantity to modify'/>
-                                    <span className="flex"><button onClick={() => editCant(modify.cantModifyStock, 'stock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCheck}></FontAwesomeIcon></button></span>
+
+                                    <span  id="TooltipConfirm" className="flex"><button onClick={() => editCant(modify.cantModifyStock, 'stock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCheck}/></button></span>
+                                    <Tooltip placement="top" isOpen={tooltipOpenConfirm} target="TooltipConfirm" toggle={toggleConfirm}>Confirm</Tooltip>
+                                
                                 </>
                             }
                             <button onClick={() => viewSwitch('stock')} className='btn btn-primary'>{modify.viewMoreStock ? "Cancel" : 'Modify stock'}</button>
@@ -150,7 +177,8 @@ const CardEdit = (props) => {
                             {modify.viewMorePrice && 
                                 <>
                                     <input type='number' name='cantModifyPrice' onChange={readInput} placeholder='New price'/>
-                                    <span className="flex"><button onClick={() => editCant(modify.cantModifyPrice, 'price')} className='btn btn-secondary'>New price</button></span>
+                                    <span id="TooltipConfirmPrice" className="flex"><button onClick={() => editCant(modify.cantModifyPrice, 'price')} className='btn btn-secondary'><FontAwesomeIcon icon={faCheck}/></button></span>
+                                    <Tooltip placement="top" isOpen={tooltipOpenConfirmPrice} target="TooltipConfirmPrice" toggle={toggleConfirmPrice}>Confirm</Tooltip>
                                 </>
                             }
                             <span><button onClick={() => viewSwitch('price')} className='btn btn-primary'>{modify.viewMorePrice ? "Cancel" : 'Modify price'}</button></span>
