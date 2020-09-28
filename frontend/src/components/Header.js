@@ -146,8 +146,7 @@ const MenuDesplegable = (props) => {
     return (
         <>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                <DropdownToggle className="desplegable"><FontAwesomeIcon icon={faUser} /> 
-                {props.userLogued.token ? `${props.userLogued.username}` : 'Cuenta'}</DropdownToggle>
+                <DropdownToggle className="desplegable"><FontAwesomeIcon icon={faUser} /> {props.userLogued.token ? `${props.userLogued.username}` : 'Cuenta'}</DropdownToggle>
                 <DropdownMenu>
                     {props.userLogued.token ?   
                         (
