@@ -6,8 +6,6 @@ import Home from "./pages/Home"
 import Products from './pages/Products';
 import Cart from './pages/Cart'
 import HomeAdmin from './pages/HomeAdmin'
-import FormAdmin from './components/FormAdmin'
-import EditAdmin from './components/EditAdmin'
 import LogIn from './pages/LogIn'
 import SignUp from './pages/SignUp'
 import LogOut from './pages/LogOut'
@@ -34,8 +32,6 @@ class App extends React.Component{
     var adminRoutes = (
       <Switch>
         <Route exact path ="/admin-home" component={HomeAdmin}/>
-        <Route path = "/admin-form" component={FormAdmin} />
-        <Route path = "/admin-edit" component={EditAdmin}/>
         <Route path = "/log-out" component={LogOut}/>
         <Redirect to = "/admin-home" component={HomeAdmin}/>
       </Switch>

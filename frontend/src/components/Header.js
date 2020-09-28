@@ -143,7 +143,6 @@ const MenuDesplegable = (props) => {
   
     const toggle = () => setDropdownOpen(prevState => !prevState)
     
-    
 
     return (
         <>
@@ -154,15 +153,15 @@ const MenuDesplegable = (props) => {
                     {props.userLogued.token ?   
                         (
                             <>
-                            <DropdownItem><NavLink to='/' style={{width: '100%'}}>Mi cuenta</NavLink></DropdownItem>
-                            <DropdownItem><NavLink to="/log-out">Cerrar sesión</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to='/' style={{width: '100%'}}>Mi cuenta</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to="/log-out">Cerrar sesión</NavLink></DropdownItem>
                             </>
                         )
                         :   
                         (
                             <>
-                            <DropdownItem><NavLink to='/sign-in' style={{width: '100%'}}>Iniciar sesión</NavLink></DropdownItem>
-                            <DropdownItem><NavLink to='/sign-up' style={{width: '100%'}}>Crear cuenta</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to='/sign-in' style={{width: '100%'}}>Iniciar sesión</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to='/sign-up' style={{width: '100%'}}>Crear cuenta</NavLink></DropdownItem>
                             </>
                         )
                     }
