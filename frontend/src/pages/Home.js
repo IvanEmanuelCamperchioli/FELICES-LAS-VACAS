@@ -6,10 +6,7 @@ import Header from '../components/Header'
 import Item from '../components/Item'
 
 class Home extends React.Component {
-
-
-    render() {
-
+    render() { 
         return (
             <>
                 <Header />
