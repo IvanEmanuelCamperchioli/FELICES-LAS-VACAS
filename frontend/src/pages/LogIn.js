@@ -1,11 +1,9 @@
 
 import Header from '../components/Header'
 import React from 'react'
-import userActions from '../redux/actions/usersActions'
+import usersActions from '../redux/actions/usersActions'
 import {connect} from 'react-redux'
 import GoogleLogin from 'react-google-login';
-
-
 import Swal from 'sweetalert2'
 import Footer from '../components/Footer';
 import { NavLink } from 'react-router-dom';
@@ -14,24 +12,20 @@ import { NavLink } from 'react-router-dom';
 class SignIn extends React.Component{
     state={
         logUser:{
-            user:"",
+            username:"",
             password:"",    
         },
         error:""
     }
     getForm = e =>{
         e.preventDefault()
-        const property = e.target.name
-        const value = e.target.value
+       
         this.setState({
-            
             logUser:{
                 ...this.state.logUser,
-                [property]: value
+                [e.target.name]: e.target.value
             }
         })
-        
-        
     }
 
 
@@ -43,7 +37,7 @@ class SignIn extends React.Component{
                 error: "Both fields are required"
             }) 
         }else{
-            const logUser= {user:this.state.logUser.user , password: this.state.logUser.password}
+            const logUser= {user:this.state.logUser.username , password: this.state.logUser.password}
             const response =  await this.props.logUser(logUser)
             
             if (response.success === true){
@@ -60,7 +54,7 @@ class SignIn extends React.Component{
         this.setState({
             ...this.state,
             logUser:{
-                user:response.profileObj.email,
+                username:response.profileObj.email,
                 password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase()
             }
         })
@@ -68,7 +62,7 @@ class SignIn extends React.Component{
         
         if(res === true){
             const resp =  await this.props.logUser(this.state.logUser)
-
+            
             
         }else{
             Swal.fire({  title: 'You must sign up!',  text: `Please go to create an account, ${response.profileObj.givenName}.`,  icon: 'warning',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
@@ -76,7 +70,7 @@ class SignIn extends React.Component{
         this.setState({
             ...this.state,
             logUser:{
-                user:"",
+                username:"",
                 password:""
             }
         })    
@@ -94,7 +88,7 @@ class SignIn extends React.Component{
                 
                 <div className="inputs">
                     <span className = {this.state.error === "" ? "" : "logError"}>{this.state.error}</span>
-                    <input className="account" name="user" type="text" placeholder="Enter your user" onChange={this.getForm}></input>
+                    <input className="account" name="username" type="text" placeholder="Enter your user" onChange={this.getForm}></input>
                     <input className="password" type="password" name="password" placeholder="Enter your password" onChange={this.getForm}></input>
                  </div>
                     
@@ -121,13 +115,13 @@ class SignIn extends React.Component{
 }
 
 const mapDispatchToProps = {
-    logUser: userActions.logUser,
-    getUser: userActions.getUser
+    logUser: usersActions.logUser,
+    getUser: usersActions.getUser
 }
 
 const mapStateToProps = (state)=>{
     return{
-        userLog: state.userRed
+        userLog: state.usersRed
     }
 }
 

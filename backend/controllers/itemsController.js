@@ -20,11 +20,47 @@ const itemsController = {
     },
     getProductById: async (req,res) => {
         var id = req.params.id
+        
+        try{
         const product= await Product.findOne({_id:id})
+        
         res.json({
             success: true,
-            product
+            response: {product}
+        })
+        }catch(error){
+            res.json({
+                success: false,
+                error
+            })
+        }
+    },
+    modifyStockProduct: async (req,res) => {
+
+        const idProduct = req.params.id
+        const { cantStock } = req.body
+
+        const productModify = await Product.findOne({ _id: idProduct })
+
+        const newCantStock = productModify.stock + cantStock
+
+        await Product.findOneAndUpdate({ _id: idProduct }, { stock: newCantStock })
+        
+        res.json({
+            success:true,
+            productModify
         })
     },
+    modifyPropertyTotalProduct: async (req, res) => {
+        const idProduct = req.params.id
+        const { cantModify, aProperty } = req.body
+
+        const newModify = await Product.findOneAndUpdate({ _id: idProduct }, { [aProperty]: cantModify })
+
+        res.json({
+            success:true,
+            newModify
+        })
+    }
 }
 module.exports= itemsController

@@ -9,6 +9,7 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
                 products: action.payload,
             }
+
         default:
             return state
     }
