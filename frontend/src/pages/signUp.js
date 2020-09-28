@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import userActions from '../redux/actions/usersActions'
 import Swal from 'sweetalert2'
 import GoogleLogin from 'react-google-login';
-import Footer from '../components/footer'
+import Footer from '../components/Footer'
 import LogIn from './LogIn'
 /* import'../styles/logs.css' */
 

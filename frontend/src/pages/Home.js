@@ -3,10 +3,10 @@ import Carrousel from '../components/Carrousel'
 import Destacado from '../components/Destacado'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import Item from '../components/item'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
 class Home extends React.Component {
-
 
     render() {
 
@@ -14,6 +14,7 @@ class Home extends React.Component {
             <>
                 <Header />
                 <Carrousel />
+                <button className="questionCircle"><FontAwesomeIcon  icon={faQuestionCircle} /></button>
                 <Destacado />
                 <Footer />
             </>
