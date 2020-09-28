@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/home.css'
 import { NavLink } from 'react-router-dom';
+import ItemCard from './ItemCard';
 
 class ProductosDestacados extends React.Component{
     state = {
@@ -33,14 +34,7 @@ class ProductosDestacados extends React.Component{
                     
                     return (
                         <>
-                            <div className="card">
-                                <div className="productoImg" style={{backgroundImage: `url(${product.photo})`}}></div>
-                                <h1>{product.name}</h1>
-                                <p className="price">$ {product.price}</p>
-                                <p>{product.description}</p>
-                                <p><NavLink to="/itam"><button>Ver más</button></NavLink></p>
-                                <p><NavLink to="/carrito"><button>Agregar al carrito</button></NavLink></p>
-                            </div>
+                            <ItemCard key={product.id} item={product}/>
                         </>
                     )
                 })}
@@ -49,14 +43,7 @@ class ProductosDestacados extends React.Component{
                 {this.state.secondThree.map(product => {
                     return (
                         <>
-                            <div className="card">
-                                <div className="productoImg" style={{backgroundImage: `url(${product.photo})`}}></div>
-                                <h1>{product.name}</h1>
-                                <p className="price">$ {product.price}</p>
-                                <p>{product.description}</p>
-                                <p><NavLink to="/itam"><button>Ver más</button></NavLink></p>
-                                <p><button>Agregar al carrito</button></p>
-                            </div>
+                            <ItemCard key={product.id} item={product}/>
                         </>
                     )
                 })}

@@ -1,0 +1,50 @@
+.containeritemsCart{
+    width: 90%;
+    height: 80%;
+    overflow-y: scroll;
+}
+
+.containerItemCart{
+width: 80%;
+margin: 10px auto;
+height: 25vh;
+padding: 2rem;
+display: flex;
+background-color: #3f9b55be;
+border-radius: 1rem;
+justify-content: space-between;
+}
+
+.containerItemCart img{
+    width: 15vh;
+}
+.headerPanel{
+    display: flex;
+    color: black;
+}
+
+.headerPanel p{
+    margin-left: 3rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: black;
+}
+
+.texto{
+    text-align: center;
+}
+.texto p{
+    margin: 0;
+}
+.footCart{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+    text-align: center;
+    width: 80%;
+    color: black;
+}
+
+.footCart p{
+    margin-bottom: 0;
+}

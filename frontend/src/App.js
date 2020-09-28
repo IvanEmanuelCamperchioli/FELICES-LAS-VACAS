@@ -18,7 +18,7 @@ import usersActions from './redux/actions/usersActions'
 class App extends React.Component{
   
   render(){
-    console.log(this.props)
+    
     var normalRoutes = (
       <Switch>
         <Route exact path ="/" component={Home}/>

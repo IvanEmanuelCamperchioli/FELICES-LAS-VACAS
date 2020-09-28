@@ -156,6 +156,7 @@ margin-bottom: 2rem;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    float: right;
   }
 
   .sidepanel  h4{
@@ -179,7 +180,9 @@ margin-bottom: 2rem;
     position: absolute;
     top: 0;
     right: 25px;
-    font-size: 36px;
+    font-size: 25px;
+    background-color: #16993500;
+    border: none;
   }
   
   .openbtn {
