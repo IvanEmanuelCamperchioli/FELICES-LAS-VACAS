@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import GoogleLogin from 'react-google-login';
 import Footer from '../components/Footer'
 import LogIn from './LogIn'
+import '../styles/account.css'
 /* import'../styles/logs.css' */
 
 
@@ -145,10 +146,9 @@ class SignUp extends React.Component{
         return (
             <>
             <Header />
-            <h3 className="titleHouses">Create an account</h3>
+            <h3 className="titleHouses">CREA UNA CUENTA</h3>
             
             <div className="signContainer">
-                    
                 <div className="inputs">
                     <span className={this.state.errors.mail === "" ? "" : "logError"}>{this.state.errors.mail}</span>
                     <input className="mail" type="mail" placeholder="Enter your email" name="mail" onChange={this.getForm}></input>
@@ -167,21 +167,17 @@ class SignUp extends React.Component{
                     
                     <span className={this.state.errors.surname === "" ? "" : "logError"}>{this.state.errors.surname}</span>
                     <input className="surname" type="text" placeholder="Enter your surname" name="surname" onChange={this.getForm}></input>
-                    
-                    
-                        
                 </div>
-                    <button className="send" onClick={this.submit}>Sign Up</button>
-                    <p className="or">or</p>
-                    <GoogleLogin
-                        className="googleBtn"
-                        clientId="410495293057-2vf4ipg2vojn0pdvjg2p4pc8269vcbbq.apps.googleusercontent.com"
-                        buttonText="Create account with Google"
-                        onSuccess={this.responseGoogle}
-                        onFailure={this.responseGoogle}
-                        cookiePolicy={'single_host_origin'}
-                    />
-                
+                <button className="send" onClick={this.submit}><span>Crear cuenta </span></button>
+                <p className="or">or</p>
+                <GoogleLogin
+                    className="googleBtn"
+                    clientId="410495293057-2vf4ipg2vojn0pdvjg2p4pc8269vcbbq.apps.googleusercontent.com"
+                    buttonText="Create account with Google"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
             </div>
             
             <Footer/>

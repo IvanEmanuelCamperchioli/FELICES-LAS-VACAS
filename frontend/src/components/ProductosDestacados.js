@@ -31,7 +31,6 @@ class ProductosDestacados extends React.Component{
             <>
             <div className="conteiner-card">
                 {this.state.firstThree.map(product => {
-                    
                     return (
                         <>
                             <ItemCard key={product.id} item={product}/>

@@ -59,14 +59,12 @@ class Header extends React.Component {
         }
 
 
-
         
-
         return (
             <>
             {<div className="header-sup">
                     <h5 className="titleHeader">Felices las vacas | Alimentación conciente</h5>
-                    <button onClick={this.openNav} className="openbtn" ><FontAwesomeIcon className="carrito" icon={faShoppingCart} /></button>
+                    <button onClick={this.openNav} className="questionCircle" ><FontAwesomeIcon className="carrito" icon={faShoppingCart} /></button>
                    { <div className="sidepanel" style={style}>
                         <div className="headerPanel">
                         <p>CARRITO DE COMPRAS</p>
@@ -104,7 +102,8 @@ class Header extends React.Component {
                 <NavLink to='/faqs'>Como comprar</NavLink>
                 <MenuDesplegable userLogued={this.props} />
                 <div className="div"></div>
-            </div>            
+            </div>          
+            
             </>
         )
     }
@@ -138,8 +137,7 @@ const MenuDesplegable = (props) => {
     return (
         <>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                <DropdownToggle className="desplegable"><FontAwesomeIcon icon={faUser} /> 
-                {props.userLogued.token ? `${props.userLogued.username}` : 'Cuenta'}</DropdownToggle>
+                <DropdownToggle className="desplegable"><FontAwesomeIcon icon={faUser} /> {props.userLogued.token ? `${props.userLogued.username}` : 'Cuenta'}</DropdownToggle>
                 <DropdownMenu>
                     {props.userLogued.token ?   
                         (

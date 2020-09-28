@@ -7,6 +7,7 @@ import GoogleLogin from 'react-google-login';
 import Swal from 'sweetalert2'
 import Footer from '../components/Footer';
 import { NavLink } from 'react-router-dom';
+import '../styles/account.css'
 
 
 class SignIn extends React.Component{
@@ -82,7 +83,7 @@ class SignIn extends React.Component{
         return (
             <>
             <Header />
-            <h3 className="titleHouses">Enter into your account</h3>
+            <h3 className="titleHouses">ENTRA A TU CUENTA</h3>
             
             <div className="signContainer">
                 
@@ -92,8 +93,8 @@ class SignIn extends React.Component{
                     <input className="password" type="password" name="password" placeholder="Enter your password" onChange={this.getForm}></input>
                  </div>
                     
-                    <button onClick={this.submit} className="send">Sign In</button>
-                    <NavLink to="/forgotPass" style={{fontSize:"1.4rem"}}>I forgot my password</NavLink>
+                    <button onClick={this.submit} className="send"><span> Iniciar sesión</span></button>
+                    <NavLink to="/forgotPass" style={{fontSize:"1.4rem"}}>Olvidé mi contraseña</NavLink>
                     <p className="or">Or</p>
                     <GoogleLogin
                         className="googleBtn"
