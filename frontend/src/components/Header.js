@@ -15,10 +15,7 @@ class Header extends React.Component {
     state = {
         tooltipOpen: false,
         open: "0",
-        width: "100vw",
-        height: "100vh",
-        opacity: "",
-        position: "fixed",
+       
         products: this.props.products
     }
 
@@ -53,7 +50,7 @@ class Header extends React.Component {
     render() {
 
         var subtotal = 0
-        console.log(this.props)
+        
         this.props.cartProducts.map(item =>{
             subtotal += (item.product.price * item.quantity)
         })        
@@ -61,13 +58,7 @@ class Header extends React.Component {
             width: this.state.open
         }
 
-        const body = {
-            width: this.state.width,
-            height: this.state.height,
-            backgroundColor: this.state.opacity,
-            position: this.state.position,
-            
-        }
+
 
         
 
@@ -84,7 +75,7 @@ class Header extends React.Component {
                         
                         {this.props.cartProducts.length === 0 ?
                         <div className="containeritemsCart">
-                        <h1>El carrito esta vacio</h1>
+                        <h1 className="titleEmpty">El carrito está vacio :(</h1>
                         </div>
                         :
                         <>
@@ -95,7 +86,7 @@ class Header extends React.Component {
                         </div>
                         <div className="footCart">
                             <p>Total: ${subtotal}</p>
-                            <button>Iniciar Compra</button>
+                            <NavLink to="/comprar"><button>Iniciar Compra</button></NavLink>
                         </div>
 
                         </>
@@ -104,7 +95,7 @@ class Header extends React.Component {
                        
                     </div>}
             </div>}
-            {/* <div style={body}></div> */}
+            
            
             <div className="navbar">
                 <div className="div"></div>

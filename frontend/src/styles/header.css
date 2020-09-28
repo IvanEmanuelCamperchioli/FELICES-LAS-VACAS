@@ -202,3 +202,8 @@ margin-bottom: 2rem;
   .div {
     width: 30%;
   }
+.titleEmpty{
+  text-align: center;
+  margin: 5rem;
+  color: #3bc45b;
+}

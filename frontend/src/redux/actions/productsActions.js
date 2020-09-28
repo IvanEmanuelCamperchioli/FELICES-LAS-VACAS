@@ -5,7 +5,7 @@ const productsActions = {
         return async (dispatch, getState) => {
             
             const res = await axios.get("http://127.0.0.1:4000/api/items")
-            console.log(res)
+            
             dispatch({
                 type: 'GET_PRODUCTS_USER',
                 payload: res.data.products,

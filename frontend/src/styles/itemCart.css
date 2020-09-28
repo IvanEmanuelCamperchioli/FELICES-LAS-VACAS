@@ -7,7 +7,7 @@
 .containerItemCart{
 width: 80%;
 margin: 10px auto;
-height: 25vh;
+height: 30vh;
 padding: 2rem;
 display: flex;
 background-color: #3f9b55be;
@@ -28,6 +28,10 @@ justify-content: space-between;
     font-weight: 600;
     text-decoration: underline;
     text-decoration-color: black;
+}
+
+.texto h3{
+    font-size: 25px;
 }
 
 .texto{
