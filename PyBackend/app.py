@@ -16,8 +16,6 @@ def api():
             'capital': 'Lima'
         }
     ]
-
-    value2 = ( 'yimbo', 'lariza', 'eddilberto' )
     
     return jsonify(value)
 
