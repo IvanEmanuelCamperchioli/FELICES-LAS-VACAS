@@ -5,9 +5,7 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 
 class Home extends React.Component {
-
-    render() {
-
+    render() { 
         return (
             <>
                 <Header />

@@ -38,7 +38,7 @@ class SignIn extends React.Component{
                 error: "Both fields are required"
             }) 
         }else{
-            const logUser= {user:this.state.logUser.username , password: this.state.logUser.password}
+            const logUser= {username:this.state.logUser.username , password: this.state.logUser.password}
             const response =  await this.props.logUser(logUser)
             
             if (response.success === true){

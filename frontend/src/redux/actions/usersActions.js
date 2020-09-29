@@ -6,7 +6,7 @@ const usersActions = {
     return async (dispatch, getState) => {
       const res = await axios.post(
         "http://127.0.0.1:4000/api/user", user )
-      
+      console.log(res)
       if (res.data.success !== true) {
         return res.data.message
       } else {
