@@ -47,9 +47,8 @@ const usersController = {
 
 
     userLogin: async (req, res) => {
-        const { user, password } = req.body
-        console.log(req.body)
-        const userExist = await User.findOne({ user })
+        const { username, password } = req.body
+        const userExist = await User.findOne({ username })
 
         if (!userExist) {
             res.json({
@@ -73,7 +72,6 @@ const usersController = {
                             token,
                             name: userExist.name,
                             username: userExist.username,
-                            surname: userExist.surname,
                             role: userExist.role
                             }
                         })
@@ -102,8 +100,8 @@ const usersController = {
     
     getUsersExist: async (req,res) =>{
         
-        const user = req.body.user
-        const userExist = await User.findOne({user})
+        const username = req.body.user
+        const userExist = await User.findOne({username})
         if (userExist){
             res.json({
                 success:true
