@@ -9,7 +9,8 @@ import HomeAdmin from './pages/HomeAdmin'
 import LogIn from './pages/LogIn'
 import SignUp from './pages/SignUp'
 import LogOut from './pages/LogOut'
-import Item from './components/Item';
+import Item from './components/Item'
+import Faq from './pages/Faq'
 import {connect} from 'react-redux'
 import usersActions from './redux/actions/usersActions'
 
@@ -22,7 +23,7 @@ class App extends React.Component{
         <Route exact path ="/" component={Home}/>
         <Route path = "/productos" component={Products}/>
         <Route path = "/producto/:id" component={Item}/>
-        <Route path = "/faqs" component={Home} />
+        <Route path = "/faqs" component={Faq} />
         <Route path = "/carrito" component={Cart} />
         <Route path = "/mi-cuenta" component={Home} />
         <Route path = "/log-out" component={LogOut}/>
@@ -41,7 +42,7 @@ class App extends React.Component{
         <Route exact path ="/" component={Home}/>
         <Route path = "/productos" component={Products}/>
         <Route path = "/producto/:id" component={Item}/>
-        <Route path = "/faqs" component={Home} />
+        <Route path = "/faqs" component={Faq} />
         <Route path = "/sign-in" component={LogIn} />
         <Route path = "/sign-up" component={SignUp} />
         <Redirect to = "/" />
