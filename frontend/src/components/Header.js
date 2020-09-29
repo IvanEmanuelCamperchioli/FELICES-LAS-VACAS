@@ -158,7 +158,7 @@ const MenuDesplegable = (props) => {
                         :   
                         (
                             <>
-                                <DropdownItem><NavLink to='/sign-in' style={{width: '100%'}}>Iniciar sesión</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to='/sign-in' style={{width: '100%'}} name="iniciar-sesion">Iniciar sesión</NavLink></DropdownItem>
                                 <DropdownItem><NavLink to='/sign-up' style={{width: '100%'}}>Crear cuenta</NavLink></DropdownItem>
                             </>
                         )

@@ -33,12 +33,12 @@ class SignIn extends React.Component{
     submit =  async e => {
  
         e.preventDefault()
-        if (this.state.logUser.name ==="" || this.state.logUser.password === "" ){
+        if (this.state.logUser.username ==="" || this.state.logUser.password === "" ){
             this.setState({
                 error: "Both fields are required"
             }) 
         }else{
-            const logUser= {user:this.state.logUser.username , password: this.state.logUser.password}
+            const logUser= {username:this.state.logUser.username , password: this.state.logUser.password}
             const response =  await this.props.logUser(logUser)
             
             if (response.success === true){
@@ -89,13 +89,13 @@ class SignIn extends React.Component{
                 
                 <div className="inputs">
                     <span className = {this.state.error === "" ? "" : "logError"}>{this.state.error}</span>
-                    <input className="account" name="username" type="text" placeholder="Enter your user" onChange={this.getForm}></input>
-                    <input className="password" type="password" name="password" placeholder="Enter your password" onChange={this.getForm}></input>
+                    <input className="account" name="username" type="text" placeholder="Escriba su nombre de usuario" autocomplete="off" onChange={this.getForm} />
+                    <input className="password" type="password" name="password" placeholder="Escriba su contraseña" autocomplete="off" onChange={this.getForm} />
                  </div>
                     
                     <button onClick={this.submit} className="send"><span> Iniciar seción</span></button>
                     <NavLink to="/forgotPass" style={{fontSize:"1.4rem"}}>I forgot my password</NavLink>
-                    <p className="or">Or</p>
+                    <p className="or">O</p>
                     <GoogleLogin
                         className="googleBtn"
                         clientId="204753879301-qflivfpgiqk2v57hne24iu8j2acnmimn.apps.googleusercontent.com"
