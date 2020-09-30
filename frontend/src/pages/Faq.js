@@ -60,7 +60,7 @@ class Faq extends React.Component {
                     <Button onClick={() => this.toggle(1)} className="button-Faq" >¿Por qué ser vegano?</Button>
                     <Collapse style={{transition: 'all 0.3s'}} isOpen={this.state.one.isOpen}>
                         <Card className="card-faq">
-                            <CardBody className="card-body">
+                            <CardBody className="card-body-faq">
                                 <p> Porque el veganismo hace sentir consecuentes el amor y respeto que tenemos 
                                     hacia los seres vivos y el planeta.
                                     Consideramos que el futuro es vegano, por eso lucharemos para activar 
@@ -71,7 +71,7 @@ class Faq extends React.Component {
                     <Button onClick={() => this.toggle(2)} className="button-Faq" >¿Cuál es un producto vegano?</Button>
                     <Collapse style={{transition: 'all 0.3s'}} isOpen={this.state.two.isOpen}>
                         <Card className="card-faq">
-                            <CardBody className="card-body">
+                            <CardBody className="card-body-faq">
                                 <p>Se considera vegano todo aquel producto cuyos ingredientes 
                                     y procesos no provengan de animales ni de sus derivados.</p>                        
                             </CardBody>
@@ -83,7 +83,7 @@ class Faq extends React.Component {
                     <Button onClick={() => this.toggle(3)} className="button-Faq" >¿Cuáles son los medios de pago?</Button>
                     <Collapse style={{transition: 'all 0.3s'}} isOpen={this.state.three.isOpen}>
                         <Card className="card-faq">
-                            <CardBody className="card-body">
+                            <CardBody className="card-body-faq">
                                 <h4>Dinero en Mercado Pago</h4>
                                 <h4>Tarjeta de crédito en hasta 12 cuotas</h4>
                                 <h4>Tarjeta de débito</h4>
@@ -94,7 +94,7 @@ class Faq extends React.Component {
                     <Button onClick={() => this.toggle(4)} className="button-Faq" >¿Es segura mi compra con mercado pago?</Button>
                     <Collapse style={{transition: 'all 0.3s'}} isOpen={this.state.four.isOpen}>
                         <Card className="card-faq">
-                            <CardBody className="card-body">
+                            <CardBody className="card-body-faq">
                                 <p> MercadoPago es la plataforma de pago online líder de América Latina y 
                                     garantiza la seguridad en todas las operaciones que se generen a través de su sistema.
                                     Cuenta con un sistema de privacidad que protege los datos de la tarjeta y 
@@ -108,7 +108,7 @@ class Faq extends React.Component {
                 <Button onClick={() => this.toggle(5)} className="button-Faq" >¿Cuáles son los métodos de envío o retiro disponibles?</Button>
                     <Collapse style={{transition: 'all 0.3s'}} isOpen={this.state.five.isOpen}>
                         <Card className="card-faq">
-                            <CardBody className="card-body">
+                            <CardBody className="card-body-faq">
                                 <p> El envio a domicilio tiene un costo estimado para envios en capital federal y otro para el interior del país. 
                                     El retiro personal por nuestro local no tiene costos extras, 
                                     aún así se encuientra temporalmente suspendido todo retiro de forma personal.</p>
@@ -118,7 +118,7 @@ class Faq extends React.Component {
                     <Button onClick={() => this.toggle(6)} className="button-Faq" >¿Qué documentación se requiere para recibir o retirar mi compra?</Button>
                     <Collapse style={{transition: 'all 0.3s'}} isOpen={this.state.six.isOpen}>
                         <Card className="card-faq">
-                            <CardBody className="card-body">
+                            <CardBody className="card-body-faq">
                                 <p> Por razones de sanidad en debida conformidad comunitaria, 
                                     nuestra actividad no se encuentra autorizada a reanudar, por lo tanto, 
                                     quedan suspendidos los retiros en nuestro local. En el caso de que se 
