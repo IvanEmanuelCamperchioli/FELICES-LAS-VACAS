@@ -7,6 +7,7 @@ import './styles/app.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Items from './pages/Items';
 import Item from './components/item';
+import EditProfile from './components/EditProfile';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/signup' component={SignUp}/>
           <Route path='/productos' component={Items}/>
           <Route path='/item' component={Item}/>
+          <Route path='/edit' component={EditProfile}/>
           <Redirect to='/'/>
         </Switch>
       </BrowserRouter>
