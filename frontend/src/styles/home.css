@@ -126,7 +126,7 @@
 .conteiner-card {
     display: flex;
     justify-content: space-around;
-    align-items: flex-end;
+    align-items: flex-start;
     margin: 3rem 0;
     width: 80%;
 }

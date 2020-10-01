@@ -13,7 +13,7 @@ const Item = (props) => {
     var idProduct = props.match.params.id
     const res = await props.getProduct(idProduct)
     setItem(res)
-    console.log(item)
+   
 	  }, [])
 	
     

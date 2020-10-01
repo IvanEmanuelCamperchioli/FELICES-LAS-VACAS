@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     DNI: {type: Number, default: null},
     province: {type: String, default: null},
     address: {type: String, default: null},
+    city:{type: String, default: null},
     role: {type: String, default: "comprador"},
     loginGoogle: {type: Boolean, default: false}
     
