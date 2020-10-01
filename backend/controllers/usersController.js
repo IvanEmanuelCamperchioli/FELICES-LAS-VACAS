@@ -47,6 +47,7 @@ const usersController = {
 
 
     userLogin: async (req, res) => {
+        console.log(req.body);
         const { username, password } = req.body
         
         const userExist = await User.findOne({ username })
