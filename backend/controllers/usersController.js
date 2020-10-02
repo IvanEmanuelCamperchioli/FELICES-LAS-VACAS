@@ -86,7 +86,6 @@ const usersController = {
         }
     },
 
-
     tokenVerificator: (req, res) => {
         
         const name = req.user.name
@@ -150,6 +149,17 @@ const usersController = {
             response: error ? "User not updated" : "User updated"
         })
 
+    },
+    getUserInformation: async (req, res) => {
+        console.log(req.params)
+        const user = await User.findOne({...req.params})
+        const {name, surname, province, city, adress, DNI} = user
+        res.json({
+            success: user ? true : false,
+            userInfo:{
+                name, surname, province, city, adress, DNI
+            }
+        })
     }
 }
 

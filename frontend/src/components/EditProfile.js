@@ -4,20 +4,28 @@ import { connect } from 'react-redux';
 import Header from './Header'
 
 
-const Profile = () => {
-    const[load, setLoad]= useState(false)
+const Profile = (props) => {
+    const[load, setLoad]= useState(true)
     const[userData, setUserData]=useState({})
+    
     useEffect(()=>{
+        const data= async()=>{
+        const response = await axios.get(`http://127.0.0.1:4000/api/userInfo/${props?.username}`)
+        setUserData(response.data.userInfo)}
         data()
         
-    },[])
-    const data= async(token)=>{
-        const response = await axios.get("http://127.0.0.1:4000/api/getUser/",
-        {headers: {
-            Authorization: `Bearer ${token}`
-        }})
-        console.log(response)
+    },[props.username])
+
+    const showProfile =()=>{
+        return(<>
+        <p>Nombre:{userData.name}</p>
+        <p>Apellido:{userData.surname}</p>
+        <p>City:{!userData.city ? "todavía no cargo nada": userData.city}</p>
+        <p>DNI:{!userData.DNI ? "todavía no cargó nada": userData.DNI}</p>
+        
+        </>)
     }
+    
     const inputHandler=(e)=>{
         const value=e.target.value
         const campo= e.target.name
@@ -28,19 +36,20 @@ const Profile = () => {
     }
     const submit = async (e) => {
         e.preventDefault();
-        setLoad({status: true})
+        console.log(userData)
     }
     return (
         <div>
             <Header/>
             <div style={{display:"flex", flexDirection:"column"}}>
-                {editProfile(inputHandler)}
+    <button onClick={()=> setLoad(!load)}>{load? "editar": "cancelar"}</button>
+                {load? showProfile(): editProfile(inputHandler,submit)}
            
             </div>
         </div>
     );
 };
-const editProfile = (inputHandler) =>{
+const editProfile = (inputHandler, submit) =>{
     return(
         <>
         <label>Name</label>
@@ -54,20 +63,21 @@ const editProfile = (inputHandler) =>{
         <input type='text' name='' placeholder='' onChange={inputHandler} />
         <label>Dirección:</label>
         <input type='text' name='' placeholder='Ingrese su dirección' onChange={inputHandler} />
+        <button onClick={submit}>send</button>
         </>
     )
 }
-const ShowProfile =()=>{
-    return(
-    <>
-    <h5>{}</h5>
-    <h5></h5>
-    <h5></h5>
-    </>)
-}
+
+/*const data= async(token)=>{
+    const response = await axios.post("http://127.0.0.1:4000/api/getUser/",
+    {headers: {
+        Authorization: `Bearer ${token}`
+    }})
+}*/
 const mapStateToProps = (state) =>{
     return{
-        token: state.usersRed.token
+        token: state.usersRed.token,
+        username: state.usersRed.username
     }
 }
 const mapDispatchToProps = {

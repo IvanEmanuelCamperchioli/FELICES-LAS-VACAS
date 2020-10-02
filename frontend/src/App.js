@@ -9,25 +9,24 @@ import HomeAdmin from './pages/HomeAdmin'
 import LogIn from './pages/LogIn'
 import SignUp from './pages/SignUp'
 import LogOut from './pages/LogOut'
-import Item from './components/Item';
-import Buy from './pages/Buy'
+import Item from './components/Item'
 import {connect} from 'react-redux'
 import usersActions from './redux/actions/usersActions'
-import Profile from './components/EditProfile';
+import Profile from './components/EditProfile'
 
 class App extends React.Component{
   
   render(){
+    
     var normalRoutes = (
       <Switch>
         <Route exact path ="/" component={Home}/>
         <Route path = "/productos" component={Products}/>
         <Route path = "/producto/:id" component={Item}/>
-        <Route path = "/faqs" component={Home} />
+        <Route path ="/edit" component={Profile}/>
         <Route path = "/carrito" component={Cart} />
         <Route path = "/mi-cuenta" component={Home} />
         <Route path = "/log-out" component={LogOut}/>
-        <Route path ="/comprar" component ={Buy}/>
         <Redirect to = "/" />
       </Switch>
     )
@@ -43,8 +42,6 @@ class App extends React.Component{
         <Route exact path ="/" component={Home}/>
         <Route path = "/productos" component={Products}/>
         <Route path = "/producto/:id" component={Item}/>
-        <Route path = "/faqs" component={Home} />
-        <Route path ="/comprar" component ={Buy}/>
         <Route path = "/sign-in" component={LogIn} />
         <Route path = "/sign-up" component={SignUp} />
         <Redirect to = "/" />
@@ -59,18 +56,21 @@ class App extends React.Component{
       }
     }else if(localStorage.getItem('token')){
       this.props.forcedLogIn(localStorage.getItem('token'))
+      
+      if(this.props.role === "admin"){
+        var routes = adminRoutes
+      }else{
+        var routes = normalRoutes
+      }
+      
     }else{
       var routes = unlogedRoutes
     }
+
+
+
     return(
       <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route path='/login' component={LogIn}/>
-          <Route path='/signup' component={SignUp}/>
-          <Route path='/edit' component={Profile}/>
-          <Redirect to='/'/>
-        </Switch>
         {routes}
       </BrowserRouter>
     )

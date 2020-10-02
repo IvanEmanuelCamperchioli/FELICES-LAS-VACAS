@@ -12,6 +12,7 @@ router.route('/users')//Ruta para crear una cuenta
 router.route('/user')//Ruta para loguear un usuario
 .post(usersController.userLogin)
 
+router.route('/userInfo/:username').get(usersController.getUserInformation)
 /*router.route('/editUser')
 .get(passport.authenticate('jwt', { session: false }), usersController.editUser)*/
 
