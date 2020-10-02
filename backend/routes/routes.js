@@ -1,30 +1,41 @@
 const express = require("express")
+const passport = require("../config/passport")
 const itemsController = require("../controllers/itemsController")
-const usuariosController = require("../controllers/usuariosController")
+const usersController = require("../controllers/usersController")
 const router = express.Router()
 
 
 
-router.route('/usuarios')
-.post(usuariosController.crearCuenta)
+router.route('/users')//Ruta para crear una cuenta
+.post(usersController.createAccount)
 
-router.route('/usuario')
-.post(usuariosController.loguearUsuario)
-/* router.route('/usuarioGoogle')
-.post(usuariosController.crearCuentaConGoogle) */
+router.route('/user')//Ruta para loguear un usuario
+.post(usersController.userLogin)
 
-router.route('/getUser')
-.post(usuariosController.getUsersExist)
+/*router.route('/editUser')
+.get(passport.authenticate('jwt', { session: false }), usersController.editUser)*/
 
-router.route('/login')
-.post(usuariosController.loguearUsuario)
+router.route('/getUser')//Obtengo si el usuario ya se registro con su cuenta de google
+.post(usersController.getUsersExist)
 
-router.route('/modificarUsuario')
-.put(usuariosController.modificarUsuario)
+router.route('/getUserAddress')//Obtengo la direccion de un usuario logeado
+.get(passport.authenticate('jwt', { session: false }), usersController.getUserAddress)
+
+router.route('/tokenVerificator')//Ruta para perdurar la sesión
+.get(passport.authenticate('jwt', { session: false }), usersController.tokenVerificator)
+
+router.route('/sendAddress')
+.put(passport.authenticate('jwt', { session: false }), usersController.updateAddress)
 
 router.route("/items")
 .get(itemsController.getProducts)
 .post(itemsController.newProduct)
+
+router.route("/items/stocks/:id")
+.put(itemsController.modifyStockProduct)
+
+router.route("/items/total/:id")
+.put(itemsController.modifyPropertyTotalProduct)
 
 router.route("/items/:id")
 .get(itemsController.getProductById)
