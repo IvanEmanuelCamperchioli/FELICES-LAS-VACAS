@@ -142,7 +142,7 @@ const MenuDesplegable = (props) => {
                     {props.userLogued.token ?   
                         (
                             <>
-                                <DropdownItem><NavLink to='/' style={{width: '100%'}}>Mi cuenta</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to='/Profile' style={{width: '100%'}}>Mi cuenta</NavLink></DropdownItem>
                                 <DropdownItem><NavLink to="/log-out">Cerrar sesión</NavLink></DropdownItem>
                             </>
                         )
