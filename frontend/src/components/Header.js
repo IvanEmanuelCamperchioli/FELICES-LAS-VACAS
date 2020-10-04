@@ -64,7 +64,7 @@ class Header extends React.Component {
             <>
             {<div className="header-sup">
                     <h5 className="titleHeader">Felices las vacas | Alimentación conciente</h5>
-                    <button onClick={this.openNav} className="questionCircle" ><FontAwesomeIcon className="carrito" icon={faShoppingCart} /></button>
+                    <button onClick={this.openNav} className="cartCircle" ><FontAwesomeIcon className="carrito" icon={faShoppingCart} /></button>
                    { <div className="sidepanel" style={style}>
                         <div className="headerPanel">
                         <p>CARRITO DE COMPRAS</p>
@@ -99,7 +99,7 @@ class Header extends React.Component {
                 <div className="div"></div>
                 <NavLink to='/'>Inicio</NavLink>
                 <NavLink to='/productos'>Productos</NavLink>
-                <NavLink to='/faqs'>Como comprar</NavLink>
+                <NavLink to='/faqs'>Guía de compra</NavLink>
                 <MenuDesplegable userLogued={this.props} />
                 <div className="div"></div>
             </div>          
@@ -149,7 +149,7 @@ const MenuDesplegable = (props) => {
                         :   
                         (
                             <>
-                                <DropdownItem><NavLink to='/sign-in' style={{width: '100%'}}>Iniciar sesión</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to='/sign-in' style={{width: '100%'}} name="iniciar-sesion">Iniciar sesión</NavLink></DropdownItem>
                                 <DropdownItem><NavLink to='/sign-up' style={{width: '100%'}}>Crear cuenta</NavLink></DropdownItem>
                             </>
                         )
