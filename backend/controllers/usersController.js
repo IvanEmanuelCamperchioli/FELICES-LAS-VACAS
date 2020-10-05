@@ -86,7 +86,6 @@ const usersController = {
         }
     },
 
-
     tokenVerificator: (req, res) => {
         
         const name = req.user.name
@@ -150,6 +149,33 @@ const usersController = {
             response: error ? "User not updated" : "User updated"
         })
 
+    },
+    getUserInformation: async (req, res) => {
+        console.log(req.params)
+        const user = await User.findOne({...req.params})
+        const {name, surname, province, city, adress, DNI, username} = user
+        res.json({
+            success: user ? true : false,
+            userInfo:{
+                name, surname, province, city, adress, DNI, username
+            }
+        })
+    },
+    modifyCommentById: (req, res) => {
+		const { commentId, comment } = req.body
+		Comment.findByIdAndUpdate(commentId, { comment }, { new: true })
+			.then(comment => res.json({ success: true, comment }))
+			.catch(error => res.json({ success: false, error }))
+	},
+    editUser: async(req, res)=>{
+        console.log(req.body)
+        const user = await User.findOneAndUpdate({username: req.body.username},{$set:{...req.body}}, {new: true})
+        .then(user=>{
+            console.log(user)
+            res.json({success:true, user: user})})
+        .catch(err=>{
+            console.log(err) 
+            res.json({success:false}, err)})
     }
 }
 

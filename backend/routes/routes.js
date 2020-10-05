@@ -12,6 +12,8 @@ router.route('/users')//Ruta para crear una cuenta
 router.route('/user')//Ruta para loguear un usuario
 .post(usersController.userLogin)
 
+router.route('/userInfo/:username').get(usersController.getUserInformation)
+router.route('/editUser').put(usersController.editUser)
 
 router.route('/getUser')//Obtengo si el usuario ya se registro con su cuenta de google
 .post(usersController.getUsersExist)

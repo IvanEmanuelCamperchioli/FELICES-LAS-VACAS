@@ -8,7 +8,6 @@ import {
   } from 'reactstrap';
 
 const ItemCard = (props) => {
-
     const [quantity, setQuantity] = useState(0)
 
     const changeInput = (e) =>{

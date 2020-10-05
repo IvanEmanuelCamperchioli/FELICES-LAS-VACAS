@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     username: {type:String, required:true, 
         validate:{
             validator: async username => await User.find({username}).countDocuments()===0,
-            message: () => "That user name is already used"
+            message: () => "That username is already in use"
         }
     },
     password: {type: String, required: true},

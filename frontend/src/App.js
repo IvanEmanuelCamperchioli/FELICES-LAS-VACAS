@@ -14,6 +14,7 @@ import Buy from './pages/Buy'
 import Faq from './pages/Faq'
 import {connect} from 'react-redux'
 import usersActions from './redux/actions/usersActions'
+import Profile from './components/EditProfile'
 
 class App extends React.Component{
   
@@ -25,10 +26,10 @@ class App extends React.Component{
         <Route path = "/productos" component={Products}/>
         <Route path = "/producto/:id" component={Item}/>
         <Route path = "/faqs" component={Faq} />
+        <Route path ="/Profile" component={Profile}/>
         <Route path = "/carrito" component={Cart} />
         <Route path = "/mi-cuenta" component={Home} />
         <Route path = "/log-out" component={LogOut}/>
-        <Route path ="/comprar" component ={Buy}/>
         <Redirect to = "/" />
       </Switch>
     )
@@ -60,6 +61,13 @@ class App extends React.Component{
       }
     }else if(localStorage.getItem('token')){
       this.props.forcedLogIn(localStorage.getItem('token'))
+      
+      if(this.props.role === "admin"){
+        var routes = adminRoutes
+      }else{
+        var routes = normalRoutes
+      }
+      
     }else{
       var routes = unlogedRoutes
     }

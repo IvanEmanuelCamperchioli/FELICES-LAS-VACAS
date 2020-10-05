@@ -6,7 +6,6 @@ import usersActions from '../redux/actions/usersActions'
 import Swal from 'sweetalert2'
 import GoogleLogin from 'react-google-login';
 import Footer from '../components/Footer'
-import LogIn from './LogIn'
 import '../styles/account.css'
 /* import'../styles/logs.css' */
 
