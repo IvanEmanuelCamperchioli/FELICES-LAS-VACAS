@@ -11,8 +11,10 @@ const Profile = (props) => {
     useEffect(()=>{
         const data= async()=>{
         const response = await axios.get(`http://127.0.0.1:4000/api/userInfo/${props.username}`)
-        setUserData(response.data.userInfo)}
-        prov = await axios.get("http://localhost:5000/api/prov")
+        setUserData(response.data.userInfo)
+        const provinceData = await axios.get("http://localhost:5000/api/prov")
+        setProvinces(provinceData.data)}
+        
         data()
     },[props.username])
 
@@ -81,11 +83,11 @@ const editProfile = (inputHandler, submit, userData, prov) =>{
         <label>DNI: </label>
         <input type='text' name='DNI' value={userData.DNI ? userData.DNI :"" } onChange={inputHandler} />
         <label>Provincia:</label>
-        <select name='provicia'>
-            {prov.map(prov=>{
-                <option value={prov}>{prov}</option>
-            })}
-            </select>
+        <select name='province' onChange={inputHandler}>
+            {provinces.map((province, index)=>
+                <option key={index} value={province} >{province}</option>
+            )}
+        </select>
         <label>Ciudad:</label>
         <input type='text' name='city' value={userData.city ? userData.city :"" } onChange={inputHandler} />
         <label>Dirección:</label>
