@@ -4,18 +4,27 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/api/country', methods=['get'])
+@app.route('/api/prov', methods=['get'])
 def api():
     value = [
-        {
-            'name': 'Argentina',
-            'capital': 'Buenos Aires',
-        },
-        {
-            'name': 'Peru',
-            'capital': 'Lima'
-        }
-    ]
+        "Buenos Aires","Catamarca","Chaco","Chubut","Córdoba",
+"Corrientes",
+"Entre Ríos",
+"Formosa",
+"Jujuy",
+"La Pampa",
+"La Rioja",
+"Mendoza",
+"Misiones",
+"Neuquén",
+"Río Negro",
+"Salta",
+"San Juan",
+"Santa Cruz",
+"Santa Fe",
+"Santiago del Estero",
+"Tierra del Fuego",
+"Tucumán"]
     
     return jsonify(value)
 
