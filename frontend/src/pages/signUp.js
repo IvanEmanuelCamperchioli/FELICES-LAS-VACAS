@@ -130,8 +130,7 @@ class SignUp extends React.Component{
         })
         const res = await this.props.createAccount(this.state.newUser)
        
-        if (res.success === true){
-            
+        if (res.success === true){   
             
         }else{
             if (res.username !== ""){
@@ -143,6 +142,7 @@ class SignUp extends React.Component{
 
     
     render(){
+
         return (
             <>
             <Header />

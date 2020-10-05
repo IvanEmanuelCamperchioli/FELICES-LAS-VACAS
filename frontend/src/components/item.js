@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from 'react';
 import Header from './Header'
-import axios from 'axios'
 import { connect } from 'react-redux';
 import productsActions from '../redux/actions/productsActions'
 
@@ -15,8 +14,6 @@ const Item = (props) => {
     setItem(res)
    
 	  }, [])
-	
-    
     
 
     return (

@@ -93,7 +93,7 @@ class SignIn extends React.Component{
                     <input className="password" type="password" name="password" placeholder="Escriba su contraseña" autocomplete="off" onChange={this.getForm} />
                  </div>
                     
-                    <button onClick={this.submit} className="send"><span> Iniciar seción</span></button>
+                    <button onClick={this.submit} className="send"><span> Iniciar sesión</span></button>
                     <NavLink to="/forgotPass" style={{fontSize:"1.4rem"}}>I forgot my password</NavLink>
                     <p className="or">O</p>
                     <GoogleLogin

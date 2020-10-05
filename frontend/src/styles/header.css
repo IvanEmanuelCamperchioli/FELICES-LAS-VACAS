@@ -23,7 +23,7 @@
 }
 
   .desplegable:hover {
-    transition: all 1s;
+    transition: all 0.3s;
     color: whitesmoke!important;
     background-color: #3bc45b!important;
   }
@@ -47,9 +47,11 @@
 }
 
 .navbar {
-  background: whitesmoke!important;
+  background: #fff;
   display: flex;
-  justify-content: space-evenly!important;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 .navbar a {
@@ -64,22 +66,8 @@
 .navbar a:hover {
   background-color: #3bc45b;
   color: whitesmoke!important;
-  transition: all 1s;
+  transition: all 0.3s;
 }
-.tituloC{
-  width: 35%;
-  padding: 20px;
-  border-radius: 50px;
-  margin: auto 0 70px auto;
- background-color: rgba(68, 68, 68, 0.356);
-}
-.tituloC h3{
-  font-size: 50px;
-  text-align: right;
-  font-weight: 700;
-  color:  #5ff181be;
-}
-
 
 .container-logo {
 display: flex;
@@ -140,6 +128,11 @@ margin-bottom: 2rem;
   background-position: center;
   height: 85vh;
   background-size: cover;
+  transition: 0.5s;
+}
+
+.carousel-item {
+  transition: all 0.4s;
 }
       
   .sidepanel  {
@@ -207,7 +200,6 @@ margin-bottom: 2rem;
     z-index: 99;
     font-size: 18px;
     border: none;
-    outline: none;
     color: white;
     cursor: pointer;
     padding: 15px;
@@ -221,4 +213,8 @@ margin-bottom: 2rem;
 .cartCircle:hover {
   background-color: #fff;
   color: #3bc45b;
+}
+
+.cartCircle:focus {
+  outline: none;
 }
