@@ -34,7 +34,7 @@ const ItemCard = (props) => {
     }
 
     return (
-      <Card className={{margin:"2vw"}}>
+      <Card style={{margin:"2vw"}}>
         <CardImg top width="100%" src={props.item.photo}/>
         <CardBody className="card-body-item">
           <CardTitle>{props.item.name}</CardTitle>

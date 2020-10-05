@@ -30,6 +30,7 @@ class App extends React.Component{
         <Route path = "/carrito" component={Cart} />
         <Route path = "/mi-cuenta" component={Home} />
         <Route path = "/log-out" component={LogOut}/>
+        <Route path ="/comprar" component ={Buy}/>
         <Redirect to = "/" />
       </Switch>
     )

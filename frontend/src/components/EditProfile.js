@@ -7,30 +7,32 @@ import Header from './Header'
 const Profile = (props) => {
     const[load, setLoad]= useState(true)
     const[userData, setUserData]=useState({})
-    const[prov, setProv]=useState([])
-    useEffect(async ()=>{
-        const data= async()=>{
-        const response = await axios.get(`http://127.0.0.1:4000/api/userInfo/${props.username}`)
-        setUserData(response.data.userInfo)}
-        prov = await axios.get("http://localhost:5000/api/prov")
-        data()
+    const[provinces, setProvinces]=useState([])
+
+    useEffect(()=>{
+       data()
     },[props.username])
 
-    
+    const data = async () => {
+        const response = await axios.get(`http://127.0.0.1:4000/api/userInfo/${props.username}`)
+        setUserData(response.data.userInfo)
+        const provinceData = await axios.get("https://countriesfeliceslasvacasapi.herokuapp.com/api/prov")
+        setProvinces(provinceData.data)
+    }
 
     const showProfile =()=>{
         return(
         <>
-       <div>
-       <h3>Mi perfil: </h3>
-        <p>Nombre: {userData.name}.</p>
-        <p>Apellido: {userData.surname}.</p>
-        <p>DNI: {!userData.DNI ? " todavía no cargó nada": userData.DNI}.</p>
-        <h4>Datos para el envio:</h4>
-        <p>Ciudad: {!userData.city ? " todavía no cargo nada": userData.city}.</p>
-        <p>Provincia: {!userData.address ? " Actualice los datos" : userData.address}.</p>
-        <p>País: Argentina.</p>
-       </div>
+            <div>
+            <h3>Mi perfil: </h3>
+                <p>Nombre: {userData.name}.</p>
+                <p>Apellido: {userData.surname}.</p>
+                <p>DNI: {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
+                <h4>Datos para el envio:</h4>
+                <p>Ciudad: {!userData.city ? "Actualice los datos": userData.city}.</p>
+                <p>Provincia: {!userData.province ? "Actualice los datos" : userData.province}.</p>
+                <p>País: Argentina.</p>
+            </div>
         </>)
     }
     
@@ -54,9 +56,9 @@ const Profile = (props) => {
     }
     const submit = async (e) => {
         e.preventDefault();
+        console.log(userData);
         await toEdit(userData)
         setLoad(!load)
-
     }
     return (
         <div>
@@ -64,13 +66,13 @@ const Profile = (props) => {
             <div style={{display:"flex", flexDirection:"column", justifyContent:"space-between" }}>
              <div style={{marginLeft:"10%"}}>
              <button style={{marginLeft:"80%", border:"none", textDecoration:"underline", backgroundColor:"white", color:"gray"}} onClick={()=> setLoad(!load)}>{load? "editar": "cancelar"}</button>
-                {load? showProfile(): editProfile(inputHandler,submit, userData, prov)}
+                {load? showProfile(): editProfile(inputHandler,submit, userData, provinces)}
                 </div>
             </div>
         </div>
     );
 };
-const editProfile = (inputHandler, submit, userData, prov) =>{
+const editProfile = (inputHandler, submit, userData, provinces) =>{
     return(
         <>
         <div style={{display:"flex", flexDirection:"column", marginRight:"10%" }}>
@@ -81,11 +83,11 @@ const editProfile = (inputHandler, submit, userData, prov) =>{
         <label>DNI: </label>
         <input type='text' name='DNI' value={userData.DNI ? userData.DNI :"" } onChange={inputHandler} />
         <label>Provincia:</label>
-        <select name='provicia'>
-            {prov.map(prov=>{
-                <option value={prov}>{prov}</option>
-            })}
-            </select>
+        <select name='province' onChange={inputHandler}>
+            {provinces.map((province, index)=>
+                <option key={index} value={province} >{province}</option>
+            )}
+        </select>
         <label>Ciudad:</label>
         <input type='text' name='city' value={userData.city ? userData.city :"" } onChange={inputHandler} />
         <label>Dirección:</label>
