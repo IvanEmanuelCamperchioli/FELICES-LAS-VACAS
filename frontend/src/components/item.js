@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from 'react';
 import Header from './Header'
-import axios from 'axios'
 import { connect } from 'react-redux';
 import productsActions from '../redux/actions/productsActions'
 
@@ -8,16 +7,11 @@ import productsActions from '../redux/actions/productsActions'
 const Item = (props) => {
     const [item, setItem] = useState({})
   
-  
     useEffect(async () => {
-    var idProduct = props.match.params.id
-    const res = await props.getProduct(idProduct)
-    setItem(res)
-   
+      var idProduct = props.match.params.id
+      const res = await props.getProduct(idProduct)
+      setItem(res)
 	  }, [])
-	
-    
-    
 
     return (
     <>

@@ -1,8 +1,8 @@
 import React from 'react'
 import '../styles/home.css'
-import ProductosDestacados from './ProductosDestacados'
+import ProductsBestSellers from './ProductsBestSellers'
 
-class Destacado extends React.Component {
+class BestSellers extends React.Component {
 
     state = {
         products: []
@@ -35,7 +35,7 @@ class Destacado extends React.Component {
                     <h5>QUEDATE EN CASA, HACÉ TU PEDIDO Y NOSOTROS TE LO LLEVAMOS</h5>
                         {this.state.products.length === 0 
                             ?   <h1>Lodading</h1>
-                            :   <ProductosDestacados products={this.state.products}/>}
+                            :   <ProductsBestSellers products={this.state.products}/>}
                 </div>
                 
             </div>
@@ -43,5 +43,5 @@ class Destacado extends React.Component {
     }
 }
 
-export default Destacado
+export default BestSellers
 

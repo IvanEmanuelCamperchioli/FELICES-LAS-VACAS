@@ -9,32 +9,30 @@ const Profile = (props) => {
     const[userData, setUserData]=useState({})
     const[provinces, setProvinces]=useState([])
 
-    useEffect(async()=>{
-        const data = async()=>{
-            const response = await axios.get(`http://127.0.0.1:4000/api/userInfo/${props.username}`)
-            setUserData(response.data.userInfo)
-        }
-        data()
+    useEffect(()=>{
+       data()
     },[props.username])
 
-    useEffect(async() => {
-        const provinceData = await axios.get("http://localhost:5000/api/prov")
+    const data = async () => {
+        const response = await axios.get(`http://127.0.0.1:4000/api/userInfo/${props.username}`)
+        setUserData(response.data.userInfo)
+        const provinceData = await axios.get("https://countriesfeliceslasvacasapi.herokuapp.com/api/prov")
         setProvinces(provinceData.data)
-    }, [])
+    }
 
     const showProfile =()=>{
         return(
         <>
-       <div>
-       <h3>Mi perfil: </h3>
-        <p>Nombre: {userData.name}.</p>
-        <p>Apellido: {userData.surname}.</p>
-        <p>DNI: {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
-        <h4>Datos para el envio:</h4>
-        <p>Ciudad: {!userData.city ? "Actualice los datos": userData.city}.</p>
-        <p>Provincia: {!userData.province ? "Actualice los datos" : userData.province}.</p>
-        <p>País: Argentina.</p>
-       </div>
+            <div>
+            <h3>Mi perfil: </h3>
+                <p>Nombre: {userData.name}.</p>
+                <p>Apellido: {userData.surname}.</p>
+                <p>DNI: {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
+                <h4>Datos para el envio:</h4>
+                <p>Ciudad: {!userData.city ? "Actualice los datos": userData.city}.</p>
+                <p>Provincia: {!userData.province ? "Actualice los datos" : userData.province}.</p>
+                <p>País: Argentina.</p>
+            </div>
         </>)
     }
     
