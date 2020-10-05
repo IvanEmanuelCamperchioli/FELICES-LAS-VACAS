@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import '../styles/header.css'
 import "../styles/itemCart.css"
+import "../styles/mediaQuerys/mediaHeader.css"
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem,  Tooltip} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faUser} from '@fortawesome/free-solid-svg-icons'
@@ -42,9 +43,14 @@ class Header extends React.Component {
 
     openNav = () => {
         this.setState({
-            open: '600px',
+            open: '50vw',
             opacity: 'rgba(0,0,0,0.3)'
         })
+        if (this.state.open === '50vw') {
+            this.setState({
+                open: '0vw',
+            })    
+        }
     }
     
     render() {

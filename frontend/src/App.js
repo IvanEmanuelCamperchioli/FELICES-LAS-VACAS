@@ -44,7 +44,7 @@ class App extends React.Component{
         <Route exact path ="/" component={Home}/>
         <Route path = "/productos" component={Products}/>
         <Route path = "/producto/:id" component={Item}/>
-        <Route path = "/faqs" component={Home} />
+        <Route path = "/faqs" component={Faq} />
         <Route path ="/comprar" component ={Buy}/>
         <Route path = "/sign-in" component={LogIn} />
         <Route path = "/sign-up" component={SignUp} />
