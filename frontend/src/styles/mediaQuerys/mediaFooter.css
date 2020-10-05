@@ -60,7 +60,19 @@
 
 @media screen and (max-width: 565px) {
     .underFooter {
-        font-size: 10px;
+        font-size: 8px;
         padding-left: 70px;
+    }
+    .left-footer h4 {
+        font-size: 11px;
+    }
+    .left-footer p {
+        font-size: 10px;
+    }
+    .center-footer p {
+        font-size: 11px;
+    }
+    .center-footer a {
+        font-size: 11px;
     }
 }

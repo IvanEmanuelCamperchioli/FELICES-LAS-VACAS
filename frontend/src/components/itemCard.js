@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import productsActions from '../redux/actions/productsActions'
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
-  } from 'reactstrap';
+import { Card, CardImg, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import '../styles/mediaQuerys/mediaCards.css'
+import '../styles/home.css'
+
 
 const ItemCard = (props) => {
 
@@ -35,7 +35,7 @@ const ItemCard = (props) => {
     }
 
     return (
-      <Card className={{margin:"2vw"}}>
+      <Card className="cardProduct">
         <CardImg top width="100%" src={props.item.photo}/>
         <CardBody className="card-body-item">
           <CardTitle>{props.item.name}</CardTitle>

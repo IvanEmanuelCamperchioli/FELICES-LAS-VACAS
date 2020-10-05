@@ -59,7 +59,6 @@ class Header extends React.Component {
     render() {
 
         var subtotal = 0
-        console.log(this.props)
         this.props.cartProducts.map(item =>{
             subtotal += (item.product.price * item.quantity)
         })        

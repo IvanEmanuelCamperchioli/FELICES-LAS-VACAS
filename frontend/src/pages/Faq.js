@@ -3,6 +3,7 @@ import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import '../styles/faq.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer';
+import '../styles/mediaQuerys/mediaFaq.css'
 
 class Faq extends React.Component {
 

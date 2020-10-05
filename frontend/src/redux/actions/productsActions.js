@@ -16,7 +16,7 @@ const productsActions = {
     getProductById: (idProduct) => {
         return async (dispatch, getState) => {
             const res = await axios.get("http://127.0.0.1:4000/api/items/"+idProduct)
-            
+
             dispatch({
                 type: "GET_PRODUCT"
             })
