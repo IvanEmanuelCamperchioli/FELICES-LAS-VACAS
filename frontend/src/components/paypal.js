@@ -1,10 +1,10 @@
 import React,{useEffect, useRef} from 'react';
-import {NavLink, Redirect} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const Paypal = (props) => {
 
     const redirect = () => {
-        return <Redirect to='/'/>  
+        props.history.push('/')
     }
 
     console.log(parseFloat(Number(props.total).toFixed(2)));
@@ -17,7 +17,7 @@ const Paypal = (props) => {
                     intent:'CAPTURE',
                     purchase_units:[
                         {description: 'Felices las vacas', amount:{
-                            value: parseInt(Number(props.total).toFixed(2)),
+                            value: parseFloat(Number(props.total).toFixed(2)),
                             currency_code: 'USD'
                         }}
                     ]
@@ -40,7 +40,7 @@ const Paypal = (props) => {
         <>
           <div ref={paypal}></div>  
         </>
-    );
-};
+    )
+}
 
-export default Paypal;
+export default withRouter(Paypal)

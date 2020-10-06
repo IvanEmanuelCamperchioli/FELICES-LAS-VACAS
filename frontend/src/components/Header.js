@@ -78,23 +78,24 @@ class Header extends React.Component {
                         <button onClick={this.closeNav} className="closebtn">x</button>
                         </div>
                         
-                        {this.props.cartProducts.length === 0 ?
-                        <div className="containeritemsCart">
-                        <h1 className="titleEmpty">El carrito está vacio :(</h1>
-                        </div>
+                        {this.props.cartProducts.length === 0 
+                        ?
+                            <div className="containeritemsCart">
+                                <h1 className="titleEmpty">El carrito está vacio :/</h1>
+                            </div>
                         :
                         <>
-                         <div className="containeritemsCart">
-                        {this.props.cartProducts.map(product =>{
-                            return <ItemCart product = {product} />
-                        })}
-                        </div>
-                        <div className="footCart">
-                            <p>Total: ${subtotal}</p>
-                            <NavLink to="/comprar"><button>Iniciar Compra</button></NavLink>
-                        </div>
-                        
+                            <div className="containeritemsCart">
+                                {this.props.cartProducts.map(product =>{
+                                    return <ItemCart product = {product} />
+                                })}
+                            </div>
+                            <div className="footCart">
+                                <p>Total: ${subtotal}</p>
+                                <NavLink to="/comprar"><button>Iniciar Compra</button></NavLink>
+                            </div>
                         </>
+                        
                         }
                     </div>}
             </div>}
@@ -146,7 +147,7 @@ const MenuDesplegable = (props) => {
                     {props.userLogued.token ?   
                         (
                             <>
-                                <DropdownItem><NavLink to='/Profile' style={{width: '100%'}}>Mi cuenta</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to='/profile' style={{width: '100%'}}>Mi cuenta</NavLink></DropdownItem>
                                 <DropdownItem><NavLink to="/log-out">Cerrar sesión</NavLink></DropdownItem>
                             </>
                         )
