@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {connect} from 'react-redux'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -9,38 +9,34 @@ import usersActions from '../redux/actions/usersActions'
 import SignUp from './SignUp'
 import Profile from '../components/EditProfile'
 
-class Buy extends React.Component{
+const Buy = (props) => {
 
-    state ={
-        flag: "noLog"
+    const [flag, setFlag] = useState('noLog')
+
+    useEffect(() => {
+        data()
+    }, [])
+
+    const data = async() => {
+        var userLogued = await props.getUser(props.token)
+        
+        setFlag(userLogued.address === null ? "noAddress" : "ok")
     }
 
-    async componentDidMount(){
-        if(this.props.token){
-            var userLogued = await this.props.getUser(this.props.token)
-         
-            this.setState({
-                flag: userLogued.address === null ? "noAddress" : "ok"
-            })
-        }
-    }
-    
-    render(){
-
-        return (
-            <>
-                {this.state.flag !== "noAddress" && <Header/>}
-                {this.state.flag === "noLog" 
-                    ? <GoSignIn/>
-                    : this.state.flag === "noAddress" 
-                        ? <Profile/>
-                        : <FinishShopping />
-                }
-                <Footer />
-            </>
-        )
-    }
+    return (
+        <>
+            {flag !== "noAddress" && <Header/>}
+            {flag === "noLog" 
+                ? <GoSignIn/>
+                : flag === "noAddress" 
+                    ? <Profile/>
+                    : <FinishShopping />
+            }
+            <Footer />
+        </>
+    )
 }
+
 
 const mapDispatchToProps = {
     getUser: usersActions.getUserAddress

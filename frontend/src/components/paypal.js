@@ -17,7 +17,7 @@ const Paypal = (props) => {
                     intent:'CAPTURE',
                     purchase_units:[
                         {description: 'Felices las vacas', amount:{
-                            value: parseInt(Number(props.total).toFixed(2)),
+                            value: parseFloat(Number(props.total).toFixed(2)),
                             currency_code: 'USD'
                         }}
                     ]
