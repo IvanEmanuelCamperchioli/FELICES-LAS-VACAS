@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+/*import React, { useEffect,useState } from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux';
 import Header from './Header'
@@ -106,4 +106,4 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps, null)(Profile)
+export default connect(mapStateToProps, null)(Profile)*/

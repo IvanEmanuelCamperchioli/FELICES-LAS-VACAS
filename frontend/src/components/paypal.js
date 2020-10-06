@@ -1,6 +1,6 @@
 import React,{useEffect, useRef} from 'react';
 
-const paypal = (props) => {
+const Paypal = (props) => {
     const paypal = useRef()
     useEffect((
         window.paypal.Buttons({
@@ -31,4 +31,4 @@ const paypal = (props) => {
     );
 };
 
-export default paypal;
+export default Paypal;
