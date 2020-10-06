@@ -47,11 +47,9 @@ const usersController = {
 
 
     userLogin: async (req, res) => {
-        console.log(req.body)
         const { username, password } = req.body
-        
         const userExist = await User.findOne({ username })
-        console.log(userExist)
+
         if (!userExist) {
             res.json({
                 success: false, message: "Usuario y/o contraseña incorrectos"
@@ -75,7 +73,6 @@ const usersController = {
                             token,
                             name: userExist.name,
                             username: userExist.username,
-                            surname: userExist.surname,
                             role: userExist.role
                             }
                         })
