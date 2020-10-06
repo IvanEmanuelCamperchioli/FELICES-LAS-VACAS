@@ -16,7 +16,7 @@
     color: rgba(44, 62, 80, 0.8);
     background-color: #fff;
     border: 1px solid #3bc45b;
-    width: 40%;
+    width: 100%;
     padding: 6px 12px;
     line-height: 1px;
     font-size: 14px;
@@ -26,13 +26,18 @@
 
 .inputs input:focus {
     border-color: none;
-    box-shadow: 0 1px 1px #3bc45b69 inset, 0 0 8px #3bc45b;
+    box-shadow: 0 1px 1px #4bdb6d69 inset, 0 0 8px #4bdd6d;
     outline: 0 none;
 }
 
 .titleHouses {
     text-align: center;
     margin-top: 2vh;
+    color: #fff;
+    width: 50%;
+    border-radius: 50px;
+    background-color: rgba(73, 146, 0, 0.801);
+    padding: 3px;
 }
 
 .send {
@@ -77,4 +82,28 @@
 .send:hover span:after {
     opacity: 1;
     right: 0;
+}
+
+.or {
+    color: #fff;
+}
+
+.cardInputs-signUp {
+    border: 1px solid #000;
+    min-height: 100%;
+    width: 40vw; 
+    background: rgba(0,0,0,0.2);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1vh;
+}
+
+.back-signUp {
+    width: 100%;
+    height: 100% ;
+    background-size: cover;
+    background-position: center;
+    padding: 4vh 0 4vh 2vw;
 }

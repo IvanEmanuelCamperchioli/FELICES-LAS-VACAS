@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 import productsActions from '../redux/actions/productsActions';
+import '../styles/mediaQuerys/mediaCards.css'
 
 class Products extends React.Component {
 
@@ -137,8 +138,8 @@ class Products extends React.Component {
                     <Button className="btnFilter" onClick={searchFilterHome} >Buscar</Button>
                 </div>
                 <div className="cardsContainer">
-                    {this.state.filteredItems.map((item, index) => {
-                        return (<div key={index} style={{margin:"1.4vw",width:"25vw"}}><ItemCard key={item.id} item={item}/></div>)
+                    {this.state.filteredItems.map(item => {
+                        return <ItemCard key={item.id} item={item}/>
                     })}
                 </div>
             </div>

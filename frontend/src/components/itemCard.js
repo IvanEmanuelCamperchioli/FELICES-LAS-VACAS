@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import productsActions from '../redux/actions/productsActions'
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
-  } from 'reactstrap';
+import { Card, CardImg, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import '../styles/mediaQuerys/mediaCards.css'
+import '../styles/home.css'
+import { motion } from "framer-motion";
+
+
 
 const ItemCard = (props) => {
     const [quantity, setQuantity] = useState(0)
+
 
     const changeInput = (e) =>{
       e.preventDefault()  
@@ -34,7 +37,7 @@ const ItemCard = (props) => {
     }
 
     return (
-      <Card style={{margin:"2vw"}}>
+      <Card className="cardProduct">
         <CardImg top width="100%" src={props.item.photo}/>
         <CardBody className="card-body-item">
           <CardTitle>{props.item.name}</CardTitle>
@@ -50,7 +53,16 @@ const ItemCard = (props) => {
                 <input value={quantity} type="number"></input>
                 <button value="down" onClick={changeInput}>-</button>
               </div>
-              <button className="addToCart" onClick={addItem}>Añadir al carrito</button>
+              <motion.a
+              />
+              <motion.button 
+                className="addToCart" onClick={addItem}
+                whileHover={{ scale: (1.08) }}
+                onHoverStart={e => {}}
+                onHoverEnd={e => {}}
+              >
+                Añadir al carrito
+              </motion.button>
             </div>
           </div>
           </CardBody>

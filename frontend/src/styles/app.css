@@ -50,3 +50,13 @@ html * {
   .dropdown:hover .dropbtn {
     background-color: #3e8e41;
   }
+
+  .logoMotion {
+    background-position: center;
+    background-size: cover;
+    width: 8vw; 
+    height: 8vw; 
+    position: absolute; 
+    top: 3px; 
+    left: 12vw;
+  }

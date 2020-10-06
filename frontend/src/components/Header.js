@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import usersActions from "../redux/actions/usersActions";
 import ItemCart from './ItemCart'
 import productsActions from '../redux/actions/productsActions'
+import { motion } from 'framer-motion'
 
 class Header extends React.Component {
 
@@ -92,11 +93,9 @@ class Header extends React.Component {
                             <p>Total: ${subtotal}</p>
                             <NavLink to="/comprar"><button>Iniciar Compra</button></NavLink>
                         </div>
-
-                        </>
                         
+                        </>
                         }
-                       
                     </div>}
             </div>}
             
@@ -109,7 +108,6 @@ class Header extends React.Component {
                 <MenuDesplegable userLogued={this.props} />
                 <div className="div"></div>
             </div>          
-            
             </>
         )
     }
