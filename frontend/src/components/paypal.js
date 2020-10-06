@@ -9,10 +9,6 @@ const Paypal = (props) => {
 
     console.log(parseFloat(Number(props.total).toFixed(2)));
 
-<<<<<<< HEAD
-const Paypal = (props) => {
-=======
->>>>>>> 64fa4897a890d668199d0ceef14c372db5b8e82b
     const paypal = useRef()
     useEffect(() => {
         window.paypal.Buttons({

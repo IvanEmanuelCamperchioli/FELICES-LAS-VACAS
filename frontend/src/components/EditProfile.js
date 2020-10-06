@@ -1,4 +1,4 @@
-/*import React, { useEffect,useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux';
 import Header from './Header'
@@ -21,6 +21,7 @@ const Profile = (props) => {
     }
 
     const showProfile =()=>{
+        console.log(userData)
         return(
         <>
             <div>
@@ -29,9 +30,10 @@ const Profile = (props) => {
                 <p>Apellido: {userData.surname}.</p>
                 <p>DNI: {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
                 <h4>Datos para el envio:</h4>
-                <p>Ciudad: {!userData.city ? "Actualice los datos": userData.city}.</p>
-                <p>Provincia: {!userData.province ? "Actualice los datos" : userData.province}.</p>
                 <p>País: Argentina.</p>
+                <p>Provincia: {!userData.province ? "Actualice los datos" : userData.province}.</p>
+                <p>Ciudad: {!userData.city ? "Actualice los datos": userData.city}.</p>
+                <p>Dirección: {!userData.address ? "Actualice los datos": userData.address}.</p>
             </div>
         </>)
     }
@@ -106,4 +108,4 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps, null)(Profile)*/
+export default connect(mapStateToProps, null)(Profile)
