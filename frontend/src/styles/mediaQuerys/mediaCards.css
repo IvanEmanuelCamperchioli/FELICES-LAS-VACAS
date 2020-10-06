@@ -1,0 +1,71 @@
+@media screen and (max-width: 1200px) {
+    .conteiner-card {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 942px) {
+    .card {
+        width: 250px;
+        height: 500px;
+    }
+    .cardInput {
+        max-height: 100px;
+    }
+    .addToCart {
+        font-size: 13px!important;
+    }
+    .viewMore-navLink {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 789px) {
+    .card {
+        font-size: 13px;
+        width: 218px;
+        height: 350px;
+    }
+    .cardInput {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 789px) {
+    .card {
+        font-size: 13px;
+        width: 180px;
+        height: 320px;
+    }
+    .conteiner-card {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}
+
+@media screen and (max-width: 583px) {
+    .conteiner-card {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-left: 15%;
+    }
+    .card {
+        margin: 5vh 5vw 0 0;
+    }
+}
+
+@media screen and (max-width: 509px) {
+    .card {
+        width: 250px;
+        height: 385px;
+    }
+    .conteiner-card {
+        padding: 0 10%;
+        justify-content: center;
+    }
+    .card {
+        margin-top: 2vh;
+        margin-right: 0;
+    }
+}
+

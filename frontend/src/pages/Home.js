@@ -1,6 +1,6 @@
 import React from 'react'
 import Carrousel from '../components/Carrousel'
-import Destacado from '../components/Destacado'
+import BestSellers from '../components/BestSellers'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 
@@ -10,7 +10,7 @@ class Home extends React.Component {
             <>
                 <Header />
                 <Carrousel />
-                <Destacado />
+                <BestSellers />
                 <Footer />
             </>
         )

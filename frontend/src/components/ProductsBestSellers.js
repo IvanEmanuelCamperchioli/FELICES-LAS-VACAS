@@ -1,9 +1,9 @@
 import React from 'react'
 import '../styles/home.css'
-import { NavLink } from 'react-router-dom';
-import ItemCard from './ItemCard';
+import '../styles/mediaQuerys/mediaCards.css'
+import ItemCard from './ItemCard'
 
-class ProductosDestacados extends React.Component{
+class ProductsBestSellers extends React.Component{
     state = {
         firstThree: [],
         secondThree:[],
@@ -54,4 +54,4 @@ class ProductosDestacados extends React.Component{
 
 }
 
-export default ProductosDestacados
+export default ProductsBestSellers
