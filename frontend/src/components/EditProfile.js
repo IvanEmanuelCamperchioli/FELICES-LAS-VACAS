@@ -25,16 +25,20 @@ const Profile = (props) => {
         return(
         <>
             <div>
-            <h3>Mi perfil: </h3>
-                <p>Nombre: {userData.name}.</p>
-                <p>Apellido: {userData.surname}.</p>
-                <p>DNI: {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
-                <h4>Datos para el envio:</h4>
-                <p>País: Argentina.</p>
-                <p>Provincia: {!userData.province ? "Actualice los datos" : userData.province}.</p>
-                <p>Ciudad: {!userData.city ? "Actualice los datos": userData.city}.</p>
-                <p>Dirección: {!userData.address ? "Actualice los datos": userData.address}.</p>
-            </div>
+            <h3 style={{color:"green"}}>Mi perfil: </h3>
+                <div style={{marginLeft:"5%"}}>
+                <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Nombre:</h6> {userData.name}.</p>
+                <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Apellido: </h6> {userData.surname}.</p>
+                <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>DNI:</h6> {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
+                </div>
+            <h4 style={{color:"green"}}>Datos para el envio:</h4>
+                <div style={{marginLeft:"5%"}}>
+                <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>País: </h6> Argentina.</p>
+                <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Provincia: </h6> {!userData.province ? "Actualice los datos" : userData.province}.</p>
+                <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Ciudad: </h6> {!userData.city ? "Actualice los datos": userData.city}.</p>
+                <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Dirección: </h6> {!userData.address ? "Actualice los datos": userData.address}.</p>
+                </div>
+                </div>
         </>)
     }
     
@@ -65,8 +69,9 @@ const Profile = (props) => {
     return (
         <div>
             <Header/>
+            <div className="jpgfood"></div>
             <div style={{display:"flex", flexDirection:"column", justifyContent:"space-between" }}>
-             <div style={{marginLeft:"10%"}}>
+             <div style={{marginLeft:"15%"}}>
              <button style={{marginLeft:"80%", border:"none", textDecoration:"underline", backgroundColor:"white", color:"gray"}} onClick={()=> setLoad(!load)}>{load? "editar": "cancelar"}</button>
                 {load? showProfile(): editProfile(inputHandler,submit, userData, provinces)}
                 </div>
