@@ -18,12 +18,6 @@
     margin-top: 3rem;
 }
 
-.cardsContainer{
-    margin-left: 8%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
 
 .itemCard {
     display: flex;

@@ -9,7 +9,6 @@ import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 import productsActions from '../redux/actions/productsActions';
 
-
 class Products extends React.Component {
 
     state = {
@@ -138,8 +137,8 @@ class Products extends React.Component {
                     <Button className="btnFilter" onClick={searchFilterHome} >Buscar</Button>
                 </div>
                 <div className="cardsContainer">
-                    {this.state.filteredItems.map(item => {
-                        return (<div style={{margin:"1.4vw",width:"25vw"}}><ItemCard key={item.id} item={item}/></div>)
+                    {this.state.filteredItems.map((item, index) => {
+                        return (<ItemCard key={item.id} item={item}/>)
                     })}
                 </div>
             </div>

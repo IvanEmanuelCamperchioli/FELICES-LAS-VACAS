@@ -11,8 +11,10 @@ import SignUp from './pages/SignUp'
 import LogOut from './pages/LogOut'
 import Item from './components/Item';
 import Buy from './pages/Buy'
+import Faq from './pages/Faq'
 import {connect} from 'react-redux'
 import usersActions from './redux/actions/usersActions'
+import Profile from './components/EditProfile'
 
 class App extends React.Component{
   
@@ -23,7 +25,8 @@ class App extends React.Component{
         <Route exact path ="/" component={Home}/>
         <Route path = "/productos" component={Products}/>
         <Route path = "/producto/:id" component={Item}/>
-        <Route path = "/faqs" component={Home} />
+        <Route path = "/faqs" component={Faq} />
+        <Route path ="/Profile" component={Profile}/>
         <Route path = "/carrito" component={Cart} />
         <Route path = "/mi-cuenta" component={Home} />
         <Route path = "/log-out" component={LogOut}/>
@@ -43,7 +46,7 @@ class App extends React.Component{
         <Route exact path ="/" component={Home}/>
         <Route path = "/productos" component={Products}/>
         <Route path = "/producto/:id" component={Item}/>
-        <Route path = "/faqs" component={Home} />
+        <Route path = "/faqs" component={Faq} />
         <Route path ="/comprar" component ={Buy}/>
         <Route path = "/sign-in" component={LogIn} />
         <Route path = "/sign-up" component={SignUp} />
@@ -59,6 +62,13 @@ class App extends React.Component{
       }
     }else if(localStorage.getItem('token')){
       this.props.forcedLogIn(localStorage.getItem('token'))
+      
+      if(this.props.role === "admin"){
+        var routes = adminRoutes
+      }else{
+        var routes = normalRoutes
+      }
+      
     }else{
       var routes = unlogedRoutes
     }
