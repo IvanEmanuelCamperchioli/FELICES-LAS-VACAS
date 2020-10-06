@@ -27,6 +27,7 @@ class App extends React.Component{
         <Route path = "/producto/:id" component={Item}/>
         <Route path = "/faqs" component={Faq} />
         <Route path ="/Profile" component={Profile}/>
+        <Route path ="/comprar" component ={Buy}/>
         <Route path = "/carrito" component={Cart} />
         <Route path = "/mi-cuenta" component={Home} />
         <Route path = "/log-out" component={LogOut}/>
@@ -47,7 +48,6 @@ class App extends React.Component{
         <Route path = "/productos" component={Products}/>
         <Route path = "/producto/:id" component={Item}/>
         <Route path = "/faqs" component={Faq} />
-        <Route path ="/comprar" component ={Buy}/>
         <Route path = "/sign-in" component={LogIn} />
         <Route path = "/sign-up" component={SignUp} />
         <Redirect to = "/" />
