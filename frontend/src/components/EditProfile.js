@@ -21,18 +21,17 @@ const Profile = (props) => {
     }
 
     const showProfile =()=>{
-        console.log(userData)
         return(
         <>
             <div>
             <h3 style={{color:"green"}}>Mi perfil: </h3>
-                <div style={{marginLeft:"5%"}}>
+                <div style={{marginLeft:"5%", borderLeft:"solix 1px gray"}}>
                 <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Nombre:</h6> {userData.name}.</p>
                 <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Apellido: </h6> {userData.surname}.</p>
                 <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>DNI:</h6> {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
                 </div>
             <h4 style={{color:"green"}}>Datos para el envio:</h4>
-                <div style={{marginLeft:"5%"}}>
+                <div style={{marginLeft:"5%",  borderLeft:"solix 1px gray"}}>
                 <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>País: </h6> Argentina.</p>
                 <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Provincia: </h6> {!userData.province ? "Actualice los datos" : userData.province}.</p>
                 <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Ciudad: </h6> {!userData.city ? "Actualice los datos": userData.city}.</p>
