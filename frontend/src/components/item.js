@@ -8,10 +8,13 @@ import { NavLink } from 'react-router-dom';
 const Item = (props) => {
     const [item, setItem] = useState({})
 
-    useEffect(async () => {
-      var idProduct = props.match.params.id
-      const res = await props.getProduct(idProduct)
-      setItem(res)
+    useEffect( () => {
+      const getinfo = async () => {
+        var idProduct = props.match.params.id
+        const res = await props.getProduct(idProduct)
+        setItem(res)  
+      }
+      getinfo()
 	  }, [])
     
     return (

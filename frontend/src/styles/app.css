@@ -60,3 +60,34 @@ html * {
     top: 3px; 
     left: 12vw;
   }
+
+  @media screen and (max-width: 838px) {
+    .logoMotion {
+      left: 8vw;
+      top: 5vh;
+      width: 10vw; 
+      height: 10vw;   
+    }
+  }
+
+  @media screen and (max-width: 696px) {
+    .logoMotion {
+      left: 3vw;
+      top: 5vh
+    }
+  }
+
+  @media screen and (max-width: 577px) {
+    .logoMotion {
+      left: 3vw;
+      top: 13vh
+    }
+  }
+
+  @media screen and (max-width: 577px) {
+    .logoMotion {
+      width: 12vw; 
+      height: 12vw;   
+    }
+
+  }

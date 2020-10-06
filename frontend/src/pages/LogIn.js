@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import Footer from '../components/Footer';
 import { NavLink } from 'react-router-dom';
 import '../styles/account.css'
+import { motion } from 'framer-motion'
 
 
 class SignIn extends React.Component{
@@ -80,36 +81,42 @@ class SignIn extends React.Component{
     
     render(){
 
+        const tortilla = require('../images/tortilla.jpg')
+        const pizza = require('../images/pizza.jpg')
+
         return (
             <>
             <Header />
-            <h3 className="titleHouses">ENTRA A TU CUENTA</h3>
-            
-            <div className="signContainer">
+            <div className="back-logIn">
+                <div className="RightBack-logIn" style={{backgroundImage: `url(${tortilla})`}}>
+                </div>
                 
-                <div className="inputs">
-                    <span className = {this.state.error === "" ? "" : "logError"}>{this.state.error}</span>
-                    <input className="account" name="username" type="text" placeholder="Escriba su nombre de usuario" autocomplete="off" onChange={this.getForm} />
-                    <input className="password" type="password" name="password" placeholder="Escriba su contraseña" autocomplete="off" onChange={this.getForm} />
-                 </div>
-                    
-                    <button onClick={this.submit} className="send"><span> Iniciar sesión</span></button>
-                    <NavLink to="/forgotPass" style={{fontSize:"1.4rem"}}>I forgot my password</NavLink>
-                    <p className="or">O</p>
-                    <GoogleLogin
-                        className="googleBtn"
-                        clientId="204753879301-qflivfpgiqk2v57hne24iu8j2acnmimn.apps.googleusercontent.com"
-                        buttonText="Sign in with Google"
-                        onSuccess={this.responseGoogle}
-                        onFailure={this.responseGoogle}
-                        cookiePolicy={'single_host_origin'}
-                    />
-                
+                <div className="pizza" style={{ backgroundImage: `url(${pizza})`, backgroundPosition: 'center', backgroundSize: 'cover'}}>
+                    <div className="cardInputs-logIn">
+                        <h3 className="titleHouses">Entrá a tu cuenta</h3>
+                        <div className="signContainer-login">
+                            <div className="inputs">
+                                <span className = {this.state.error === "" ? "" : "logError"}>{this.state.error}</span>
+                                <input className="account" name="username" type="text" placeholder="Escriba su nombre de usuario" autocomplete="off" onChange={this.getForm} />
+                                <input className="password" type="password" name="password" placeholder="Escriba su contraseña" autocomplete="off" onChange={this.getForm} />
+                            </div>
+                            <button onClick={this.submit} className="send"><span> Iniciar sesión</span></button>
+                            <NavLink to="/forgotPass" style={{fontSize:"1.4rem", color: 'white'}}>Olvidé mi contraseña</NavLink>
+                            <p className="or" style={{marginTop: '1.5vh'}}>Ó</p>
+                            <GoogleLogin
+                                className="googleBtn"
+                                clientId="204753879301-qflivfpgiqk2v57hne24iu8j2acnmimn.apps.googleusercontent.com"
+                                buttonText="Inicia sesión con Google"
+                                onSuccess={this.responseGoogle}
+                                onFailure={this.responseGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                            />
+                                <p style={{marginTop: '5vh', color: 'white', textAlign: 'center'}}>Si todavía no tienes una cuenta, <NavLink style={{color: 'white'}} to='/sign-up'>regístrate aquí.</NavLink></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-           
-            
             <Footer/>
-
             </>
         )
     }
