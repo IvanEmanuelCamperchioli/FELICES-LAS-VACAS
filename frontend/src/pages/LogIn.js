@@ -7,6 +7,7 @@ import GoogleLogin from 'react-google-login';
 import Swal from 'sweetalert2'
 import Footer from '../components/Footer';
 import { NavLink } from 'react-router-dom';
+import '../styles/account.css'
 
 
 class SignIn extends React.Component{
@@ -19,17 +20,13 @@ class SignIn extends React.Component{
     }
     getForm = e =>{
         e.preventDefault()
-        const property = e.target.name
-        const value = e.target.value
+       
         this.setState({
-            
             logUser:{
                 ...this.state.logUser,
-                [property]: value
+                [e.target.name]: e.target.value
             }
         })
-        
-        
     }
 
 
@@ -41,7 +38,7 @@ class SignIn extends React.Component{
                 error: "Both fields are required"
             }) 
         }else{
-            const logUser= {user:this.state.logUser.username , password: this.state.logUser.password}
+            const logUser= {username:this.state.logUser.username , password: this.state.logUser.password}
             const response =  await this.props.logUser(logUser)
             
             if (response.success === true){
@@ -66,7 +63,7 @@ class SignIn extends React.Component{
         
         if(res === true){
             const resp =  await this.props.logUser(this.state.logUser)
-
+            
             
         }else{
             Swal.fire({  title: 'You must sign up!',  text: `Please go to create an account, ${response.profileObj.givenName}.`,  icon: 'warning',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
@@ -86,7 +83,7 @@ class SignIn extends React.Component{
         return (
             <>
             <Header />
-            <h3 className="titleHouses">Enter into your account</h3>
+            <h3 className="titleHouses">ENTRA A TU CUENTA</h3>
             
             <div className="signContainer">
                 
@@ -96,8 +93,8 @@ class SignIn extends React.Component{
                     <input className="password" type="password" name="password" placeholder="Enter your password" onChange={this.getForm}></input>
                  </div>
                     
-                    <button onClick={this.submit} className="send">Sign In</button>
-                    <NavLink to="/forgotPass" style={{fontSize:"1.4rem"}}>I forgot my password</NavLink>
+                    <button onClick={this.submit} className="send"><span> Iniciar sesión</span></button>
+                    <NavLink to="/forgotPass" style={{fontSize:"1.4rem"}}>Olvidé mi contraseña</NavLink>
                     <p className="or">Or</p>
                     <GoogleLogin
                         className="googleBtn"

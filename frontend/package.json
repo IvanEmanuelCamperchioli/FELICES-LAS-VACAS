@@ -11,16 +11,20 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
+    "react-alice-carousel": "^1.19.3",
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.21",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-scroll": "^1.8.1",
     "reactstrap": "^8.6.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "sweetalert2": "^10.3.1"
+    "sweetalert2": "^10.3.1",
+    "swiper": "^6.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

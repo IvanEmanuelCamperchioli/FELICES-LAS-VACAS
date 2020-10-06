@@ -6,7 +6,7 @@ const usersActions = {
     return async (dispatch, getState) => {
       const res = await axios.post(
         "http://127.0.0.1:4000/api/user", user )
-        console.log(res)
+      console.log(res)
       if (res.data.success !== true) {
         return res.data.message
       } else {
@@ -24,14 +24,14 @@ const usersActions = {
   },
   
   createUser: (newUser) => {
-    console.log(newUser)
+  
     return async (dispatch, getState) => {
       const res = await axios.post("http://127.0.0.1:4000/api/users", newUser)
       const error ={
         mail:"",
         username:""
       }
-      console.log(res)
+ 
       if(!res.data.success && res.data.response !== undefined){
         if(res.data.response.errors.mail !== undefined){
           error.mail = "Ese email ya esta en uso"
@@ -63,22 +63,22 @@ const usersActions = {
 
   forcedLogIn: token => {
     return async (dispatch, getState) => {
-        const response = await axios.get('http://127.0.0.1:4000/api/tokenVerificator', {
+        const res = await axios.get('http://127.0.0.1:4000/api/tokenVerificator', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
+        
         dispatch({
             type: "SET_USER",
             payload: {
-                name: response.data.name,
-                username: response.data.username,
-                token: token,
-                mail: response.data.mail,
-                role: response.data.role,
+                username: res.data.response.username,
+                token: token, 
+                role: res.data.response.role, 
+                name: res.data.response.name
             }
         })
-        return response.data.username
+        return res.data.response.username
     }
   },
   
@@ -93,11 +93,38 @@ const usersActions = {
         return res.data.success
     }
   },
-
-  userLogOut: () => {
-    return (dispatch, getState) => {
+  unlogUser : () => {
+    return (dispatch, getState) =>{
         dispatch({
-            type: "LOGOUT_USER"
+            type: "UNLOG_USER_FROM_APP"
+        })
+    }
+  },
+  getUserAddress: (token) =>{
+    return async (dispatch, getState) =>{
+        
+      const res = await axios.get("http://127.0.0.1:4000/api/getUserAddress",{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }})
+      
+      dispatch({
+          type: "GET_USER_ADDRESS"
+      })
+      return res.data.response
+    }
+  },
+  sendAddress: (token, newData) =>{
+    return async (dispatch, getState) =>{
+      const res = await axios.put("http://127.0.0.1:4000/api/sendAddress", 
+      {city: newData.city, province: newData.province, address: newData.address},
+      {
+        headers: {
+            Authorization: `Bearer ${token}`
+      }})
+        console.log(res)
+        dispatch({
+          type: "UPADATE_USER_ADDRESS"
         })
     }
   }

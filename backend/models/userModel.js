@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 const userSchema = new mongoose.Schema({
     username: {type:String, required:true, 
         validate:{
-            validator: async user => await User.find({user}).countDocuments()===0,
+            validator: async username => await User.find({username}).countDocuments()===0,
             message: () => "That user name is already used"
         }
     },
@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     DNI: {type: Number, default: null},
     province: {type: String, default: null},
     address: {type: String, default: null},
+    city:{type: String, default: null},
     role: {type: String, default: "comprador"},
     loginGoogle: {type: Boolean, default: false}
     

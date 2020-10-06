@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from "react-redux"
 import adminActions from '../redux/actions/adminActions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const FormAdmin = (props) => {
+
+    const listCategory = ['secos', 'refrigerados', 'congelados']
 
     const validationMinLength = ['name', 'description', 'category']
     const validationMinNumeric = ['price', 'stock']
@@ -20,9 +24,18 @@ const FormAdmin = (props) => {
     const [errors, setErrors] = useState(newProduct)
 
     const readInput = e => {  
+
+        let valueInput
+
+        (e.target.name === 'price' || e.target.name === 'stock') 
+            ? valueInput = parseInt(e.target.value) 
+            : (e.target.name === 'category') 
+                ? valueInput = listCategory[e.target.value - 1] 
+                : valueInput = e.target.value
+        
         setNewProduct({
             ...newProduct,
-            [e.target.name]: e.target.value
+            [e.target.name]: valueInput
         })
     }
 
@@ -46,23 +59,21 @@ const FormAdmin = (props) => {
 
         setErrors({...errorsCopy})
 
-        console.log(errors);
+        
 
         if (errors.name === "" && errors.price === 0 && errors.description === "" && errors.stock=== "" && errors.category=== "" && errors.rating=== 0 && errors.views === 0) {
             
-            console.log(errors)
+          
 
             const response = await props.newProduct(newProduct)
 
             if (response.success) {
-                console.log('ok')
+                
                 
             }
             
         }
     }
-
-    console.log(newProduct);
 
     return (
         <>
@@ -71,49 +82,63 @@ const FormAdmin = (props) => {
                 flexDirection:'column',
                 justifyContent:'space-between'
             }}>
-                <label>Name Product</label>
-                <input style={{
-                    borderRadius: '3vw'
-                }} type='text' name='name' placeholder='Write the product name'
-                    onChange={readInput} />
 
-                <label>Price Product</label>
-                <input style={{
-                    borderRadius: '3vw'
-                }} type='number' name='price' placeholder='Write the product price (number)'
-                    onChange={readInput} />
+                <div className="input-group">
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text" id="basic-addon3">Name Product</span>
+                        </div>
+                        <input name='name' onChange={readInput} type="text" className="form-control"/>
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text" id="basic-addon3">Price Product</span>
+                            <span className="input-group-text">$</span>
+                        </div>
+                        <input name='price' onChange={readInput} type="number" className="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text" id="basic-addon3">Description Product</span>
+                        </div>
+                        <input name='description' onChange={readInput} type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text" id="basic-addon3">Stock Product</span>
+                        </div>
+                        <input name='stock' onChange={readInput} type="number" className="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <label className="input-group-text" htmlFor="inputGroupSelect01">Category Product</label>
+                        </div>
+                        <select name='category' onChange={readInput} className="custom-select" id="inputGroupSelect01">
+                            <option defaultValue>Choose...</option>
+                            <option value="1">Secos</option>
+                            <option value="2">Refrigerados</option>
+                            <option value="3">Congelados</option>
+                        </select>
+                    </div>
+                </div>
 
-                <label>Description Product</label>
-                <input style={{
-                    borderRadius: '3vw'
-                }} type='text' name='description' placeholder='Write the product description'
-                    onChange={readInput} />
-
-                <label>Stock Product</label>
-                <input style={{
-                    borderRadius: '3vw'
-                }} type='number' name='stock' placeholder='Write the product stock (number)'
-                    onChange={readInput} />
-
-                <label>Category Product</label>
-                <input style={{
-                    borderRadius: '3vw'
-                }} type='text' name='category' placeholder='Write the product category'
-                    onChange={readInput} />
-
-                <label>Photo Product</label>
+                <div className="row d-flex">
+                    <div className=" d-flex col-md-12 p-2">
+                        <button onClick={sendInfo} className="btn btn-primary btn-lg btn-block"><FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Submit</button>
+                    </div>
+                </div>
+                
+                {/* <label style={colorWhite}>Photo Product</label>
                 <input style={{
                     borderRadius: '3vw'
                 }} type='text' name='photo' placeholder='Write the product photo (url)'
                     onChange={readInput} />
 
-                <label>Photo1 Product</label>
+                <label style={colorWhite}>Photo1 Product</label>
                 <input style={{
                     borderRadius: '3vw'
                 }} type='text' name='photo1' placeholder='Write the product photo1 (url)'
-                    onChange={readInput} />  
-
-                <button onClick={sendInfo}>Send</button>
+                    onChange={readInput} />   */}
 
             </div>
         </>
