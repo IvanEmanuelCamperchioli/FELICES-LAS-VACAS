@@ -85,10 +85,10 @@ class Faq extends React.Component {
                     <Collapse style={{transition: 'all 0.3s'}} isOpen={this.state.three.isOpen}>
                         <Card className="card-faq">
                             <CardBody className="card-body-faq">
-                                <h4>Dinero en Mercado Pago</h4>
-                                <h4>Tarjeta de crédito en hasta 12 cuotas</h4>
-                                <h4>Tarjeta de débito</h4>
-                                <h4>En efectivo en puntos de pago</h4>
+                                <h4>- Dinero en Pay Pal</h4>
+                                <h4>- Tarjeta de crédito en hasta 12 cuotas</h4>
+                                <h4>- Tarjeta de débito</h4>
+                                <h4>- En efectivo en puntos de pago</h4>
                             </CardBody>
                         </Card>
                     </Collapse>
@@ -110,9 +110,9 @@ class Faq extends React.Component {
                     <Collapse style={{transition: 'all 0.3s'}} isOpen={this.state.five.isOpen}>
                         <Card className="card-faq">
                             <CardBody className="card-body-faq">
-                                <p> El envio a domicilio tiene un costo estimado para envios en capital federal y otro para el interior del país. 
+                                <p> El envío a domicilio tiene un costo estimado para envíos en capital federal y otro para el interior del país. 
                                     El retiro personal por nuestro local no tiene costos extras, 
-                                    aún así se encuientra temporalmente suspendido todo retiro de forma personal.</p>
+                                    aún así se encuentra temporalmente suspendido todo retiro de forma personal.</p>
                             </CardBody>
                         </Card>
                     </Collapse>

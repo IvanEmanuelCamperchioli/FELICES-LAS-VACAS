@@ -17,7 +17,7 @@ class Home extends React.Component {
                 <motion.div className="logoMotion" style={{backgroundImage: `url(${logo})`}}
                 initial={{x: -1000, scale: 0}}
                 animate={{x: 0, scale: 1, rotate: 1440 }}
-                transition={{ duration: 2 }}
+                transition={{ duration: 1 }}
                 >
                 </motion.div>
                 <Carrousel />
