@@ -8,7 +8,9 @@ import GoogleLogin from 'react-google-login';
 import Footer from '../components/Footer'
 import LogIn from './LogIn'
 import '../styles/account.css'
-/* import'../styles/logs.css' */
+import '../styles/mediaQuerys/mediaAccount.css'
+import { motion } from 'framer-motion'
+
 
 
 class SignUp extends React.Component{
@@ -143,43 +145,52 @@ class SignUp extends React.Component{
     
     render(){
 
+        const farmer = require('../images/campo.jpg')
+
         return (
             <>
             <Header />
-            <h3 className="titleHouses">CREA UNA CUENTA</h3>
-            
-            <div className="signContainer">
-                <div className="inputs">
-                    <span className={this.state.errors.mail === "" ? "" : "logError"}>{this.state.errors.mail}</span>
-                    <input className="mail" type="mail" placeholder="Email" name="mail" autocomplete="off" onChange={this.getForm} />
-                    
-                    <span className={this.state.errors.username === "" ? "" : "logError"}>{this.state.errors.username}</span>
-                    <input className="account" type="text" placeholder="Nombre de usuario" name="username" autocomplete="off" onChange={this.getForm} />
-                    
-                    <span className={this.state.errors.password === "" ? "" : "logError"}>{this.state.errors.password}</span>
-                    <input className="password" type="password" placeholder="Contraseña" name="password" autocomplete="off" onChange={this.getForm} />
-                    
-                    <span className={this.state.errors.passwordValidation === "" ? "" : "logError"}>{this.state.errors.passwordValidation}</span>
-                    <input className="passwordCheck" type="password" placeholder="Por favor, repita su contraseña" name="passwordValidation" autocomplete="off" onChange={this.getForm}  />
-                    
-                    <span className={this.state.errors.name === "" ? "" : "logError"}>{this.state.errors.name}</span>
-                    <input className="name" type="text" placeholder="Nombre completo" name="name" autocomplete="off" onChange={this.getForm}  />
-                    
-                    <span className={this.state.errors.surname === "" ? "" : "logError"}>{this.state.errors.surname}</span>
-                    <input className="surname" type="text" placeholder="Apellido/s" name="surname" autocomplete="off" onChange={this.getForm} />
-                </div>
-                <button className="send" onClick={this.submit}><span>Crear cuenta </span></button>
-                <p className="or">O</p>
-                <GoogleLogin
-                    className="googleBtn"
-                    clientId="410495293057-2vf4ipg2vojn0pdvjg2p4pc8269vcbbq.apps.googleusercontent.com"
-                    buttonText="Create account with Google"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                    cookiePolicy={'single_host_origin'}
-                />
+            <div className="back-signUp" style={{backgroundImage: `url(${farmer})`}}>
+                <motion.div 
+                initial={{ x: -1000, scale: 0 }}
+                animate={{ x: 0, scale: 1 }}
+                transition={{ duration: 2 }}                
+                className="cardInputs-signUp"
+                >
+                    <h3 className="titleHouses">CREA UNA CUENTA</h3>
+                    <div className="signContainer">
+                        <div className="inputs">
+                            <span className={this.state.errors.mail === "" ? "" : "logError"}>{this.state.errors.mail}</span>
+                            <input className="mail" type="mail" placeholder="Email" name="mail" autocomplete="off" onChange={this.getForm} />
+                            
+                            <span className={this.state.errors.username === "" ? "" : "logError"}>{this.state.errors.username}</span>
+                            <input className="account" type="text" placeholder="Nombre de usuario" name="username" autocomplete="off" onChange={this.getForm} />
+                            
+                            <span className={this.state.errors.password === "" ? "" : "logError"}>{this.state.errors.password}</span>
+                            <input className="password" type="password" placeholder="Contraseña" name="password" autocomplete="off" onChange={this.getForm} />
+                            
+                            <span className={this.state.errors.passwordValidation === "" ? "" : "logError"}>{this.state.errors.passwordValidation}</span>
+                            <input className="passwordCheck" type="password" placeholder="Por favor, repita su contraseña" name="passwordValidation" autocomplete="off" onChange={this.getForm}  />
+                            
+                            <span className={this.state.errors.name === "" ? "" : "logError"}>{this.state.errors.name}</span>
+                            <input className="name" type="text" placeholder="Nombre completo" name="name" autocomplete="off" onChange={this.getForm}  />
+                            
+                            <span className={this.state.errors.surname === "" ? "" : "logError"}>{this.state.errors.surname}</span>
+                            <input className="surname" type="text" placeholder="Apellido/s" name="surname" autocomplete="off" onChange={this.getForm} />
+                        </div>
+                        <button className="send" onClick={this.submit}><span>Crear cuenta </span></button>
+                        <p className="or">Ó</p>
+                        <GoogleLogin
+                            className="googleBtn"
+                            clientId="410495293057-2vf4ipg2vojn0pdvjg2p4pc8269vcbbq.apps.googleusercontent.com"
+                            buttonText="Create account with Google"
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />
+                    </div>
+                </motion.div>
             </div>
-            
             <Footer/>
 
             </>

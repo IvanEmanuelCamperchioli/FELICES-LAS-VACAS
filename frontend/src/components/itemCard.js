@@ -5,11 +5,14 @@ import productsActions from '../redux/actions/productsActions'
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import '../styles/mediaQuerys/mediaCards.css'
 import '../styles/home.css'
+import { motion } from "framer-motion";
+
 
 
 const ItemCard = (props) => {
 
     const [quantity, setQuantity] = useState(0)
+
 
     const changeInput = (e) =>{
       e.preventDefault()  
@@ -50,7 +53,16 @@ const ItemCard = (props) => {
                 <button value="up" onClick={changeInput}>+</button>
                 <button calue="down" onClick={changeInput}>-</button>
               </div>
-              <button className="addToCart" onClick={addItem}>Añadir al carrito</button>
+              <motion.a
+              />
+              <motion.button 
+                className="addToCart" onClick={addItem}
+                whileHover={{ scale: (1.08) }}
+                onHoverStart={e => {}}
+                onHoverEnd={e => {}}
+              >
+                Añadir al carrito
+              </motion.button>
             </div>
           </div>
           </CardBody>

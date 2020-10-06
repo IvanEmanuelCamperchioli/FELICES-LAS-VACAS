@@ -240,11 +240,13 @@
     appearance: none;
     text-align: center; 
     letter-spacing: 1px;
+    opacity: 0.75;
 }
 
 .addToCart:hover {
+    opacity: 1;
     color: white;
-    opacity: 0.8;
+    background-color: rgba(57, 168, 13, 0.808);
     box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.8);
 }
 
@@ -267,3 +269,4 @@
     margin: 2vw;
     width: 25vw;
 }
+

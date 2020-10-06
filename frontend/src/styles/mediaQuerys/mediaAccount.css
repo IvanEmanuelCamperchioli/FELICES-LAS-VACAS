@@ -1,0 +1,28 @@
+
+@media screen and (max-width: 877px) {
+    .titleHouses {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 675px) {
+    .cardInputs-signUp {
+        width: 55vw;
+    }
+}
+
+@media screen and (max-width: 675px) {
+    .cardInputs-signUp {
+        width: 65vw;
+    }
+}
+
+@media screen and (max-width: 409px) {
+    .back-signUp {
+        display: flex;
+        justify-content: center;
+    }
+    .cardInputs-signUp {
+        width: 80vw;
+    }
+}
