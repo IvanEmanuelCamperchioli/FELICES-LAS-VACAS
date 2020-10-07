@@ -22,7 +22,7 @@
   display: flex;
   font-size: 29px;
   font-weight: bolder;
-  color: #02895b;
+  color: #048f55;
   line-height: 4.5vh;
   height: 19vh;
   align-items: center;
@@ -36,30 +36,39 @@
 
 .addToCart {
   font-size: 20px;
-  color: #02895b !important;
+  color: #048f55 !important;
   /* text-decoration: none!important; */
   background-color: white !important;
-  border: 3px solid #02895b !important;
+  border: 3px solid #048f55 !important;
   border-radius: 8px;
   text-align: center;
   letter-spacing: 1px;
   padding: 4px !important;
   margin-top: 2vh;
+  font-weight: bolder;
 }
 
 .addToCart:hover {
-  color: white;
+  background-color: #048f55 !important;
+  color: white !important;
   opacity: 0.8;
   box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.8);
+  transition: 150ms;
 }
+
+button:focus {
+  outline: none !important;
+}
+
+
 
 .moreLess {
   font-size: 30px;
   font-weight: bolder;
-  color: #02895b !important;
+  color: #048f55 !important;
   /* text-decoration: none!important; */
   background-color: white !important;
-  border: 3px solid #02895b !important;
+  border: 3px solid #048f55 !important;
   text-align: center;
   letter-spacing: 1px;
   padding: 4px !important;
@@ -67,10 +76,11 @@
 }
 
 .moreLess:hover {
-  color: white;
+  background-color: #048f55 !important;
+  color: white !important;
   opacity: 0.8;
   box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.8);
-  transition: 200ms;
+  transition: 150ms;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -80,7 +90,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 input[type="number"] {
-  -moz-appearance: textfield!important;
+  -moz-appearance: textfield !important;
 }
 
 .conteiner-card {
@@ -106,6 +116,7 @@ input[type="number"] {
 }
 
 .card:hover {
+  background-color: rgba(245, 245, 245, 0.815);
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
@@ -170,4 +181,3 @@ input[type="number"] {
   height: 40vh;
   justify-content: space-between;
 }
-
