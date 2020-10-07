@@ -51,6 +51,13 @@ const productsReducer = (state = initialState, action) => {
                 ...state,
                 cartProducts: cart
             }
+
+        case "DELETE_CART":
+        localStorage.removeItem('cart')
+            return{
+                ...state,
+                cartProducts:[]
+            }
         default:
             return state
     }

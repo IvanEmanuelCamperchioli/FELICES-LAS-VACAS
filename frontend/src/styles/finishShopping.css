@@ -1,0 +1,77 @@
+.mainCont{
+    display:flex;
+    padding: 10px 50px;
+    
+}
+
+.maincontainerStract{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 60vh;
+    margin: auto;
+    
+    
+}
+
+.nameFinish{
+    width: 100%;
+    background-color: green;
+    text-align: center;
+    color: whitesmoke;
+    padding: 10px 0px;
+}
+.containerStract{
+    border: solid;
+    border-width: 3px;
+    border-color: green;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.containerStract img{
+    width: 100px;
+    height: 100px!important;
+}
+.stract h3{
+    color: green;
+    font-size: 20px;
+}
+.asideImg{
+    height: 600px;
+    border-radius: 20px;
+    
+    border: solid;
+    border-color: green;
+}
+.subtotal{
+    color: green;
+    text-align: center;
+}
+
+.buttons{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btn1{
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: solid;
+    border-color: green;
+    font-size: 20px;
+    color: green;
+    margin: 10px 0 50px 0;
+}
+
+.btn1:hover{
+    background-color: green;
+    color: whitesmoke;
+}
