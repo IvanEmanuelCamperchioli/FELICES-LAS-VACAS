@@ -138,8 +138,8 @@ class Products extends React.Component {
                     <Button className="btnFilter" onClick={searchFilterHome} >Buscar</Button>
                 </div>
                 <div className="cardsContainer">
-                    {this.state.filteredItems.map(item => {
-                        return <ItemCard key={item.id} item={item}/>
+                    {this.state.filteredItems.map((item, index) => {
+                        return (<ItemCard key={item.id} item={item}/>)
                     })}
                 </div>
             </div>

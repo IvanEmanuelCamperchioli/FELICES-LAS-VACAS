@@ -48,9 +48,8 @@ const usersController = {
 
     userLogin: async (req, res) => {
         const { username, password } = req.body
-        
         const userExist = await User.findOne({ username })
-        
+
         if (!userExist) {
             res.json({
                 success: false, message: "Usuario y/o contraseña incorrectos"
@@ -74,7 +73,6 @@ const usersController = {
                             token,
                             name: userExist.name,
                             username: userExist.username,
-                            surname: userExist.surname,
                             role: userExist.role
                             }
                         })
@@ -84,7 +82,6 @@ const usersController = {
 
         }
     },
-
 
     tokenVerificator: (req, res) => {
         
@@ -102,19 +99,81 @@ const usersController = {
     
     getUsersExist: async (req,res) =>{
         
-        const user = req.body.user
-        const userExist = await User.findOne({user})
+        const username = req.body.username
+        const userExist = await User.findOne({username})
         if (userExist){
             res.json({
-                success:true
+                success:true,
+                response: userExist
             })
         }else{
             res.json({
                 success:false
             })
         }
-    }
+    },
+    getUserAddress: async (req,res) =>{
+        
+        const idUser = req.user._id
+        
+        const userExist = await User.findOne({_id:idUser})
+        if (userExist) {
+            res.json({
+                success:true,
+                response: userExist
+            })
+        }else{
+            res.json({
+                success:false
+            })
+        }
+    },
+    updateAddress: async (req, res) =>{
+        const idUser = req.user._id
+       
+        const {address, city, province} = req.body
+        const error = false 
+        const userExist = await User.findOne({_id:idUser})
 
+        if (userExist){
+            var userUpdate = await User.updateOne({_id:idUser}, {address, city, province})
+          
+        } else {
+            error = true
+        }
+        res.json({
+            success: error ? false : true,
+            response: error ? "User not updated" : "User updated"
+        })
+
+    },
+    getUserInformation: async (req, res) => {
+     
+        const user = await User.findOne({...req.params})
+        const {name, surname, province, city, address, DNI, username,} = user
+        res.json({
+            success: user ? true : false,
+            userInfo:{
+                name, surname, province, city, address, DNI, username
+            }
+        })
+    },
+    modifyCommentById: (req, res) => {
+		const { commentId, comment } = req.body
+		Comment.findByIdAndUpdate(commentId, { comment }, { new: true })
+			.then(comment => res.json({ success: true, comment }))
+			.catch(error => res.json({ success: false, error }))
+	},
+    editUser: async(req, res)=>{
+      
+        const user = await User.findOneAndUpdate({username: req.body.username},{$set:{...req.body}}, {new: true})
+        .then(user=>{
+          
+            res.json({success:true, user: user})})
+        .catch(err=>{
+           
+            res.json({success:false}, err)})
+    }
 }
 
 

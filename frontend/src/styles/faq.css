@@ -10,6 +10,7 @@
     justify-content: center;
     margin-left: 5vw;
     padding: 3vh 0;
+    font-weight: bold;
 }
 
 .card-faq p {
@@ -17,7 +18,7 @@
 }
 
 .button-Faq:hover, .button-Faq:focus {
-    color: rgb(255, 255, 255);
+    color: #048f55;
 }
 
 .card-faq {
@@ -27,7 +28,7 @@
     border: none;
     box-shadow: none;
     text-align: left;
-    color: rgb(255, 255, 255);
+    color: #048f55;
     background-color: rgba(0, 0, 0, 0);
 }
 
@@ -37,20 +38,30 @@
 
 .card-body-faq {
     color: rgb(255, 255, 255);
-    background-image: linear-gradient(to right, #3bc45b, #27863d);
-    border-radius: 50px;
+    background-color: #048f55be;
+    border-radius: 15px;
     margin-bottom: 1rem;
     width: 100%;
+    font-weight: 700;
 }
 
 .fondo-faq {
-    background-color: rgb(20, 20, 20);
-    color: rgb(255, 255, 255);
-    padding: 7vh 0;
+    background-image: url(../images/fondo.png);
+    background-position: right center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 7vh;
+    margin: 4vh 3vw;
 }
 
 .fondo-faq h1 {
     margin-left: 5vw;
+}
+
+.fondo-transparente {
+    background-color: #000000b7;
+    border-radius: 20px;
+    padding: 8vh 0vw;
 }
 
 .titulo-faq-1 {
@@ -60,6 +71,8 @@
     letter-spacing: 2px;
     flex-grow: 1;
     width: 90%;
+    color: #048f55;
+    font-weight: bolder;
 }
 
 .titulo-faq-1::after {
@@ -107,4 +120,6 @@
     letter-spacing: 2px;
     flex-grow: 1;
     width: 90%;
+    color: #048f55;
+    font-weight: bolder;
 }

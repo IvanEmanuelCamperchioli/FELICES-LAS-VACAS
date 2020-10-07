@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import productsActions from '../redux/actions/productsActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faMinusCircle, faPlus, faPlusCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { Tooltip } from 'reactstrap'
-import "../styles/ItemCart.css"
+import "../styles/itemCart.css"
 import "../styles/mediaQuerys/mediaCart.css"
 
 
@@ -57,9 +57,9 @@ class ItemCart extends React.Component{
                 <div className="counterContainer">
                     <p>Unidades<b>:</b> </p>
                     <div className="counter">
-                        <button onClick={() => this.removeOne(this.state.product._id)}><p style={{fontSize: '4vw'}}><b className="b">-</b></p></button>
-                        <div className="quantity" style={{ width: '2vw', textAlign: 'center', paddingTop: '9px'}}>{ this.state.quantity }</div>
-                        <button onClick={() => this.addOne(this.state.product._id)}><FontAwesomeIcon icon={faPlus} /></button>
+                        <button className="downup" onClick={() => this.removeOne(this.state.product._id)}><FontAwesomeIcon icon={faMinusCircle} /></button>
+                        <div className="quantity" style={{ width: '2vw', textAlign: 'center'}}>{ this.props.p }</div>
+                        <button className="downup" onClick={() => this.addOne(this.state.product._id)}><FontAwesomeIcon icon={faPlusCircle} /></button>
                     </div>
                 </div>
             </div>

@@ -1,49 +1,55 @@
 .header-sup {
-    height: 6.3vh;
-    width: 100%;
-    background-color: #3bc45b;
-    color: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  height: 6.3vh;
+  width: 100%;
+  background-color: #048f55 ;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .titleHeader {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   letter-spacing: 2px;
   margin: 0;
   text-shadow: 2px 2px 3px rgb(41, 115, 68);
   text-align: center;
 }
 
-.desplegable{
-  background-color: whitesmoke!important;
-  border: solid 2px #3bc45b!important;
-  color: #3bc45b!important;
+.desplegable {
+  background-color: whitesmoke !important;
+  border: solid 2px #048f55  !important;
+  color: #048f55  !important;
 }
 
-  .desplegable:hover {
-    transition: all 0.3s;
-    color: whitesmoke!important;
-    background-color: #3bc45b!important;
-  }
-
-  .dropdown-menu.show {
-    background-color: #16993579;
-    
-  }
-
-  .dropdown-header {
-    color: rgb(2, 252, 98)!important;
-    font-size: 20px!important;
-  }
+.desplegable:hover {
+  transition: all 0.3s;
+  background-color: #048f55  !important;
+  color: white !important;
+  border: 2px solid #048f55 ;
   
+}
+
+.dropdown-menu.show {
+  background-color: white;
+  transition: 600ms;
+  border: 2px solid #048f55  !important;
+  border-radius: 5px !important;
+}
+
+.dropdown-header {
+  color: #048f55  !important;
+  font-size: 20px !important;
+}
+
 .dropdown-item {
-  color: white!important;
+  color: white !important;
 }
 
 .dropdown-item:hover {
-  color: black!important;
+  background-color: #048f55  !important;
+  color: white !important;
+  transition: 300ms;
 }
 
 .navbar {
@@ -52,6 +58,7 @@
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: nowrap;
+  height: 100px;
 }
 
 .navbar a {
@@ -59,38 +66,38 @@
   font-size: 16px;
   text-align: center;
   padding: 15px 16px;
-  text-decoration: none!important;
-  color: #3bc45b!important;
+  text-decoration: none !important;
+  color: #048f55  !important;
 }
-  
+
 .navbar a:hover {
-  background-color: #3bc45b;
-  color: whitesmoke!important;
-  transition: all 0.3s;
+  background-color: #048f55  !important;
+  color: white !important;
+  transition: 300ms;
 }
 
 .container-logo {
-display: flex;
-flex-direction: column;
-width: 100%;
-justify-content: center;
-align-items: center;
-background-image: linear-gradient(rgba(250, 250, 250, 0.363), #a2c037);
-border-spacing: 0;
-border-collapse: separate;
-padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgba(250, 250, 250, 0.363), #a2c037);
+  border-spacing: 0;
+  border-collapse: separate;
+  padding: 1rem;
 }
 
 .logo {
-width: 15vw;
-height: 15vw;
-background-size: cover;
-background-position: center;
-margin-bottom: 2rem;
+  width: 15vw;
+  height: 15vw;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 2rem;
 }
 
-.containerTitle{
-  background-image: url('../images/BANDA.png');
+.containerTitle {
+  background-image: url("../images/BANDA.png");
   height: 60vh;
   background-position: center center;
   background-size: auto;
@@ -100,25 +107,25 @@ margin-bottom: 2rem;
   align-items: center;
 }
 
-.containerTitle h3{
+.containerTitle h3 {
   color: whitesmoke;
   font-weight: 600;
-  font-size: 40px
+  font-size: 40px;
 }
-.containerTitle h4{
+.containerTitle h4 {
   color: whitesmoke;
   font-weight: 500;
   font-size: 30px;
 }
-.containerTitle h5{
+.containerTitle h5 {
   color: whitesmoke;
-  margin: 0!important;
+  margin: 0 !important;
   font-weight: 500;
-  font-size: 20px
+  font-size: 20px;
 }
-.containerProductsImg{
+.containerProductsImg {
   height: 60vh;
-  background-image: url('../images/productos.jpg');
+  background-image: url("../images/productos.jpg");
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -220,8 +227,9 @@ margin-bottom: 2rem;
 }
 
 .cartCircle:hover {
-  background-color: #fff;
-  color: #3bc45b;
+  background-color: #048f55  !important;
+  color: white !important;
+  transition: 300ms;
 }
 
 .cartCircle:focus {

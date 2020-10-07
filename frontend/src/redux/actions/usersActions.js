@@ -6,7 +6,7 @@ const usersActions = {
     return async (dispatch, getState) => {
       const res = await axios.post(
         "http://127.0.0.1:4000/api/user", user )
-      
+    
       if (res.data.success !== true) {
         return res.data.message
       } else {
@@ -49,7 +49,7 @@ const usersActions = {
           payload: {  
             username: res.data.response.username,
             token: res.data.response.token,
-            role: res.data.response.role
+            role: res.data.response.role,
           },
         });
         return {
@@ -99,7 +99,35 @@ const usersActions = {
             type: "UNLOG_USER_FROM_APP"
         })
     }
-},
+  },
+  getUserAddress: (token) =>{
+    return async (dispatch, getState) =>{
+        
+      const res = await axios.get("http://127.0.0.1:4000/api/getUserAddress",{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }})
+     
+      dispatch({
+          type: "GET_USER_ADDRESS",
+      })
+      return res.data.response
+    }
+  },
+  sendAddress: (token, newData) =>{
+    return async (dispatch, getState) =>{
+      const res = await axios.put("http://127.0.0.1:4000/api/sendAddress", 
+      {city: newData.city, province: newData.province, address: newData.address},
+      {
+        headers: {
+            Authorization: `Bearer ${token}`
+      }})
+        
+        dispatch({
+          type: "UPADATE_USER_ADDRESS"
+        })
+    }
+  }
 };
 
 export default usersActions;

@@ -9,7 +9,7 @@ import HeaderAdmin from '../components/HeaderAdmin'
 const HomeAdmin = () => {
 
     const [bodyEdit, setBodyEdit] = useState('')
-
+    
     const styleContainer = {
         padding: "3%",
         marginTop: "3%",

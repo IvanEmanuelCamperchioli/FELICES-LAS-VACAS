@@ -1,4 +1,16 @@
 const Product = require('../models/itemModel');
+const nodeMailer = require('nodemailer')
+
+
+var transport = nodeMailer.createTransport({
+    port:465, 
+    host:"smtp.gmail.com",
+    auth: {
+        pass: "123456789Emi",
+        user: "emiruffini5@gmail.com"
+    },
+    tls: { rejectUnauthorized: false }
+})
 
 const itemsController = {
     newProduct: async (req, res) => {
@@ -61,6 +73,44 @@ const itemsController = {
             success:true,
             newModify
         })
+    },
+    confirmBuy: async (req, res) =>{
+        const products= req.body
+        const email = req.user.mail
+     
+        try{
+            const asyncRes = await Promise.all(products.map(async (product) => {
+                const productSaved = await Product.findOne({_id : product.product._id})
+             
+                const newStock = productSaved.stock - product.quantity
+                const act = await Product.updateOne({_id:productSaved._id}, {stock:newStock}) 
+              
+            }));
+            
+            var mailOptions = {
+                from: "Felices Las Vacas <notresponse@notreply.com>",
+                sender: "Felices Las Vacas <notresponse@notreply.com>",
+                to: `${email}`,
+                subject: "Compra confirmada",
+                html:  `<div>
+                <h1>Muchas gracias por tu compra</h1>
+                <h2>En el transcurso de 5 dias hábiles los productos llegaran a tu dirección<h2>
+                <h2>Por cualquier consulta comunicarse a feliceslasvacas@gmail.com<h2>               
+                </div>`,
+            }
+            transport.sendMail(mailOptions, (error, info) => {
+                res.send("email enviado")
+            })
+            res.json({
+                success:true,
+                response: "compra confirmada"
+            })
+        }catch(error){
+            res.json({
+                success:false,
+               response: error
+            })
+        }
     }
 }
 module.exports= itemsController

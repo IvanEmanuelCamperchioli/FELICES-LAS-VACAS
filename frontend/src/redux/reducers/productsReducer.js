@@ -12,29 +12,53 @@ const productsReducer = (state = initialState, action) => {
             }
         case 'ADD_TO_CART':
 
+            
+            var exist = false
             var newProducts =  state.cartProducts
-            newProducts.push(action.payload)
-            localStorage.setItem('cart', JSON.stringify(newProducts))
-            return{
-                ...state,
-                cartProducts: newProducts
+            console.log(action.payload)
+            newProducts.map(product => {
+                if (product.product._id === action.payload.product._id){
+                    exist = true
+                    console.log("entre")
+                    product.quantity = product.quantity + action.payload.quantity
+                }
+            })
+            
+            if (exist){
+                localStorage.setItem('cart', JSON.stringify(newProducts))
+                return {
+                    ...state,
+                    cartProducts:newProducts
+                }
+            }else{
+                newProducts.push(action.payload)
+                localStorage.setItem('cart', JSON.stringify(newProducts))
+                return{
+                    ...state,
+                    cartProducts: newProducts
+                }
             }
+            
         case 'UP_QUANTITY':
-            state.cartProducts.map(product =>{
+            var newProducts = state.cartProducts
+            
+            newProducts.map(product =>{
                 if (product.product._id === action.payload){
                     product.quantity +=1
                 }
             })
-            localStorage.setItem('cart', JSON.stringify(state.cartProducts))
-            return state
+            localStorage.setItem('cart', JSON.stringify(newProducts))
+                return {...state , cartProducts:newProducts}   
         case 'DOWN_QUANTITY':
-            state.cartProducts.map(product =>{
+            var newProducts = state.cartProducts
+            
+            newProducts.map(product =>{
                 if (product.product._id === action.payload){
                     product.quantity -=1
                 }
             })
-            localStorage.setItem('cart', JSON.stringify(state.cartProducts))
-                return state    
+            localStorage.setItem('cart', JSON.stringify(newProducts))
+                return {...state , cartProducts:newProducts}   
         case "DELETE_PRODUCT":
             var newProducts = state.cartProducts.filter( product =>
                 product.product._id !== action.payload
@@ -50,6 +74,13 @@ const productsReducer = (state = initialState, action) => {
             return{
                 ...state,
                 cartProducts: cart
+            }
+
+        case "DELETE_CART":
+        localStorage.removeItem('cart')
+            return{
+                ...state,
+                cartProducts:[]
             }
         default:
             return state

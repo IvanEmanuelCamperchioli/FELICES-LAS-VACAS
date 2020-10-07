@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import '../styles/header.css'
-import "../styles/ItemCart.css"
+import "../styles/itemCart.css"
 import "../styles/mediaQuerys/mediaHeader.css"
 import "../styles/mediaQuerys/mediaCart.css"
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button} from 'reactstrap'
@@ -17,18 +17,26 @@ class Header extends React.Component {
     state = {
         tooltipOpen: false,
         open: "0",
-        width: "100vw",
-        height: "100vh",
-        opacity: "",
-        position: "fixed",
-        products: this.props.products,
+       
+        products: this.props.cartProducts
     }
 
     componentDidMount(){
         if (this.props.cartProducts.length === 0 && localStorage.getItem('cart')){
             this.props.forceCart()
         }
+        
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.countTotal !== prevProps.countTotal) {
+            this.setState({
+                ...this.state,
+                product:this.props.products
+            })
+        }
+    }
+      
 
     toggle = () => {
         this.setState({
@@ -61,22 +69,16 @@ class Header extends React.Component {
         const backCart = require('../images/fondo-carrito2.jpg')
 
         var subtotal = 0
+        
         this.props.cartProducts.map(item =>{
             subtotal += (item.product.price * item.quantity)
         })       
 
         const style = {
             width: this.state.open,
-            backgroundImage: `url(${backCart})`,
             backgroundSize: 'cover',
         }
 
-        const body = {
-            width: this.state.width,
-            height: this.state.height,
-            backgroundColor: this.state.opacity,
-            position: this.state.position,
-        }
 
 
         
@@ -105,17 +107,20 @@ class Header extends React.Component {
                         <div>
                             <div className="footCart">
                                 <p><b>Total:</b></p>
-                                <p><b>${subtotal}</b></p>
+                                <p><b>${this.props.countTotal}</b></p>
                             </div>
                             <div className="footCart-buy">
-                                <p onClick={this.openNav}><NavLink style={{color: '#fff'}} to='/productos'>Ver más productos</NavLink></p>
-                                <Button>Iniciar Compra <FontAwesomeIcon icon={faTag} /></Button>
+                                <NavLink style={{color: '#fff'}} to='/productos'>Ver más productos</NavLink>
+                                <Button><NavLink to="/comprar">Iniciar Compra <FontAwesomeIcon icon={faTag} /></NavLink></Button>
                             </div>
                         </div>
                         </>
+                        
                         }
                     </div>}
             </div>}
+            
+           
             <div className="navbar">
                 <div className="div"></div>
                 <NavLink to='/'>Inicio</NavLink>
@@ -130,11 +135,16 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    
+    console.log(state)
+    var countTotal = 0
+        state.productsRed.cartProducts.map(product =>{
+        countTotal += (parseInt(product.quantity) * parseInt(product.product.price))
+    })
     return {
       username: state.usersRed.username,
       token: state.usersRed.token,
-      cartProducts: state.productsRed.cartProducts
+      cartProducts: state.productsRed.cartProducts,
+      countTotal
     };
   };
   
@@ -162,7 +172,7 @@ const MenuDesplegable = (props) => {
                     {props.userLogued.token ?   
                         (
                             <>
-                                <DropdownItem><NavLink to='/' style={{width: '100%'}}>Mi cuenta</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to='/profile' style={{width: '100%'}}>Mi cuenta</NavLink></DropdownItem>
                                 <DropdownItem><NavLink to="/log-out">Cerrar sesión</NavLink></DropdownItem>
                             </>
                         )
