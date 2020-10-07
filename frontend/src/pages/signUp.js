@@ -176,7 +176,7 @@ class SignUp extends React.Component{
                             <h5 className="titleHouses">Para registrarte llene el siguiente formulario</h5>
                             <div className="signContainer">
                                 <div style={{height: '5px', width: '100%'}}>
-                                    <Progress   style={{transition: 'all 1s'}} 
+                                    <Progress   style={{transition: 'all 1s', backgroundColor: '#02895b'}} 
                                                 value={this.state.load.value}
                                     />
                                 </div>
