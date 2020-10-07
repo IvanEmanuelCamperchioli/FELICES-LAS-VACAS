@@ -3,7 +3,7 @@
     outline: none!important;
     appearance: none!important;
     background: none!important;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border-style: none!important;
     box-shadow: none!important;
     display: flex;
@@ -18,7 +18,7 @@
 }
 
 .button-Faq:hover, .button-Faq:focus {
-    color: black;
+    color: #048f55;
 }
 
 .card-faq {
@@ -38,7 +38,7 @@
 
 .card-body-faq {
     color: rgb(255, 255, 255);
-    background-color: #048f55d7;
+    background-color: #048f55be;
     border-radius: 15px;
     margin-bottom: 1rem;
     width: 100%;
@@ -59,8 +59,9 @@
 }
 
 .fondo-transparente {
-    background-color: #ffffffb7;
+    background-color: #000000b7;
     border-radius: 20px;
+    padding: 8vh 0vw;
 }
 
 .titulo-faq-1 {
@@ -70,7 +71,7 @@
     letter-spacing: 2px;
     flex-grow: 1;
     width: 90%;
-    color: #00ad73;
+    color: #048f55;
     font-weight: bolder;
 }
 
@@ -119,6 +120,6 @@
     letter-spacing: 2px;
     flex-grow: 1;
     width: 90%;
-    color: #00ad73;
+    color: #048f55;
     font-weight: bolder;
 }
