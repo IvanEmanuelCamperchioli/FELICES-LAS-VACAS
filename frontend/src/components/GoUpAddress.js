@@ -22,7 +22,6 @@ const getForm = e =>{
         ...newData,
         [property]: value
     })
-    console.log(newData)
 }
 
 

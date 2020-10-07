@@ -41,4 +41,8 @@ router.route("/items/:id")
 .get(itemsController.getProductById)
 .delete(itemsController.deleteProductById)
 
+router.route("/shopConfirm") //Ruta compra confirmada
+.post(passport.authenticate('jwt', { session: false }), itemsController.confirmBuy)
+
+
 module.exports = router;

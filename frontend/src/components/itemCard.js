@@ -11,22 +11,25 @@ import {
   CardSubtitle,
   Button,
 } from "reactstrap";
-import itemCard from "../styles/itemCard.css";
+import "../styles/itemCard.css";
+
 
 const ItemCard = (props) => {
   const [quantity, setQuantity] = useState(0);
 
-  const changeInput = (e) => {
-    e.preventDefault();
-    if (e.target.value === "up") {
-      setQuantity(quantity + 1);
-    } else {
-      setQuantity(quantity - 1);
-      if (quantity <= 0) {
-        setQuantity(0);
+
+    const changeInput = (e) =>{
+      e.preventDefault()  
+      if (e.target.value === "up"){
+        setQuantity(quantity+1)
+      }else{
+        setQuantity(quantity-1)
+        if (quantity <= 0){
+          setQuantity(0)
+        }
       }
     }
-  };
+  
 
   const addItem = (e) => {
     e.preventDefault();
@@ -84,8 +87,9 @@ const mapDispatchToProps = {
   addToCart: productsActions.addToCart,
 };
 const mapStateToProps = (state) => {
-  return {
-    state,
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(ItemCard);
+
+return{
+  state
+}
+}
+export default connect(mapStateToProps,mapDispatchToProps) (ItemCard);

@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import { connect } from "react-redux";
-import productsActions from "../redux/actions/productsActions";
+import React, {useState,useEffect} from 'react';
+import Header from './Header'
+import { connect } from 'react-redux';
+import productsActions from '../redux/actions/productsActions'
+import { NavLink } from 'react-router-dom';
+
 
 const Item = (props) => {
-  const [item, setItem] = useState({});
-
-  useEffect(async () => {
-    var idProduct = props.match.params.id;
-    const res = await props.getProduct(idProduct);
-    setItem(res);
-  }, []);
-
-  return (
+    const [item, setItem] = useState({})
+  
+    useEffect( () => {
+      const getProduct = async () =>{
+        var idProduct = props.match.params.id
+        const res = await props.getProduct(idProduct)
+        setItem(res)
+      }
+      getProduct()
+	  }, [])
+    return (
     <>
       <Header />
       <div

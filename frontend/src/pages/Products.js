@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 import productsActions from '../redux/actions/productsActions';
+import '../styles/mediaQuerys/mediaCards.css'
 
 class Products extends React.Component {
 

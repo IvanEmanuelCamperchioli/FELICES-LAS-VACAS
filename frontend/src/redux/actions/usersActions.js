@@ -49,7 +49,7 @@ const usersActions = {
           payload: {  
             username: res.data.response.username,
             token: res.data.response.token,
-            role: res.data.response.role
+            role: res.data.response.role,
           },
         });
         return {
@@ -107,9 +107,9 @@ const usersActions = {
         headers: {
             Authorization: `Bearer ${token}`
         }})
-      
+     
       dispatch({
-          type: "GET_USER_ADDRESS"
+          type: "GET_USER_ADDRESS",
       })
       return res.data.response
     }

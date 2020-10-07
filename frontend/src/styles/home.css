@@ -157,3 +157,9 @@
 .viewMore:hover {
     background-image: linear-gradient(#00e25e, #009c41, #005222);
 }
+
+.cardProduct {
+    margin: 2vw;
+    width: 25vw;
+}
+
