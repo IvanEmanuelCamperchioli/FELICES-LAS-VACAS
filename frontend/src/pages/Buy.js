@@ -14,13 +14,17 @@ const Buy = (props) => {
     const [flag, setFlag] = useState('noLog')
 
     useEffect(() => {
+        console.log(props)
         data()
     }, [])
 
     const data = async() => {
+        if(props.token === "" ){
+            setFlag('noLog')
+        }else{
         var userLogued = await props.getUser(props.token)
-        
         setFlag(userLogued.address === null ? "noAddress" : "ok")
+        }
     }
 
     return (

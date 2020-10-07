@@ -130,14 +130,14 @@ const usersController = {
     },
     updateAddress: async (req, res) =>{
         const idUser = req.user._id
-        console.log(req.body)
+       
         const {address, city, province} = req.body
         const error = false 
         const userExist = await User.findOne({_id:idUser})
 
         if (userExist){
             var userUpdate = await User.updateOne({_id:idUser}, {address, city, province})
-            console.log(userUpdate)
+          
         } else {
             error = true
         }
@@ -148,13 +148,13 @@ const usersController = {
 
     },
     getUserInformation: async (req, res) => {
-        console.log(req.params)
+     
         const user = await User.findOne({...req.params})
-        const {name, surname, province, city, adress, DNI, username} = user
+        const {name, surname, province, city, address, DNI, username,} = user
         res.json({
             success: user ? true : false,
             userInfo:{
-                name, surname, province, city, adress, DNI, username
+                name, surname, province, city, address, DNI, username
             }
         })
     },
@@ -165,13 +165,13 @@ const usersController = {
 			.catch(error => res.json({ success: false, error }))
 	},
     editUser: async(req, res)=>{
-        console.log(req.body)
+      
         const user = await User.findOneAndUpdate({username: req.body.username},{$set:{...req.body}}, {new: true})
         .then(user=>{
-            console.log(user)
+          
             res.json({success:true, user: user})})
         .catch(err=>{
-            console.log(err) 
+           
             res.json({success:false}, err)})
     }
 }

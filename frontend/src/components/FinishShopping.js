@@ -40,7 +40,7 @@ const FinishShopping = (props) => {
                 </div>
                 
             </div>
-                <h4 className="subtotal">Subtotal: {props.countTotal}</h4>
+                <h4 className="subtotalx">Subtotal: {props.countTotal}</h4>
             <div className="buttons">
                 <button className="btn1" onClick={async () =>{
                     if(props.countTotal !== 0){

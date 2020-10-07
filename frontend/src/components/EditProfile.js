@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux';
 import Header from './Header'
+import Footer from './Footer';
 
 
 const Profile = (props) => {
@@ -24,14 +25,25 @@ const Profile = (props) => {
         return(
         <>
             <div>
-            <h3>Mi perfil: </h3>
-                <p>Nombre: {userData.name}.</p>
-                <p>Apellido: {userData.surname}.</p>
-                <p>DNI: {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
-                <h4>Datos para el envio:</h4>
-                <p>Ciudad: {!userData.city ? "Actualice los datos": userData.city}.</p>
-                <p>Provincia: {!userData.province ? "Actualice los datos" : userData.province}.</p>
-                <p>País: Argentina.</p>
+                <h3>Mi perfil</h3>
+                <div style={{
+                    marginLeft: '5vw',
+                    borderLeft:"solix 1px gray"
+                }}>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Nombre:</h6> {userData.name}.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Apellido: </h6> {userData.surname}.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>DNI:</h6> {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
+                </div>
+                <h4>Datos para el envio (importante)</h4>
+                <div style={{
+                    marginLeft: '5vw',
+                    borderLeft:"solix 1px gray"
+                }}>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>País: </h6> Argentina.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Provincia: </h6> {!userData.province ? "Actualice los datos" : userData.province}.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Ciudad: </h6> {!userData.city ? "Actualice los datos": userData.city}.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Dirección: </h6> {!userData.address ? "Actualice los datos": userData.address}.</p>
+                </div>
             </div>
         </>)
     }
@@ -54,46 +66,99 @@ const Profile = (props) => {
             return 
         }
     }
+
     const submit = async (e) => {
         e.preventDefault();
-        console.log(userData);
+     
         await toEdit(userData)
         setLoad(!load)
     }
+
+    const tortilla = require('../images/tortilla.jpg')
+
     return (
         <div>
             <Header/>
-            <div style={{display:"flex", flexDirection:"column", justifyContent:"space-between" }}>
-             <div style={{marginLeft:"10%"}}>
-             <button style={{marginLeft:"80%", border:"none", textDecoration:"underline", backgroundColor:"white", color:"gray"}} onClick={()=> setLoad(!load)}>{load? "editar": "cancelar"}</button>
-                {load? showProfile(): editProfile(inputHandler,submit, userData, provinces)}
+
+            <div style={{
+                backgroundImage: `url(${tortilla})`,
+                width: 'auto',
+                height: 'auto',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                color: 'white',
+                padding: '2vh'
+            }}>
+                <div class="container" >
+                    <div style={{
+                        display:"flex", 
+                        flexDirection:"column", 
+                        justifyContent:"space-between",
+                        border: '1px solid #000',
+                        background: 'rgba(0,0,0,0.5)',
+                        borderRadius: '20px',
+                        position: 'relative',
+                        padding: '2vh',
+                    }}>
+                        <div style={{marginLeft:"10%"}}>
+                            {load? showProfile(): editProfile(inputHandler,submit, userData, provinces)}
+                            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            <button style={{
+                                border:"none", 
+                                color: 'white',
+                                backgroundColor: '#4CAF50',
+                                border: 'none',
+                                padding: '5px',
+                                textAlign: 'center',
+                                textDecoration: 'none',
+                                margin: '10px 0',
+                                borderRadius: '4px',
+                            }} onClick={()=> setLoad(!load)}>{load? "editar": "cancelar"}</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
-    );
-};
+    )
+}
+
 const editProfile = (inputHandler, submit, userData, provinces) =>{
+
+    const input = {
+        height: '42px',
+        color: 'rgba(44, 62, 80, 0.8)',
+        backgroundColor: '#fff',
+        border: '1px solid #3bc45b',
+        width: '100%',
+        padding: '6px 12px',
+        lineHeight: '1px',
+        fontSize: '14px',
+        borderRadius: '4px',
+    }
+
     return(
         <>
-        <div style={{display:"flex", flexDirection:"column", marginRight:"10%" }}>
-        <label>Nombre: </label>
-        <input type='text' name='name' value={userData.name ? userData.name : "" }  onChange={inputHandler} />
-        <label>Apellido:</label>
-        <input type='text' name='surname' value={userData.surname ? userData.surname :"" } onChange={inputHandler} />
-        <label>DNI: </label>
-        <input type='text' name='DNI' value={userData.DNI ? userData.DNI :"" } onChange={inputHandler} />
-        <label>Provincia:</label>
-        <select name='province' onChange={inputHandler}>
-            {provinces.map((province, index)=>
-                <option key={index} value={province} >{province}</option>
-            )}
-        </select>
-        <label>Ciudad:</label>
-        <input type='text' name='city' value={userData.city ? userData.city :"" } onChange={inputHandler} />
-        <label>Dirección:</label>
-        <input type='text' name='address' value={userData.address ? userData.address :"" } onChange={inputHandler} />
-        <div style={{margin:"2% 4% 0% 0%", }}><button style={{borderRadius:"25px",backgroundColor:"green", color:"white",padding:"1% 1.4%", border:"none" }} onClick={(submit)}>send</button></div>
-        </div>
+            <div style={{display:"flex", flexDirection:"column", marginRight:"10%" }}>
+                <label>Nombre: </label>
+                <input style={input} type='text' name='name' value={userData.name ? userData.name : "" }  onChange={inputHandler} />
+                <label>Apellido:</label>
+                <input style={input} type='text' name='surname' value={userData.surname ? userData.surname :"" } onChange={inputHandler} />
+                <label>DNI: </label>
+                <input style={input} type='text' name='DNI' value={userData.DNI ? userData.DNI :"" } onChange={inputHandler} />
+                <label>Provincia:</label>
+                <select name='province' onChange={inputHandler}>
+                    {provinces.map((province, index)=>
+                        <option key={index} value={province} >{province}</option>
+                    )}
+                </select>
+                <label>Ciudad:</label>
+                <input style={input} type='text' name='city' value={userData.city ? userData.city :"" } onChange={inputHandler} />
+                <label>Dirección:</label>
+                <input style={input} type='text' name='address' value={userData.address ? userData.address :"" } onChange={inputHandler} />
+            <div style={{margin:"2% 4% 0% 0%", }}><button style={{borderRadius:"25px",backgroundColor:"green", color:"white",padding:"1% 1.4%", border:"none" }} onClick={(submit)}>send</button></div>
+            </div>
         </>
     )
 }

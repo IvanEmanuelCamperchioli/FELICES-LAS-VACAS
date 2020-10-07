@@ -77,18 +77,14 @@ const itemsController = {
     confirmBuy: async (req, res) =>{
         const products= req.body
         const email = req.user.mail
-        console.log(req.body)
-        console.log(req.user)
-
-        
-           
+     
         try{
             const asyncRes = await Promise.all(products.map(async (product) => {
                 const productSaved = await Product.findOne({_id : product.product._id})
-                console.log(productSaved)
+             
                 const newStock = productSaved.stock - product.quantity
                 const act = await Product.updateOne({_id:productSaved._id}, {stock:newStock}) 
-                console.log(act)
+              
             }));
             
             var mailOptions = {

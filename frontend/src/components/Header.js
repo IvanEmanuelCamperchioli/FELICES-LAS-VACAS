@@ -18,14 +18,25 @@ class Header extends React.Component {
         tooltipOpen: false,
         open: "0",
        
-        products: this.props.products
+        products: this.props.cartProducts
     }
 
     componentDidMount(){
         if (this.props.cartProducts.length === 0 && localStorage.getItem('cart')){
             this.props.forceCart()
         }
+        
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.countTotal !== prevProps.countTotal) {
+            this.setState({
+                ...this.state,
+                product:this.props.products
+            })
+        }
+    }
+      
 
     toggle = () => {
         this.setState({
@@ -99,8 +110,8 @@ class Header extends React.Component {
                                 <p><b>${this.props.countTotal}</b></p>
                             </div>
                             <div className="footCart-buy">
-                                <p onClick={this.openNav}><NavLink style={{color: '#fff'}} to='/productos'>Ver más productos</NavLink></p>
-                                <Button>Iniciar Compra <FontAwesomeIcon icon={faTag} /></Button>
+                                <NavLink style={{color: '#fff'}} to='/productos'>Ver más productos</NavLink>
+                                <Button><NavLink to="/comprar">Iniciar Compra <FontAwesomeIcon icon={faTag} /></NavLink></Button>
                             </div>
                         </div>
                         </>
@@ -124,6 +135,7 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     var countTotal = 0
         state.productsRed.cartProducts.map(product =>{
         countTotal += (parseInt(product.quantity) * parseInt(product.product.price))

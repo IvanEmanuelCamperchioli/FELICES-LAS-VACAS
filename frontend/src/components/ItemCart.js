@@ -58,7 +58,7 @@ class ItemCart extends React.Component{
                     <p>Unidades<b>:</b> </p>
                     <div className="counter">
                         <button className="downup" onClick={() => this.removeOne(this.state.product._id)}><FontAwesomeIcon icon={faMinusCircle} /></button>
-                        <div className="quantity" style={{ width: '2vw', textAlign: 'center'}}>{ this.state.quantity }</div>
+                        <div className="quantity" style={{ width: '2vw', textAlign: 'center'}}>{ this.props.p }</div>
                         <button className="downup" onClick={() => this.addOne(this.state.product._id)}><FontAwesomeIcon icon={faPlusCircle} /></button>
                     </div>
                 </div>
