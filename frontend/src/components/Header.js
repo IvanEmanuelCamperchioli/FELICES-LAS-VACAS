@@ -2,15 +2,15 @@ import React, {useState} from 'react'
 import '../styles/header.css'
 import "../styles/ItemCart.css"
 import "../styles/mediaQuerys/mediaHeader.css"
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem,  Tooltip} from 'reactstrap'
+import "../styles/mediaQuerys/mediaCart.css"
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faUser} from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faTag, faUser, faWindowClose} from '@fortawesome/free-solid-svg-icons'
 import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import usersActions from "../redux/actions/usersActions";
 import ItemCart from './ItemCart'
 import productsActions from '../redux/actions/productsActions'
-import { motion } from 'framer-motion'
 
 class Header extends React.Component {
 
@@ -21,9 +21,8 @@ class Header extends React.Component {
         height: "100vh",
         opacity: "",
         position: "fixed",
-        products: this.props.products
+        products: this.props.products,
     }
-
 
     componentDidMount(){
         if (this.props.cartProducts.length === 0 && localStorage.getItem('cart')){
@@ -47,10 +46,10 @@ class Header extends React.Component {
 
     openNav = () => {
         this.setState({
-            open: '50vw',
+            open: '50%',
             opacity: 'rgba(0,0,0,0.3)'
         })
-        if (this.state.open === '50vw') {
+        if (this.state.open === '50%') {
             this.setState({
                 open: '0vw',
             })    
@@ -59,12 +58,17 @@ class Header extends React.Component {
     
     render() {
 
+        const backCart = require('../images/fondo-carrito2.jpg')
+
         var subtotal = 0
         this.props.cartProducts.map(item =>{
             subtotal += (item.product.price * item.quantity)
-        })        
+        })       
+
         const style = {
-            width: this.state.open
+            width: this.state.open,
+            backgroundImage: `url(${backCart})`,
+            backgroundSize: 'cover',
         }
 
         const body = {
@@ -74,6 +78,7 @@ class Header extends React.Component {
             position: this.state.position,
         }
 
+
         
         return (
             <>
@@ -82,13 +87,13 @@ class Header extends React.Component {
                     <button onClick={this.openNav} className="cartCircle" ><FontAwesomeIcon className="carrito" icon={faShoppingCart} /></button>
                    { <div className="sidepanel" style={style}>
                         <div className="headerPanel">
-                        <p>CARRITO DE COMPRAS</p>
-                        <button onClick={this.closeNav} className="closebtn">x</button>
+                            <p>CARRITO DE COMPRAS</p>
+                            <button onClick={this.closeNav} className="closebtn"><FontAwesomeIcon className="WindowClose" style={{color: '#fff'}} icon={faWindowClose} /></button>
                         </div>
                         
                         {this.props.cartProducts.length === 0 ?
                         <div className="containeritemsCart">
-                        <h1>El carrito esta vacio</h1>
+                        <h1>El carrito esta vacio <b onClick={this.openNav} style={{fontSize: '15px'}}><NavLink style={{color: '#fff'}} to='/productos'>ver productos</NavLink></b></h1>
                         </div>
                         :
                         <>
@@ -97,9 +102,15 @@ class Header extends React.Component {
                             return <ItemCart product = {product} />
                         })}
                         </div>
-                        <div className="footCart">
-                            <p>Total: ${subtotal}</p>
-                            <button>Iniciar Compra</button>
+                        <div>
+                            <div className="footCart">
+                                <p><b>Total:</b></p>
+                                <p><b>${subtotal}</b></p>
+                            </div>
+                            <div className="footCart-buy">
+                                <p onClick={this.openNav}><NavLink style={{color: '#fff'}} to='/productos'>Ver más productos</NavLink></p>
+                                <Button>Iniciar Compra <FontAwesomeIcon icon={faTag} /></Button>
+                            </div>
                         </div>
                         </>
                         }
