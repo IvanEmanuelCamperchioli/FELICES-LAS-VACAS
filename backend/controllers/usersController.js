@@ -150,11 +150,11 @@ const usersController = {
     getUserInformation: async (req, res) => {
      
         const user = await User.findOne({...req.params})
-        const {name, surname, province, city, adress, DNI, username} = user
+        const {name, surname, province, city, address, DNI, username,} = user
         res.json({
             success: user ? true : false,
             userInfo:{
-                name, surname, province, city, adress, DNI, username
+                name, surname, province, city, address, DNI, username
             }
         })
     },

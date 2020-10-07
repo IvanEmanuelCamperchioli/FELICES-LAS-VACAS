@@ -27,19 +27,22 @@ const Profile = (props) => {
             <div>
                 <h3>Mi perfil</h3>
                 <div style={{
-                    marginLeft: '5vw'
+                    marginLeft: '5vw',
+                    borderLeft:"solix 1px gray"
                 }}>
-                    <p>Nombre: {userData.name}.</p>
-                    <p>Apellido: {userData.surname}.</p>
-                    <p>DNI: {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Nombre:</h6> {userData.name}.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Apellido: </h6> {userData.surname}.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>DNI:</h6> {!userData.DNI ? "Actualice los datos": userData.DNI}.</p>
                 </div>
                 <h4>Datos para el envio (importante)</h4>
                 <div style={{
-                    marginLeft: '5vw'
+                    marginLeft: '5vw',
+                    borderLeft:"solix 1px gray"
                 }}>
-                    <p>Ciudad: {!userData.city ? "Actualice los datos": userData.city}.</p>
-                    <p>Provincia: {!userData.province ? "Actualice los datos" : userData.province}.</p>
-                    <p>País: Argentina.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>País: </h6> Argentina.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Provincia: </h6> {!userData.province ? "Actualice los datos" : userData.province}.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Ciudad: </h6> {!userData.city ? "Actualice los datos": userData.city}.</p>
+                    <p><h6 style={{fontWeight:"bolder", display:"inline-block"}}>Dirección: </h6> {!userData.address ? "Actualice los datos": userData.address}.</p>
                 </div>
             </div>
         </>)
