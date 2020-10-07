@@ -33,7 +33,7 @@ const submit =  async e => {
     }else{
         setError("")
         const response =  await props.sendAddress(props.token, newData)
-        console.log(response)
+        
         setNewData({
             ...newData,
             city:"",
