@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import Paypal from './Paypal'
+import Paypal from "./Paypal"
 
 const FinishShopping = (props) => {
 

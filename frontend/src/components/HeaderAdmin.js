@@ -6,8 +6,8 @@ const HeaderAdmin = () => {
     return (
         <>
             <div className='d-flex justify-content-between header-sup'>
-                <h5 className="titleHeader">Felices las vacas | Alimentación conciente</h5>
-                <button className='btn btn-primary'><Link style={{color: 'white'}} to='/log-out'>LogOut</Link></button>
+                <h5 className="titleHeader" style={{marginLeft:"3%"}} >Felices las vacas | Alimentación conciente</h5>
+                <button style={{ marginRight:"3%", border:"none", backgroundColor:"#3bc45b"}} ><Link style={{color: 'white', fontWeight:"bold"}} to='/log-out'>Salir</Link></button>
             </div>
         </>
     )
