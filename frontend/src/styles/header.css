@@ -58,6 +58,7 @@
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: nowrap;
+  height: 100px;
 }
 
 .navbar a {

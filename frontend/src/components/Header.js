@@ -91,7 +91,7 @@ class Header extends React.Component {
                                 })}
                             </div>
                             <div className="footCart">
-                                <p>Total: ${subtotal}</p>
+                                <p>Total: ${this.props.countTotal}</p>
                                 <NavLink to="/comprar"><button>Iniciar Compra</button></NavLink>
                             </div>
                         </>
@@ -115,11 +115,15 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    
+    var countTotal = 0
+        state.productsRed.cartProducts.map(product =>{
+        countTotal += (parseInt(product.quantity) * parseInt(product.product.price))
+    })
     return {
       username: state.usersRed.username,
       token: state.usersRed.token,
-      cartProducts: state.productsRed.cartProducts
+      cartProducts: state.productsRed.cartProducts,
+      countTotal
     };
   };
   

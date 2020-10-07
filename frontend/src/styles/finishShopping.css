@@ -17,7 +17,7 @@
 
 .nameFinish{
     width: 100%;
-    background-color: green;
+    background-color: #048f55;
     text-align: center;
     color: whitesmoke;
     padding: 10px 0px;
@@ -25,7 +25,7 @@
 .containerStract{
     border: solid;
     border-width: 3px;
-    border-color: green;
+    border-color: #048f55;
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
@@ -38,7 +38,7 @@
     height: 100px!important;
 }
 .stract h3{
-    color: green;
+    color: #048f55;
     font-size: 20px;
 }
 .asideImg{
@@ -46,10 +46,10 @@
     border-radius: 20px;
     
     border: solid;
-    border-color: green;
+    border-color: #048f55;
 }
 .subtotal{
-    color: green;
+    color: #048f55;
     text-align: center;
 }
 
@@ -65,13 +65,13 @@
     border-radius: 20px;
     padding: 10px 20px;
     border: solid;
-    border-color: green;
+    border-color: #048f55;
     font-size: 20px;
-    color: green;
+    color: #048f55;
     margin: 10px 0 50px 0;
 }
 
 .btn1:hover{
-    background-color: green;
+    background-color: #048f55;
     color: whitesmoke;
 }
