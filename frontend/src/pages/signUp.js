@@ -69,28 +69,28 @@ class SignUp extends React.Component{
 
         errors.username =
             this.state.newUser.username.length < 2
-            ? "The username must be at least 2 characters long! "
+            ? "El nombre de usuario debe tener al menos 2 caracteres"
             : ""
         errors.passwordValidation =
             this.state.newUser.password !== this.state.newUser.passwordValidation
-            ? "The entered passwords do not match"
+            ? "Las contraseñas no concuerdan"
             : ""
         errors.password = 
             validPassword.test(this.state.newUser.password)
             ?""
-            :"Password must be at least 6 characters, and must include one upper case letter, one lower case letter, and one numeric digit"
+            :"La contraseña debe tener al menos 6 caracteres y debe incluir una letra mayúscula, una letra minúscula y un dígito numérico"
         errors.name =
             this.state.newUser.name.length < 2
-            ? "The name must be 2 at least characters long! "
+            ? "El nombre debe tener al menos 2 caracteres"
             : ""
         errors.surname =
             this.state.newUser.surname.length < 2
-            ? "The surname must be at least 2 characters long! "
+            ? "El apellido debe tener al menos 2 caracteres"
             : ""
         errors.mail = 
             validEmailRegex.test(this.state.newUser.mail)
             ? ""
-            : "Enter a valid email"
+            : "Introduzca un correo electrónico válido"
         
         this.setState({
             errors
@@ -175,7 +175,7 @@ class SignUp extends React.Component{
                     <div className="cardInputs-signUp">
                         <h5 className="titleHouses">Para registrarte llene el siguiente formulario</h5>
                         <div className="signContainer">
-                            <div style={{height: '5px', width: '100%'}}>
+                            <div style={{height: '5px', width: '100%', marginBottom: '4vh'}}>
                                 <Progress   style={{transition: 'all 1s'}} 
                                             value={this.state.load.value}
                                 />

@@ -7,7 +7,7 @@
         width: 100%;
     }
     .back-signUp {
-        height: 100vh!important;
+        height: 110vh!important;
     }
 }
 
@@ -27,9 +27,6 @@
         width: 52vw;
         left: 23vw;
     }
-}
-
-@media screen and (max-width: 675px) {
     .cardInputs-signUp {
         width: 65vw;
         left: 15vw;
@@ -37,6 +34,12 @@
     .signContainer .inputs input {
         width: 40vw;
     }
+    .logError {
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 675px) {
     .signContainer-login .inputs input {
         width: 40vw;
     }
@@ -81,6 +84,9 @@
         left: 3vw;
     }
     .signContainer .inputs input {
+        width: 60vw;
+    }
+    .logError {
         width: 60vw;
     }
     .signContainer-login .inputs input {

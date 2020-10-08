@@ -43,7 +43,7 @@ const usersActions = {
         
       }else{
         
-        await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+        await Swal.fire({  title: 'Bienvenido!',  text: `Es grato tenerte aquí, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
         dispatch({
           type: "SET_USER",
           payload: {  
