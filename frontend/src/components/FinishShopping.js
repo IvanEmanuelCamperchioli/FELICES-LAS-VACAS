@@ -82,7 +82,7 @@ const submit =  async e => {
     return (
 
         <>  
-        <Header/>
+      
         <div className="containerAll">
             <div className="containerSubtotal">
                 <h3 className="nameFinish">Resumen de compra</h3>

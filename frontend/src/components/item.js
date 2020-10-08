@@ -1,13 +1,39 @@
 import React, {useState,useEffect} from 'react';
 import Header from './Header'
+import Footer from './Footer'
 import { connect } from 'react-redux';
 import productsActions from '../redux/actions/productsActions'
 import { NavLink } from 'react-router-dom';
-
+import '../styles/item.css'
 
 const Item = (props) => {
     const [item, setItem] = useState({})
+    const [quantity, setQuantity] = useState(0);
+
+
+    const changeInput = (e) =>{
+      e.preventDefault()  
+      if (e.target.value === "up"){
+        setQuantity(quantity+1)
+      }else{
+        setQuantity(quantity-1)
+        if (quantity <= 0){
+          setQuantity(0)
+        }
+      }
+    }
   
+
+  const addItem = (e) => {
+    e.preventDefault();
+    if (quantity > item.stock) {
+      alert("NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK");
+    } else {
+      if (quantity !== 0) {
+        props.addToCart(item, quantity);
+      }
+    }
+  };
     useEffect( () => {
       const getProduct = async () =>{
         var idProduct = props.match.params.id
@@ -23,23 +49,16 @@ const Item = (props) => {
         style={{ display: "flex", flexDirection: "column", marginLeft: "5%" }}
       >
         <div>
-          <h5>inicio | productos | {item.name}</h5>
+          <h5 style={{color:"#048f55"}}>inicio | productos | {item.name}</h5>
         </div>
-        <div style={{ display: "flex", marginLeft: "5%" }}>
-          <div>
-            <div>
+        <div style={{ display: "flex", marginLeft: "5%", alignItems:"center" }}>
+          <div style={{display:"flex"}}>
+            <div >
               <img
-                style={{ width: "30vw", margin: "3%" }}
+                style={{ width: "25vw", margin: "3%" }}
                 src={item.photo}
               ></img>
             </div>
-            <button className='addToCart'
-              style={{
-                alignSelf: "center",
-              }}
-            >
-              Añadir al carrito
-            </button>
           </div>
           <div
             style={{
@@ -49,18 +68,44 @@ const Item = (props) => {
               width: "40vw",
             }}
           >
-            <h2>{item.name}</h2>
+            <h2 style={{color:"#048f55"}}>{item.name}</h2>
             <p>{item.description}</p>
-            <img style={{ width: "18vw" }} src={item.photo1}></img>
+            <div >
+            <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                <img style={{ width: "30vw", height:"30vh" }} src={item.photo1}></img>
+                <div className="allCardInputs1">
+                  <div className="masomenos1">
+                      <button className="moreLess1" value="down" onClick={changeInput}>
+                        -
+                      </button>
+                      <input
+                        value={quantity}
+                        type="number"
+                        className="imputNumber"
+                      ></input>
+
+                      <button className="moreLess1" value="up" onClick={changeInput}>
+                        +
+                      </button>
+                  </div>
+
+                  <button className="addToCart1" onClick={addItem}>
+                    Añadir al carrito
+                  </button>
+                </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
 
 const mapDispatchToProps = {
   getProduct: productsActions.getProductById,
+  addToCart: productsActions.addToCart,
 };
 
 export default connect(null, mapDispatchToProps)(Item);
