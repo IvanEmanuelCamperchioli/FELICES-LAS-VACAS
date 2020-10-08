@@ -6,8 +6,8 @@ var transport = nodeMailer.createTransport({
     port:465, 
     host:"smtp.gmail.com",
     auth: {
-        pass: "123456789Emi",
-        user: "emiruffini5@gmail.com"
+        pass: "Vacafeliz1.",
+        user: "feliceslasvacas.staff@gmail.com"
     },
     tls: { rejectUnauthorized: false }
 })
@@ -129,7 +129,8 @@ const itemsController = {
                 to: `${email}`,
                 subject: "Compra confirmada",
                 html:  `<div style="height: 100vh;
-                            width: 100%;">
+                            width: 100%;
+                            overflow: scroll">
                         <img src= "${banner}"  style="height: 50vh;
                         width: 100%;">
                         
