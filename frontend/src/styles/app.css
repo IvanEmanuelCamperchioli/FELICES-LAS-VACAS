@@ -61,11 +61,13 @@ html * {
   .logoMotion {
     background-position: center;
     background-size: cover;
-    width: 8vw; 
-    height: 8vw; 
+    width: 9vw; 
+    height: 9vw; 
     position: absolute; 
     top: 3px; 
     left: 12vw;
+    overflow: visible;
+
   }
 
   @media screen and (max-width: 838px) {

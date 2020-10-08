@@ -2,15 +2,15 @@ import React, {useState} from 'react'
 import '../styles/header.css'
 import "../styles/itemCart.css"
 import "../styles/mediaQuerys/mediaHeader.css"
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem,  Tooltip} from 'reactstrap'
+import "../styles/mediaQuerys/mediaCart.css"
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faUser} from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faTag, faUser, faWindowClose} from '@fortawesome/free-solid-svg-icons'
 import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import usersActions from "../redux/actions/usersActions";
 import ItemCart from './ItemCart'
 import productsActions from '../redux/actions/productsActions'
-import { motion } from 'framer-motion'
 
 class Header extends React.Component {
 
@@ -18,15 +18,25 @@ class Header extends React.Component {
         tooltipOpen: false,
         open: "0",
        
-        products: this.props.products
+        products: this.props.cartProducts
     }
-
 
     componentDidMount(){
         if (this.props.cartProducts.length === 0 && localStorage.getItem('cart')){
             this.props.forceCart()
         }
+        
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.countTotal !== prevProps.countTotal) {
+            this.setState({
+                ...this.state,
+                product:this.props.products
+            })
+        }
+    }
+      
 
     toggle = () => {
         this.setState({
@@ -44,10 +54,10 @@ class Header extends React.Component {
 
     openNav = () => {
         this.setState({
-            open: '50vw',
+            open: '50%',
             opacity: 'rgba(0,0,0,0.3)'
         })
-        if (this.state.open === '50vw') {
+        if (this.state.open === '50%') {
             this.setState({
                 open: '0vw',
             })    
@@ -56,14 +66,19 @@ class Header extends React.Component {
     
     render() {
 
+        const backCart = require('../images/fondo-carrito2.jpg')
+
         var subtotal = 0
         
         this.props.cartProducts.map(item =>{
             subtotal += (item.product.price * item.quantity)
-        })        
+        })       
+
         const style = {
-            width: this.state.open
+            width: this.state.open,
+            backgroundSize: 'cover',
         }
+
 
 
         
@@ -74,26 +89,31 @@ class Header extends React.Component {
                     <button onClick={this.openNav} className="cartCircle" ><FontAwesomeIcon className="carrito" icon={faShoppingCart} /></button>
                    { <div className="sidepanel" style={style}>
                         <div className="headerPanel">
-                        <p>CARRITO DE COMPRAS</p>
-                        <button onClick={this.closeNav} className="closebtn">x</button>
+                            <p>CARRITO DE COMPRAS</p>
+                            <button onClick={this.closeNav} className="closebtn"><FontAwesomeIcon className="WindowClose" style={{color: '#fff'}} icon={faWindowClose} /></button>
                         </div>
                         
-                        {this.props.cartProducts.length === 0 
-                        ?
-                            <div className="containeritemsCart">
-                                <h1 className="titleEmpty">El carrito está vacio :/</h1>
-                            </div>
+                        {this.props.cartProducts.length === 0 ?
+                        <div className="containeritemsCart">
+                        <h1>El carrito esta vacio <b onClick={this.openNav} style={{fontSize: '15px'}}><NavLink style={{color: '#fff'}} to='/productos'>ver productos</NavLink></b></h1>
+                        </div>
                         :
                         <>
-                            <div className="containeritemsCart">
-                                {this.props.cartProducts.map(product =>{
-                                    return <ItemCart product = {product} />
-                                })}
-                            </div>
+                         <div className="containeritemsCart">
+                        {this.props.cartProducts.map(product =>{
+                            return <ItemCart product = {product} />
+                        })}
+                        </div>
+                        <div>
                             <div className="footCart">
-                                <p>Total: ${subtotal}</p>
-                                <NavLink to="/comprar"><button>Iniciar Compra</button></NavLink>
+                                <p><b>Total:</b></p>
+                                <p><b>${this.props.countTotal}</b></p>
                             </div>
+                            <div className="footCart-buy">
+                                <NavLink style={{color: '#fff'}} to='/productos'>Ver más productos</NavLink>
+                                <Button><NavLink to="/comprar">Iniciar Compra <FontAwesomeIcon icon={faTag} /></NavLink></Button>
+                            </div>
+                        </div>
                         </>
                         
                         }
@@ -115,11 +135,16 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    
+    console.log(state)
+    var countTotal = 0
+        state.productsRed.cartProducts.map(product =>{
+        countTotal += (parseInt(product.quantity) * parseInt(product.product.price))
+    })
     return {
       username: state.usersRed.username,
       token: state.usersRed.token,
-      cartProducts: state.productsRed.cartProducts
+      cartProducts: state.productsRed.cartProducts,
+      countTotal
     };
   };
   

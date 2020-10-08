@@ -1,4 +1,5 @@
 import axios from "axios"
+import Swal from "sweetalert2"
 
 const productsActions = {
     getProducts: () => {
@@ -63,6 +64,37 @@ const productsActions = {
             dispatch({
                 type: "FORCE_CART"
             })
+        }
+    },
+    deleteAllProducts:()=>{
+        return async(dispatch, getState)=>{
+            dispatch({
+                type:"DELETE_CART"
+            })
+        }
+    },
+    confirm:(products, token) =>{
+        return async (dispatch, getState)=>{
+            console.log(products, token)
+            const res = await axios.post("http://localhost:4000/api/shopConfirm/",products
+            , {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            if (res.data.success === true){
+                await Swal.fire({  title: 'Muchas gracias por tu compra!',  
+                text: `Recibirás un mail de confirmación a tu correo`,  
+                icon: 'success',  
+                showConfirmButton: true, 
+                timer: false,
+                allowOutsideClick: false})
+
+            }
+            dispatch({
+                type:"DELETE_CART"
+            }) 
+            console.log(res)
         }
     }
 }

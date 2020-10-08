@@ -79,7 +79,7 @@ const Profile = (props) => {
     return (
         <div>
             <Header/>
-
+            
             <div style={{
                 backgroundImage: `url(${tortilla})`,
                 width: 'auto',
@@ -119,7 +119,7 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            
         </div>
     )
 }

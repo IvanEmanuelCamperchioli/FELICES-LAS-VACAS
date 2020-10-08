@@ -106,8 +106,7 @@ const CardEdit = (props) => {
                 padding: "3%",
                 marginTop: "3%",
                 marginBottom: "3%",
-                borderRadius: "0.5rem",
-                background: "#2b3035",
+                background: "#85cc88a4",
             }} className="container ">
 
                 <div className="row">
@@ -116,13 +115,12 @@ const CardEdit = (props) => {
                             backgroundImage: `url(${props.product.photo})`, 
                             height: '38vh', 
                             width: '20vw',
+                            marginRight:"90%",
                             backgroundSize: 'cover',
                             backgroundRepeat: 'no-repeat',
                             backgroundPosition: 'center center',
                             display: 'flex',
                             flexDirection: 'column',
-                            justifyContent: 'flex-end',
-                            borderRadius: "0.5rem",
                         }}>
                         </div>
                     </div>
@@ -143,7 +141,7 @@ const CardEdit = (props) => {
                                 flexDirection: "column",
                                 justifyContent: "center"
                             }}>
-                                <div className="flex">Category: <span className="text-danger">{props.product.category}</span></div>
+                                <div className="flex">Categoría: <span className="text-danger">{props.product.category}</span></div>
                             </div>
                         </div>
                         <div style={styleProperty} className="row col-md-12" >
@@ -152,7 +150,7 @@ const CardEdit = (props) => {
                                 flexDirection: "column",
                                 justifyContent: "center"
                             }}>
-                                <div className="flex">Description: {props.product.description}</div>
+                                <div className="flex">Descripción: {props.product.description}</div>
                             </div>
                         </div>
                         <div style={styleProperty} className="row col-md-12" >
@@ -214,7 +212,7 @@ const CardEdit = (props) => {
                             {modify.viewMoreDelete && 
                                 <>
                                     <span  id="TooltipConfirmDelete" className="flex"><button onClick={() => deleteProduct()} className='btn btn-secondary'><FontAwesomeIcon icon={faCheck}/></button></span>
-                                    <Tooltip placement="top" isOpen={tooltipOpenConfirmDelete} target="TooltipConfirmDelete" toggle={toggleConfirmDelete}>Confirm</Tooltip>
+                                    <Tooltip placement="top" isOpen={tooltipOpenConfirmDelete} target="TooltipConfirmDelete" toggle={toggleConfirmDelete}>Confirmar</Tooltip>
                                 </>
                             }
                             <button onClick={() => viewSwitch('delete')} className='btn btn-danger ml-1'>{modify.viewMoreDelete ? "Cancel" : 'Delete'}</button>
@@ -223,7 +221,7 @@ const CardEdit = (props) => {
                 </div>
 
             </div>
-        </>
+        </> 
     )
 }
 

@@ -11,12 +11,13 @@ const HomeAdmin = () => {
     const [bodyEdit, setBodyEdit] = useState('')
     
     const styleContainer = {
+        
         padding: "3%",
         marginTop: "3%",
         marginBottom: "3%",
         borderRadius: "0.5rem",
-        background: "#2b3035",
-    }
+        backgroundPosition:"center center",
+        }
 
     const switchBody = (aBody) => {
         setBodyEdit(aBody)
@@ -25,49 +26,43 @@ const HomeAdmin = () => {
     return (
         <>
             <HeaderAdmin/>
-            <div style={styleContainer} className='container'>
+            <div  style={styleContainer} className='container'>
                 <h1 style={{
                     display: "flex",
                     justifyContent: "center",
-                    color: "whitesmoke",
-                    fontSize: '8vw'
-                }}>Welcome Admin<FontAwesomeIcon style={{marginLeft:'1vh'}} icon={faKissWinkHeart}></FontAwesomeIcon></h1>
+                    color: "black",
+                    fontSize: '8vw',
+                    fontFamily:"'Dancing Script', cursive"
+                }}>Bienvenido</h1>
+                <h5 style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    color: "black",
+                    fontSize: '2vw',
+                    fontFamily: "'Open Sans Condensed', sans-serif"
+                }}>panel de administración</h5>
             </div>
 
-            <div style={styleContainer} className="container">
+            <div  className="container">
                 <div className="row d-flex mb-3">
                     <div className=" d-flex col-md-6 p-2">
-                        <button onClick={() => switchBody('add')} className="btn btn-success btn-lg btn-block"><FontAwesomeIcon icon={faServer}></FontAwesomeIcon> Add Product</button>
+                        <button onClick={() => switchBody('Añadir')} className="btn btn-success btn-lg btn-block"><FontAwesomeIcon icon={faServer}></FontAwesomeIcon> Agregar Producto</button>
                     </div>
                     <div className="col-md-6 p-2">
-                        <button onClick={() => switchBody('edit')} className="btn btn-success btn-lg btn-block"><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon> Edit Product</button>
+                        <button onClick={() => switchBody('Editar')} className="btn btn-success btn-lg btn-block"><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon> Editar Producto</button>
                     </div>
                 </div>
-                {(bodyEdit === 'add') && <FormAdmin/>}
-                {(bodyEdit === 'edit') && <EditAdmin/>}
+                {(bodyEdit === 'Añadir') && <FormAdmin/>}
+                {(bodyEdit === 'Editar') && <EditAdmin/>}
                 {(bodyEdit === '') && 
                 <>
                     <div className="col-md-12">
                         <div className="profile-img" style={{
-                            backgroundImage: 'url(http://getwallpapers.com/wallpaper/full/b/9/c/366662.jpg)', 
-                            height: '38vh', 
-                            backgroundSize: 'cover',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: 'center center',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            borderRadius: "0.5rem",
-                            color: "white"
+                            margin:"7% 38%"
+                            
                         }}>
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                fontSize: '8vw'
-                            }}>
-                                Mood Hacking
-                            </div>
+                            <img style={{height:"20vw"}} src="https://scontent.faep4-1.fna.fbcdn.net/v/t1.0-9/116526230_3358036327581589_4397387291706823192_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_ohc=wIz_IbmdvX0AX_l2prG&_nc_ht=scontent.faep4-1.fna&oh=e8efcc57f25f1fd6521db14a9908d0b1&oe=5FA24828"></img>
+                            
                         </div>
                     </div>
                 </>}

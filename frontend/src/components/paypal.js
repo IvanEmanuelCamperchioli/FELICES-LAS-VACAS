@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 const Paypal = (props) => {
 
     const redirect = () => {
-        props.history.push('/')
+        props.history.push('/gracias')
     }
 
     console.log(parseFloat(Number(props.total).toFixed(2)));

@@ -8,19 +8,29 @@ import FinishShopping from '../components/FinishShopping'
 import usersActions from '../redux/actions/usersActions'
 import SignUp from './SignUp'
 import Profile from '../components/EditProfile'
+import EditProfile from '../components/EditProfile'
 
 const Buy = (props) => {
 
     const [flag, setFlag] = useState('noLog')
 
     useEffect(() => {
+        console.log(props)
         data()
     }, [])
 
-    const data = async() => {
-        var userLogued = await props.getUser(props.token)
+
+    useEffect(() => {
         
+        data()
+    }, [])
+    const data = async() => {
+        if(props.token === "" ){
+            setFlag('noLog')
+        }else{
+        var userLogued = await props.getUser(props.token)
         setFlag(userLogued.address === null ? "noAddress" : "ok")
+        }
     }
 
     return (
@@ -28,9 +38,8 @@ const Buy = (props) => {
             {flag !== "noAddress" && <Header/>}
             {flag === "noLog" 
                 ? <GoSignIn/>
-                : flag === "noAddress" 
-                    ? <Profile/>
-                    : <FinishShopping />
+                
+                : <FinishShopping history={props.history} />
             }
             <Footer />
         </>
