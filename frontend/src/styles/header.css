@@ -37,6 +37,13 @@
   border-radius: 5px !important;
 }
 
+.btn:focus {
+  box-shadow: none;
+  border: none;
+  appearance: none;
+  outline: none;
+}
+
 .dropdown-header {
   color: #048f55  !important;
   font-size: 20px !important;

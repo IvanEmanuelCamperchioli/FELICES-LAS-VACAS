@@ -36,7 +36,7 @@ class SignIn extends React.Component{
         e.preventDefault()
         if (this.state.logUser.username ==="" || this.state.logUser.password === "" ){
             this.setState({
-                error: "Both fields are required"
+                error: "Ambos campos son obligatorios"
             }) 
         }else{
             const logUser= {username:this.state.logUser.username , password: this.state.logUser.password}

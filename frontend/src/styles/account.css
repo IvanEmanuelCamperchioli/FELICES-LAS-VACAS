@@ -17,7 +17,8 @@
 
 .signContainer .inputs input {
     width: 25vw;
-    margin-top: 3vh;
+    margin-bottom: 3vh;
+    margin-top: 0;
 }
 
 .inputs {
@@ -54,6 +55,7 @@
     border-radius: 50px;
     background-image: linear-gradient(#4CAF50, #317433);
     padding: 5px;
+    font-family: 'Monserrat', sans-serif;
 }
 
 .send {
@@ -161,4 +163,15 @@
 
 .alfajores {
     filter: contrast(130%)
+}
+
+.logError {
+    background-color: rgba(206, 50, 50, 0.795);
+    width: 25vw;
+    font-size: 12.5px;
+    color: rgb(255, 255, 255);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 0 5px;
+    text-align: center;
 }
