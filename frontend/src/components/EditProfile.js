@@ -2,8 +2,8 @@ import React, { useEffect,useState } from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux';
 import Header from './Header'
-import Footer from './Footer';
-
+import Footer from './Footer'
+import Swal from "sweetalert2"
 
 const Profile = (props) => {
     const[load, setLoad]= useState(true)
@@ -11,7 +11,7 @@ const Profile = (props) => {
     const[provinces, setProvinces]=useState([])
 
     useEffect(()=>{
-       data()
+        data()
     },[props.username])
 
     const data = async () => {
@@ -67,11 +67,34 @@ const Profile = (props) => {
         }
     }
 
+    const confirmData =  () => {
+        (userData.address === null || userData.city === null || userData.province === null) 
+        ?  Swal.fire({  
+            title: 'Direccion no completa!!!',  
+            text: `Se necesita la dirección completa para el envío (Provincia/Ciudad/Direccion)`,  
+            imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1137640/android/stickers/5615088.png',
+            showConfirmButton: true, 
+            timer: false,
+            allowOutsideClick: false,
+            footer: 'Una vaquita te lo agradecerá',
+        })
+        :  Swal.fire({  
+            title: 'Muchas gracias por completar tu dirección!!',  
+            text: `Ahora puedes confirmar la compra`,  
+            imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1137640/android/stickers/5615093.png',
+            showConfirmButton: true, 
+            timer: false,
+            allowOutsideClick: false,
+            footer: 'Una vaquita te lo agradece',
+        })
+    }
+
     const submit = async (e) => {
         e.preventDefault();
      
         await toEdit(userData)
         setLoad(!load)
+        confirmData()
     }
 
     const tortilla = require('../images/tortilla.jpg')
@@ -119,7 +142,7 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-            
+            <Footer/>
         </div>
     )
 }

@@ -75,7 +75,6 @@ const productsActions = {
     },
     confirm:(products, token) =>{
         return async (dispatch, getState)=>{
-            console.log(products, token)
             const res = await axios.post("http://localhost:4000/api/shopConfirm/",products
             , {
                 headers: {
@@ -83,18 +82,19 @@ const productsActions = {
                 }
             })
             if (res.data.success === true){
-                await Swal.fire({  title: 'Muchas gracias por tu compra!',  
-                text: `Recibirás un mail de confirmación a tu correo`,  
-                icon: 'success',  
-                showConfirmButton: true, 
-                timer: false,
-                allowOutsideClick: false})
-
+                await Swal.fire({  
+                    title: 'Muchas gracias por tu compra!',  
+                    text: `Recibirás un mail de confirmación a tu correo`,  
+                    imageUrl: 'https://i.pinimg.com/564x/59/df/57/59df57f70e533a1b116cff597638f1ed.jpg',
+                    showConfirmButton: true, 
+                    timer: false,
+                    allowOutsideClick: false,
+                    footer: 'Una vaquita te lo agradece',
+                })
             }
             dispatch({
                 type:"DELETE_CART"
             }) 
-            console.log(res)
         }
     }
 }

@@ -3,6 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import { connect } from 'react-redux';
 import productsActions from '../redux/actions/productsActions'
+import { toast } from "react-toastify"
 import { NavLink } from 'react-router-dom';
 import '../styles/item.css'
 
@@ -27,10 +28,11 @@ const Item = (props) => {
   const addItem = (e) => {
     e.preventDefault();
     if (quantity > item.stock) {
-      alert("NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK");
+      toast.warning("💩 NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK", {position: toast.POSITION.TOP_CENTER})
     } else {
       if (quantity !== 0) {
         props.addToCart(item, quantity);
+        toast.success(`🐮 ${quantity} ITEM(S) AÑADIDO(S) AL CARRITO`, {position: toast.POSITION.BOTTOM_RIGHT, autoClose: 3000})
       }
     }
   };

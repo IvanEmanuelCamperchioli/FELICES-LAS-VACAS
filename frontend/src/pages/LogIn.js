@@ -67,7 +67,14 @@ class SignIn extends React.Component{
             
             
         }else{
-            Swal.fire({  title: 'You must sign up!',  text: `Please go to create an account, ${response.profileObj.givenName}.`,  icon: 'warning',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+            Swal.fire({  
+                title: 'You must sign up!',  
+                text: `Please go to create an account, ${response.profileObj.givenName}.`,  
+                icon: 'warning',  
+                showConfirmButton: false, 
+                timer: 2000,
+                allowOutsideClick: false
+            })
         }
         this.setState({
             ...this.state,

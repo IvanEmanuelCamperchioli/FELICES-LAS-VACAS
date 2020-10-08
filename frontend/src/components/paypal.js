@@ -7,8 +7,6 @@ const Paypal = (props) => {
         props.history.push('/gracias')
     }
 
-    console.log(parseFloat(Number(props.total).toFixed(2)));
-
     const paypal = useRef()
     useEffect(() => {
         window.paypal.Buttons({

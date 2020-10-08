@@ -55,14 +55,20 @@ const submit =  async e => {
 
     useEffect(() => {
         totalDolar()
-        console.log(props)
+        
         const data = async() => {
             var userLogued = await props.getUser(props.token)
             if (userLogued.address === null){
-                await Swal.fire({  title: 'Actualice sus datos!',  text: "Por favor, antes de continuar con la compra actualice sus datos",  icon: 'warning',  showConfirmButton: true, timer: 20000,allowOutsideClick: false})
-
+                await Swal.fire({  
+                    title: 'Actualice sus datos!',  
+                    text: "Por favor, antes de continuar con la compra actualice sus datos",  
+                    imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1137640/android/stickers/5615122.png',
+                    showConfirmButton: true, 
+                    timer: 20000,
+                    allowOutsideClick: false,
+                    footer: 'Necesario para ayudar a más vaquitas!'
+                })
             }
-            
         }
         data()
     }, [])
@@ -102,22 +108,26 @@ const submit =  async e => {
                         await Swal.fire({
                             title: '¿Confirmar compra?',
                             text: "La misma llegará en 5 dias hábiles y podras abonarla tanto en efectivo como con mercado pago al momento de recibirla",
-                            icon: 'question',
+                            imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1137640/android/stickers/5615085.png',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#d33',
-                            confirmButtonText: 'Si, ¡confirmar!'
-                          }).then((result) => {
+                            confirmButtonText: 'Si, ¡confirmar!',
+                            footer: 'Ayudarías a que no se vayan más vaquitas al cielo de vaquitas!'
+                        }).then((result) => {
                             
                             if (result.isConfirmed) {
                                 if(props.countTotal !== 0){
                                     props.confirm(props.cartProducts, props.token)
-                                    Swal.fire({  title: 'Muchas gracias por tu compra!',  
-                                    text: `Recibirás un mail de confirmación a tu correo`,  
-                                    icon: 'success',  
-                                    showConfirmButton: true, 
-                                    timer: false,
-                                    allowOutsideClick: false})
+                                    Swal.fire({  
+                                        title: 'Muchas gracias por tu compra!',  
+                                        text: `Recibirás un mail de confirmación a tu correo`,  
+                                        imageUrl: 'https://i.pinimg.com/564x/59/df/57/59df57f70e533a1b116cff597638f1ed.jpg',
+                                        showConfirmButton: true, 
+                                        timer: false,
+                                        allowOutsideClick: false,
+                                        footer: 'Una vaquita te lo agradece',
+                                    })
                                     .then(props.history.push('/gracias'))
          
                                 }

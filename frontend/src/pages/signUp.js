@@ -148,7 +148,14 @@ class SignUp extends React.Component{
             
         }else{
             if (res.username !== ""){
-                Swal.fire({  title: 'Please sign into your account!',  text: `You are already register with this Google account`,  icon: 'warning',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
+                Swal.fire({  
+                    title: 'Please sign into your account!',  
+                    text: `You are already register with this Google account`,  
+                    icon: 'warning',  
+                    showConfirmButton: false, 
+                    timer: 3000,
+                    allowOutsideClick: false
+                })
             }
             
         }

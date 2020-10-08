@@ -15,7 +15,6 @@ const Buy = (props) => {
     const [flag, setFlag] = useState('noLog')
 
     useEffect(() => {
-        console.log(props)
         data()
     }, [])
 

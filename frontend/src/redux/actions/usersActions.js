@@ -1,5 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2"
+
 const usersActions = {
 
   logUser: (user) => {
@@ -10,7 +11,15 @@ const usersActions = {
       if (res.data.success !== true) {
         return res.data.message
       } else {
-        await Swal.fire({  title: 'Bienvenido!',  text: `Que bueno tenerte aqui nuevamente, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+        await Swal.fire({  
+          title: 'Bienvenido!',  
+          text: `Que bueno tenerte aqui nuevamente, ${res.data.response.name}.`,  
+          imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1306863/android/stickers/12398798.png',
+          showConfirmButton: false, 
+          timer: 3000,
+          allowOutsideClick: false,
+          footer: 'Disfruta a lo vegano!!'
+        })
             dispatch({
                 type: "SET_USER",
                 payload:res.data.response
@@ -43,7 +52,16 @@ const usersActions = {
         
       }else{
         
-        await Swal.fire({  title: 'Bienvenido!',  text: `Es grato tenerte aquí, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+        await Swal.fire({  
+          title: 'Bienvenido!',  
+          text: `Es grato tenerte aquí, ${res.data.response.name}.`,  
+          imageUrl: 'https://i.pinimg.com/originals/a9/ef/5b/a9ef5be6359ac0c8c4f1ae6974e1ed99.gif',
+          imageAlt: 'Bienvenida de la vaca',  
+          showConfirmButton: false, 
+          timer: 3000,
+          allowOutsideClick: false,
+          footer: 'Pasea, compra y diviertete a lo vegano'
+        })
         dispatch({
           type: "SET_USER",
           payload: {  

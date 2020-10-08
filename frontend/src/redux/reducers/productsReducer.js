@@ -15,11 +15,11 @@ const productsReducer = (state = initialState, action) => {
             
             var exist = false
             var newProducts =  state.cartProducts
-            console.log(action.payload)
+            
             newProducts.map(product => {
                 if (product.product._id === action.payload.product._id){
                     exist = true
-                    console.log("entre")
+                    
                     product.quantity = product.quantity + action.payload.quantity
                 }
             })

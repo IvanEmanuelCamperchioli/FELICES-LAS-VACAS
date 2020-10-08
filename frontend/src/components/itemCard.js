@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import productsActions from "../redux/actions/productsActions";
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from "reactstrap";
 import "../styles/itemCard.css";
-import { toast, ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 toast.configure()
@@ -28,11 +28,11 @@ const ItemCard = (props) => {
   const addItem = (e) => {
     e.preventDefault();
     if (quantity > props.item.stock) {
-      toast.warning("NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK", {position: toast.POSITION.TOP_CENTER})
+      toast.warning("💩 NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK", {position: toast.POSITION.TOP_CENTER})
     } else {
       if (quantity !== 0) {
         props.addToCart(props.item, quantity);
-        toast.success(`Has agreagado ${quantity} items al carrito de compra`, {position: toast.POSITION.BOTTOM_CENTER})
+        toast.success(`🐮 ${quantity} ITEM(S) AÑADIDO(S) AL CARRITO`, {position: toast.POSITION.BOTTOM_RIGHT, autoClose: 3000})
       }
     }
   };

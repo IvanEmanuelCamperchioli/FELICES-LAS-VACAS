@@ -135,7 +135,7 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    
     var countTotal = 0
         state.productsRed.cartProducts.map(product =>{
         countTotal += (parseInt(product.quantity) * parseInt(product.product.price))
