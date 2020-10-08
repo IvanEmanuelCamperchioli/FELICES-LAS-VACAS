@@ -84,7 +84,7 @@ const productsActions = {
             })
             if (res.data.success === true){
                 await Swal.fire({  title: 'Muchas gracias por tu compra!',  
-                text: `La misma llegará en 5 dias a tu domicilio y podras abonarla al recibirla, recibirás un mail de confirmación`,  
+                text: `Recibirás un mail de confirmación a tu correo`,  
                 icon: 'success',  
                 showConfirmButton: true, 
                 timer: false,

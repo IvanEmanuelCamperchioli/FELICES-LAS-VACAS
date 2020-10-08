@@ -80,41 +80,42 @@ const FormAdmin = (props) => {
             <div style={{
                 display:'flex',
                 flexDirection:'column',
-                justifyContent:'space-between'
+                justifyContent:'space-between',
+                marginBottom:'5%'
             }}>
 
                 <div className="input-group">
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon3">Name Product</span>
+                            <span className="input-group-text" id="basic-addon3">Nombre</span>
                         </div>
                         <input name='name' onChange={readInput} type="text" className="form-control"/>
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon3">Price Product</span>
+                            <span className="input-group-text" id="basic-addon3">Precio</span>
                             <span className="input-group-text">$</span>
                         </div>
                         <input name='price' onChange={readInput} type="number" className="form-control" id="basic-url" aria-describedby="basic-addon3"/>
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon3">Description Product</span>
+                            <span className="input-group-text" id="basic-addon3">Descripción</span>
                         </div>
                         <input name='description' onChange={readInput} type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3"/>
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon3">Stock Product</span>
+                            <span className="input-group-text" id="basic-addon3">Stock</span>
                         </div>
                         <input name='stock' onChange={readInput} type="number" className="form-control" id="basic-url" aria-describedby="basic-addon3"/>
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <label className="input-group-text" htmlFor="inputGroupSelect01">Category Product</label>
+                            <label className="input-group-text" htmlFor="inputGroupSelect01">Categoría</label>
                         </div>
                         <select name='category' onChange={readInput} className="custom-select" id="inputGroupSelect01">
-                            <option defaultValue>Choose...</option>
+                            <option defaultValue>Elegir..</option>
                             <option value="1">Secos</option>
                             <option value="2">Refrigerados</option>
                             <option value="3">Congelados</option>
@@ -124,7 +125,7 @@ const FormAdmin = (props) => {
 
                 <div className="row d-flex">
                     <div className=" d-flex col-md-12 p-2">
-                        <button onClick={sendInfo} className="btn btn-primary btn-lg btn-block"><FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Submit</button>
+                        <button onClick={sendInfo} className="btn btn-success btn-lg btn-block" ><FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Enviar </button>
                     </div>
                 </div>
                 

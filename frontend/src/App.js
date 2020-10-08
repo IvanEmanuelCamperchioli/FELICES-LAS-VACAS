@@ -15,6 +15,7 @@ import Faq from './pages/Faq'
 import {connect} from 'react-redux'
 import usersActions from './redux/actions/usersActions'
 import Profile from './components/EditProfile'
+import Thanks from './components/Thanks';
 
 class App extends React.Component{
   
@@ -32,6 +33,7 @@ class App extends React.Component{
         <Route path = "/mi-cuenta" component={Home} />
         <Route path = "/log-out" component={LogOut}/>
         <Route path ="/comprar" component ={Buy}/>
+        <Route path="/gracias" component ={Thanks} />
         <Redirect to = "/" />
       </Switch>
     )

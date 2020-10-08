@@ -143,7 +143,7 @@ const EditAdmin = (props) => {
                         </select>
                         <span style={{alignSelf: 'center'}}><FontAwesomeIcon icon={faSort} /></span>
                     </div>
-                    <button className='btn btn-primary col-md-4 col-sm-12' onClick={searchFilterHome} >Buscar</button>
+                    <button className="btn btn-success btn-lg btn-block" onClick={searchFilterHome} >Buscar</button>
                 </div>
             </div>
 

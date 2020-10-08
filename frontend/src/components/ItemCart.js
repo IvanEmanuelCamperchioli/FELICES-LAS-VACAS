@@ -33,12 +33,20 @@ class ItemCart extends React.Component{
     removeOne = (idProduct) =>{
         var quan = this.state.quantity
         this.setState({ loading: true })
+        if (quan === 0){
+            this.setState({
+                ...this.state,
+                quantity: 0
+            }) 
+        }else{
         this.setState({
             ...this.state,
             quantity: quan-1
         })
-        this.setState({ loading: false })
         this.props.removeProduct(idProduct)
+        }
+        this.setState({ loading: false })
+        
     }
 
     delete = (idProduct) =>{

@@ -79,7 +79,7 @@ const Profile = (props) => {
     return (
         <div>
             <Header/>
-
+            
             <div style={{
                 backgroundImage: `url(${tortilla})`,
                 width: 'auto',
