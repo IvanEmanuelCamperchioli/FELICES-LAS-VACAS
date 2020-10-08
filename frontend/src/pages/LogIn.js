@@ -68,9 +68,10 @@ class SignIn extends React.Component{
             
         }else{
             Swal.fire({  
-                title: 'You must sign up!',  
-                text: `Please go to create an account, ${response.profileObj.givenName}.`,  
-                icon: 'warning',  
+                title: 'Debes registrarte primero!',  
+                text: `Porfavor ve a crear cuenta, ${response.profileObj.givenName}.`,  
+                imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1137640/android/stickers/5615102.png',
+                    imageAlt: 'Bienvenida de la vaca triste',  
                 showConfirmButton: false, 
                 timer: 2000,
                 allowOutsideClick: false

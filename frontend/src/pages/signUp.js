@@ -149,9 +149,10 @@ class SignUp extends React.Component{
         }else{
             if (res.username !== ""){
                 Swal.fire({  
-                    title: 'Please sign into your account!',  
-                    text: `You are already register with this Google account`,  
-                    icon: 'warning',  
+                    title: 'Ingresa a tu cuenta!',  
+                    text: `Ya estas registrado con esta cuenta de Google`, 
+                    imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1137640/android/stickers/5615102.png',
+                    imageAlt: 'Bienvenida de la vaca triste',  
                     showConfirmButton: false, 
                     timer: 3000,
                     allowOutsideClick: false
