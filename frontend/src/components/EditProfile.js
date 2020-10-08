@@ -149,6 +149,7 @@ const editProfile = (inputHandler, submit, userData, provinces) =>{
                 <input style={input} type='text' name='DNI' value={userData.DNI ? userData.DNI :"" } onChange={inputHandler} />
                 <label>Provincia:</label>
                 <select name='province' onChange={inputHandler}>
+                    <option value={-1}> Por favor, indique su provincia de residencia haciendo click aquí.</option>
                     {provinces.map((province, index)=>
                         <option key={index} value={province} >{province}</option>
                     )}
