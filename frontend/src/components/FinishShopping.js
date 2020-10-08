@@ -58,10 +58,10 @@ const submit =  async e => {
         
         const data = async() => {
             var userLogued = await props.getUser(props.token)
-            if (userLogued.address === null){
+            if (userLogued.address === null || userLogued.province || userLogued.city){
                 await Swal.fire({  
-                    title: 'Actualice sus datos!',  
-                    text: "Por favor, antes de continuar con la compra actualice sus datos",  
+                    title: 'Verifique sus datos de envio!',  
+                    text: "Por favor, antes de continuar con la compra verifique sus datos",  
                     imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1137640/android/stickers/5615122.png',
                     showConfirmButton: true, 
                     timer: 20000,
@@ -102,7 +102,7 @@ const submit =  async e => {
                     </div>
                     
                 </div>
-                    <h4 className="subtotalx">Subtotal: {props.countTotal}</h4>
+                    <h4 className="subtotalx">Subtotal:$ {props.countTotal}</h4>
                 <div className="buttons">
                     <button className="btn1" onClick={async () =>{
                         await Swal.fire({
@@ -137,7 +137,7 @@ const submit =  async e => {
                           })
                          
                     }}>Pagar en efectivo</button>
-                    <button className="btn1" onClick={() => setVisibilityPaypal(!visibilityPaypal)}>Pagar con paypal</button>
+                    <button className="btn1" onClick={() => setVisibilityPaypal(!visibilityPaypal)}>{!visibilityPaypal ? "Pagar con paypal" : "Cancelar"}</button>
                     {(visibilityPaypal) && <Paypal total={countTotalDolar} />}
                 </div>
             </div>

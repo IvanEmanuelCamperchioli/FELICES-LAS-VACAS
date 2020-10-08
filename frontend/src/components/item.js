@@ -22,6 +22,7 @@ const Item = (props) => {
           setQuantity(0)
         }
       }
+      
     }
   
 
@@ -35,6 +36,7 @@ const Item = (props) => {
         toast.success(`🐮 ${quantity} ITEM(S) AÑADIDO(S) AL CARRITO`, {position: toast.POSITION.BOTTOM_RIGHT, autoClose: 3000})
       }
     }
+    setQuantity(0)
   };
     useEffect( () => {
       const getProduct = async () =>{

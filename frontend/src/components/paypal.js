@@ -1,7 +1,9 @@
-import React,{useEffect, useRef} from 'react';
+import React,{useEffect, useRef, useState} from 'react';
 import { withRouter } from 'react-router-dom'
 
 const Paypal = (props) => {
+
+    
 
     const redirect = () => {
         props.history.push('/gracias')

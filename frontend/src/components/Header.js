@@ -111,7 +111,7 @@ class Header extends React.Component {
                             </div>
                             <div className="footCart-buy">
                                 <NavLink style={{color: '#fff'}} to='/productos'>Ver más productos</NavLink>
-                                <Button><NavLink to="/comprar">Iniciar Compra <FontAwesomeIcon icon={faTag} /></NavLink></Button>
+                                <Button><NavLink to="/comprar" style={{color:"whitesmoke"}}>Iniciar Compra <FontAwesomeIcon icon={faTag} /></NavLink></Button>
                             </div>
                         </div>
                         </>

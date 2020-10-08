@@ -129,11 +129,11 @@ const itemsController = {
                 to: `${email}`,
                 subject: "Compra confirmada",
                 html:  `<div style="height: 100vh;
-                            width: 100%;">
+                            width: 100%;overflow-y: scroll">
                         <img src= "${banner}"  style="height: 50vh;
                         width: 100%;">
                         
-                    <div> 
+                    <div > 
                         <h1 style="color: #048f55;">Hola ${nombre}!</h1>
                         <h4 style="color: #048f55;">Su pedido ha sido confirmado, estamos procediendo a despachar su pedido de:</h4>
                         <ul> ${listaDeProductos} </ul>

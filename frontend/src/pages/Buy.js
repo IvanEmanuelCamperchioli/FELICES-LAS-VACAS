@@ -19,6 +19,10 @@ const Buy = (props) => {
     }, [])
 
 
+    useEffect(()=>{
+        setFlag("ok")
+    },[props.token])
+
     useEffect(() => {
         
         data()
