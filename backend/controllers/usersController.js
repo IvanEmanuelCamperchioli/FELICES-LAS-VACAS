@@ -130,11 +130,11 @@ const usersController = {
     },
     updateAddress: async (req, res) =>{
         const idUser = req.user._id
-       
+       console.log(req.user)
         const {address, city, province} = req.body
         const error = false 
         const userExist = await User.findOne({_id:idUser})
-
+        console.log(userExist)
         if (userExist){
             var userUpdate = await User.updateOne({_id:idUser}, {address, city, province})
           
