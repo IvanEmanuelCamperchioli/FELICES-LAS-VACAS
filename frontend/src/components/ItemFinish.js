@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import '../styles/finishShopping.css'
 import "../styles/itemCart.css"
 
-
+//Tarjeta de cada item en el resumen de la compra (se renderiza en FinishBuy)
 class ItemFinish extends React.Component{
     state={
         product : this.props.item.product,

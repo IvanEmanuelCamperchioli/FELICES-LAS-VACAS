@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import productsActions from '../redux/actions/productsActions'
 import '../styles/home.css'
 import ProductsBestSellers from './ProductsBestSellers'
 
@@ -9,9 +11,14 @@ class BestSellers extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://127.0.0.1:4000/api/items")
-            .then(response => response.json())
-            .then(json => this.setState({ products: json.products }))
+        //Cuando el componente se monta obtengo los productos
+        const getProducts = async () => {
+            let products = await this.props.getProducts()
+            this.setState({products})
+
+        }
+        getProducts()
+      
     }
 
     render() {
@@ -43,5 +50,9 @@ class BestSellers extends React.Component {
     }
 }
 
-export default BestSellers
+const mapDispatchToProps = {
+    getProducts: productsActions.getProducts
+}
+
+export default connect(null, mapDispatchToProps) (BestSellers)
 

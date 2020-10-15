@@ -12,6 +12,9 @@ import usersActions from "../redux/actions/usersActions";
 import ItemCart from './ItemCart'
 import productsActions from '../redux/actions/productsActions'
 
+//En el header encontramos alojado el carrito
+
+
 class Header extends React.Component {
 
     state = {
@@ -66,7 +69,6 @@ class Header extends React.Component {
     
     render() {
 
-        const backCart = require('../images/fondo-carrito2.jpg')
 
         var subtotal = 0
         

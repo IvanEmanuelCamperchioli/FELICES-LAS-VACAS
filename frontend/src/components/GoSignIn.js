@@ -3,6 +3,9 @@ import {NavLink} from 'react-router-dom'
 import '../styles/account.css'
 import '../styles/mediaQuerys/mediaAccount.css'
 
+
+//Componente que se muestra al querer comprar y no estar logueado
+
 const GoSignIn = () => {
 
     const hamburguesa = require('../images/hamburguesa_aplastada.jpg')

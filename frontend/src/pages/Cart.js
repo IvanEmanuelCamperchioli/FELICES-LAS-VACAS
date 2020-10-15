@@ -1,6 +1,9 @@
 import React from 'react'
 import '../styles/header.css'
 
+
+//Componente que conforma el panel lateral donde se encuentra el carrito
+
 class Cart extends React.Component {
 
     state = {

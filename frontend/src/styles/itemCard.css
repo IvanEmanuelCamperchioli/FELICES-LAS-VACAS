@@ -101,6 +101,9 @@ input[type="number"] {
   align-items: flex-start;
   margin: 3rem 0;
   width: 80%;
+  
+  flex-wrap: wrap;
+
 }
 
 .main-card {

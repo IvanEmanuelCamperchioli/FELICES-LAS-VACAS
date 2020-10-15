@@ -10,6 +10,10 @@ import { connect } from 'react-redux';
 import productsActions from '../redux/actions/productsActions';
 import '../styles/mediaQuerys/mediaCards.css'
 
+//Pagina principal de los productos
+//Contiene los filtros y el renderizado de los mismos
+
+
 class Products extends React.Component {
 
     state = {
@@ -20,6 +24,7 @@ class Products extends React.Component {
     }
 
     async componentDidMount() {
+        //Cuando el componente se monta obtengo los productos
         window.scrollTo({top: 0, behavior: 'smooth'})
         await this.props.getProducts()
         const products = this.props.products
@@ -32,6 +37,7 @@ class Products extends React.Component {
     }
 
     filterItem = e => {
+        //Funcion para guardar en el state la manera de filtrar y ordenar
         const property = e.target.name
         const value = e.target.value
         this.setState({
@@ -42,6 +48,7 @@ class Products extends React.Component {
     }
 
     filterP = () =>{
+        //Funcion para filtrar los productos
         var filtered = this.state.items
         if (this.state.category !== ""){
             switch (this.state.category){
@@ -69,7 +76,7 @@ class Products extends React.Component {
     }
 
     orderF = (filtered) =>{
-       
+       //Funcion para ordenar los productos
         if(this.state.order !==""){
             switch (this.state.order){
                 case "MasStock":
@@ -95,7 +102,10 @@ class Products extends React.Component {
     render() {
        
         const searchFilterHome = async (e) => {
+            //Funcion que se ejecuta al pulsar e boton de buscar
+            //De haberse seleccionado un tipo de flitro, filtro los productos
             const filtered =  await this.filterP()
+            //Luego los ordeno
             if (filtered === undefined){
                 const allfiltered = this.orderF(this.state.items)
                 this.setState({

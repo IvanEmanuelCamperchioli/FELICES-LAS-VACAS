@@ -9,67 +9,33 @@ import Header from './Header'
 import GoUpAddress from './GoUpAddress'
 import Swal from 'sweetalert2'
 
+//Componente donde se muestra el resumen de compra y se actualiza la direccion
+
 const FinishShopping = (props) => {
 
     const [countTotalDolar, setCountTotalDolar] = useState(0)
     const [visibilityPaypal, setVisibilityPaypal] = useState(false)
-    const [addressCorrect, setAddressCorrect] = useState(false)
-
-    
-const [newData, setNewData] = useState({
-    city:"",
-    province:"",
-    address:""
-})
-
-const [error, setError] = useState("")
-
-const getForm = e =>{
-    e.preventDefault()
-    const property = e.target.name
-    const value = e.target.value
-    setNewData({
-        ...newData,
-        [property]: value
-    })
-}
-
-
-const submit =  async e => {
-
-    e.preventDefault()
-    if (newData.city ==="" || newData.city ==="" || newData.city ==="" ){
-        setError("Todos los campos son requeridos")
-    }else{
-        setError("")
-        const response =  await props.sendAddress(props.token, newData)
         
-        setNewData({
-            ...newData,
-            city:"",
-            province:"",
-            address:""
-        })
+
+
+    const data = async() => {
+        var userLogued = await props.getUser(props.token)
+        if (userLogued.address === null || userLogued.province || userLogued.city){
+            await Swal.fire({  
+                title: 'Verifique sus datos de envio!',  
+                text: "Por favor, antes de continuar con la compra verifique sus datos",  
+                imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1137640/android/stickers/5615122.png',
+                showConfirmButton: true, 
+                timer: 20000,
+                allowOutsideClick: false,
+                footer: 'Necesario para ayudar a más vaquitas!'
+            })
+        }
     }
-}
 
     useEffect(() => {
         totalDolar()
         
-        const data = async() => {
-            var userLogued = await props.getUser(props.token)
-            if (userLogued.address === null || userLogued.province || userLogued.city){
-                await Swal.fire({  
-                    title: 'Verifique sus datos de envio!',  
-                    text: "Por favor, antes de continuar con la compra verifique sus datos",  
-                    imageUrl: 'https://sdl-stickershop.line.naver.jp/products/0/0/1/1137640/android/stickers/5615122.png',
-                    showConfirmButton: true, 
-                    timer: 20000,
-                    allowOutsideClick: false,
-                    footer: 'Necesario para ayudar a más vaquitas!'
-                })
-            }
-        }
         data()
     }, [])
 
@@ -137,7 +103,12 @@ const submit =  async e => {
                           })
                          
                     }}>Pagar en efectivo</button>
-                    <button className="btn1" onClick={() => setVisibilityPaypal(!visibilityPaypal)}>{!visibilityPaypal ? "Pagar con paypal" : "Cancelar"}</button>
+                    <button 
+                    className="btn1"
+                    onClick={() => setVisibilityPaypal(!visibilityPaypal)}
+                    >
+                        {!visibilityPaypal ? "Pagar con paypal" : "Cancelar"}
+                    </button>
                     {(visibilityPaypal) && <Paypal total={countTotalDolar} />}
                 </div>
             </div>

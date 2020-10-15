@@ -4,8 +4,10 @@ import Footer from './Footer'
 import { connect } from 'react-redux';
 import productsActions from '../redux/actions/productsActions'
 import { toast } from "react-toastify"
-import { NavLink } from 'react-router-dom';
 import '../styles/item.css'
+
+
+//Componente que muestra un producto en particular
 
 const Item = (props) => {
     const [item, setItem] = useState({})
@@ -38,14 +40,22 @@ const Item = (props) => {
     }
     setQuantity(0)
   };
-    useEffect( () => {
-      const getProduct = async () =>{
-        var idProduct = props.match.params.id
-        const res = await props.getProduct(idProduct)
-        setItem(res)
-      }
-      getProduct()
-	  }, [])
+
+  const getProduct = async () =>{
+    var idProduct = props.match.params.id
+    const res = await props.getProduct(idProduct)
+    setItem(res)
+  }
+  useEffect( () => {
+    //Recibo el id de producto por parametros y al montarse el componente obtengo el producto completo
+    getProduct()
+  }, [])
+    
+
+
+
+
+
     return (
     <>
       <Header />

@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import '../styles/thanks.css'
 
 class Thanks extends React.Component {
-
+//Componente con mensaje tras confirmar una compra
     render() {
         const logo = require('../images/logo.png')
         const gracias =require('../images/gracias3.gif')

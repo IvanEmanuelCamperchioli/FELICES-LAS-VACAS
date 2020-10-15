@@ -3,18 +3,18 @@ import {connect} from 'react-redux'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import GoSignIn from '../components/GoSignIn'
-import GoUpAddress from '../components/GoUpAddress'
 import FinishShopping from '../components/FinishShopping'
 import usersActions from '../redux/actions/usersActions'
-import SignUp from './SignUp'
-import Profile from '../components/EditProfile'
-import EditProfile from '../components/EditProfile'
+
+//Pagina para confirmar una compra y ver el resumen de la misma
 
 const Buy = (props) => {
 
     const [flag, setFlag] = useState('noLog')
 
     useEffect(() => {
+        //Cuando el componente se monta, veo si el usurio, esta logueado o no
+        //Y si tiene unan direccion asociada a su usuario
         data()
     }, [])
 
@@ -23,10 +23,7 @@ const Buy = (props) => {
         setFlag("ok")
     },[props.token])
 
-    useEffect(() => {
-        
-        data()
-    }, [])
+    
     const data = async() => {
         if(props.token === "" ){
             setFlag('noLog')

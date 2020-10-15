@@ -5,16 +5,19 @@ import Header from './Header'
 import Footer from './Footer'
 import Swal from "sweetalert2"
 
+//Componente para modificar los datos del usuario
 const Profile = (props) => {
     const[load, setLoad]= useState(true)
     const[userData, setUserData]=useState({})
     const[provinces, setProvinces]=useState([])
 
     useEffect(()=>{
+        //actualizo la informacion utilizada cuando las props cambian
         data()
     },[props.username])
 
     const data = async () => {
+        //funcion para actualizar la informacion
         const response = await axios.get(`http://127.0.0.1:4000/api/userInfo/${props.username}`)
         setUserData(response.data.userInfo)
         const provinceData = await axios.get("https://countriesfeliceslasvacasapi.herokuapp.com/api/prov")
@@ -22,6 +25,7 @@ const Profile = (props) => {
     }
 
     const showProfile =()=>{
+        //Esta funcion muestra los datos del usuario
         return(
         <>
             <div>
@@ -49,6 +53,7 @@ const Profile = (props) => {
     }
     
     const inputHandler=(e)=>{
+        //Funcion para obtener y guardar los datos ingresados por el usuario
         const value=e.target.value
         const campo= e.target.name
         setUserData({
@@ -58,16 +63,18 @@ const Profile = (props) => {
     }
     
     const toEdit= async(userData)=>{
+        //Funcion para enviar los datos actualizados
         const response = await axios.put("http://127.0.0.1:4000/api/editUser",userData,{
             headers: {
                 Authorization: `Bearer ${props.token}`
           }})
         if(response.success){
-            return 
+            return response
         }
     }
 
     const confirmData =  () => {
+        //Funcion que mostrará alertas al usuario
         (userData.address === null || userData.city === null || userData.province === null) 
         ?  Swal.fire({  
             title: 'Direccion no completa!!!',  
@@ -90,6 +97,7 @@ const Profile = (props) => {
     }
 
     const submit = async (e) => {
+        //Funcion ejecutada al presionar el boton de submit
         e.preventDefault();
      
         await toEdit(userData)

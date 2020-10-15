@@ -6,13 +6,15 @@ import { faCaretLeft, faCaretRight, faCheck} from '@fortawesome/free-solid-svg-i
 import { Tooltip } from 'reactstrap'
 
 const CardEdit = (props) => {
-
+    //Componente que muestra y permite modificar los productos al administrador
     const [tooltipOpenConfirm, setTooltipOpenConfirm] = useState(false)
     const [tooltipOpenConfirmPrice, setTooltipOpenConfirmPrice] = useState(false)
     const [tooltipOpenPlus, setTooltipOpenPlus] = useState(false)
     const [tooltipOpenLess, setTooltipOpenLess] = useState(false)
     const [tooltipOpenConfirmDelete, setTooltipOpenConfirmDelete] = useState(false)
 
+
+    //Las subsiguientes funciones nos permiten mostrar el tooltip de los diferentes botones
     const toggleConfirm = () => {
         setTooltipOpenConfirm(!tooltipOpenConfirm)
     }
@@ -29,6 +31,7 @@ const CardEdit = (props) => {
         setTooltipOpenConfirmDelete(!tooltipOpenConfirmDelete)
     }
 
+    //State donde guardaremos el estado de los botones y las cantidades a modificar
     const [modify, setModify] = useState({
         cantModifyStock: 0,
         cantModifyPrice: 0,
@@ -36,9 +39,10 @@ const CardEdit = (props) => {
         viewMorePrice: false,
         viewMoreDelete: false,
     })
+    
 
     const viewSwitch = (aProperty) => {
-        
+        //En esta funcion dependiendo 
         if(aProperty === 'stock') {
             setModify({
                 ...modify,
@@ -110,6 +114,7 @@ const CardEdit = (props) => {
             }} className="container ">
 
                 <div className="row">
+                    {/*---------------------------------------Foto del Producto-------------------------------------- */}
                     <div className="col-md-3 col-sm-12">
                         <div className="profile-img" style={{
                             backgroundImage: `url(${props.product.photo})`, 
@@ -124,7 +129,9 @@ const CardEdit = (props) => {
                         }}>
                         </div>
                     </div>
+                    {/*---------------------------Contenedor info del producto-------------------------------------- */}
                     <div className="flex col-md-9">
+                        {/*---------------------Nombre----------------------- */}
                         <div style={styleProperty} className="row col-md-12" >
                             <div style={{
                                 display: "flex",
@@ -134,16 +141,19 @@ const CardEdit = (props) => {
                                 <div className="flex text-primary">{props.product.name}</div>
                             </div>
                         </div>
-                        
+                        {/*---------------------Categoria----------------------- */}
                         <div style={styleProperty} className="row col-md-12" >
                             <div style={{
                                 display: "flex",
                                 flexDirection: "column",
                                 justifyContent: "center"
                             }}>
-                                <div className="flex">Categoría: <span className="text-danger">{props.product.category}</span></div>
+                                <div className="flex">
+                                    Categoría: <span className="text-danger">{props.product.category}</span>
+                                </div>
                             </div>
                         </div>
+                        {/*---------------------Descripción----------------------- */}
                         <div style={styleProperty} className="row col-md-12" >
                             <div style={{
                                 display: "flex",
@@ -153,6 +163,7 @@ const CardEdit = (props) => {
                                 <div className="flex">Descripción: {props.product.description}</div>
                             </div>
                         </div>
+                        {/*---------------------Cantidad en stock----------------------- */}
                         <div style={styleProperty} className="row col-md-12" >
                             <div style={{
                                 display: "flex",
@@ -164,21 +175,67 @@ const CardEdit = (props) => {
                             {modify.viewMoreStock && 
                                 <>
                                     <div>
-                                        <span id="TooltipPlus" className="flex"><button onClick={() => editCant(-1, 'oneStock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCaretLeft}/></button></span>
-                                        <Tooltip placement="top" isOpen={tooltipOpenPlus} target="TooltipPlus" toggle={togglePlus}>-1</Tooltip>
+                                        <span id="TooltipPlus" className="flex">
+                                            <button 
+                                            onClick={() => editCant(-1, 'oneStock')} 
+                                            className='btn btn-secondary'
+                                            >
+                                                <FontAwesomeIcon icon={faCaretLeft}/>
+                                            </button>
+                                        </span>
+                                        <Tooltip 
+                                        placement="top" 
+                                        isOpen={tooltipOpenPlus} 
+                                        target="TooltipPlus" 
+                                        toggle={togglePlus}>
+                                            -1
+                                        </Tooltip>
                                     
-                                        <span id="TooltipLess" className="flex ml-1"><button onClick={() => editCant(1, 'oneStock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCaretRight}/></button></span>
-                                        <Tooltip placement="top" isOpen={tooltipOpenLess} target="TooltipLess" toggle={toggleLess}>+1</Tooltip>
+                                        <span id="TooltipLess" className="flex ml-1">
+                                            <button 
+                                            onClick={() => editCant(1, 'oneStock')} 
+                                            className='btn btn-secondary'>
+                                                <FontAwesomeIcon icon={faCaretRight}/>
+                                                </button>
+                                            </span>
+                                        <Tooltip 
+                                        placement="top" 
+                                        isOpen={tooltipOpenLess} 
+                                        target="TooltipLess" 
+                                        toggle={toggleLess}>
+                                            +1
+                                        </Tooltip>
                                     </div>    
-                                    <input type='number' name='cantModifyStock' onChange={readInput} placeholder='Quantity to modify'/>
+                                    <input 
+                                    type='number' 
+                                    name='cantModifyStock' 
+                                    onChange={readInput} 
+                                    placeholder='Quantity to modify'/>
 
-                                    <span  id="TooltipConfirm" className="flex"><button onClick={() => editCant(modify.cantModifyStock, 'stock')} className='btn btn-secondary'><FontAwesomeIcon icon={faCheck}/></button></span>
-                                    <Tooltip placement="top" isOpen={tooltipOpenConfirm} target="TooltipConfirm" toggle={toggleConfirm}>Confirm</Tooltip>
+                                    <span  id="TooltipConfirm" className="flex">
+                                        <button 
+                                        onClick={() => editCant(modify.cantModifyStock, 'stock')} 
+                                        className='btn btn-secondary'>
+                                            <FontAwesomeIcon icon={faCheck}/>
+                                        </button>
+                                    </span>
+                                    <Tooltip 
+                                    placement="top" 
+                                    isOpen={tooltipOpenConfirm} 
+                                    target="TooltipConfirm" 
+                                    toggle={toggleConfirm}>
+                                        Confirm
+                                    </Tooltip>
                                 
                                 </>
                             }
-                            <button onClick={() => viewSwitch('stock')} className='btn btn-primary'>{modify.viewMoreStock ? "Cancel" : 'Modify stock'}</button>
+                            <button 
+                            onClick={() => viewSwitch('stock')} 
+                            className='btn btn-primary'>
+                                {modify.viewMoreStock ? "Cancel" : 'Modify stock'}
+                            </button>
                         </div>
+                        {/*---------------------Precio------------------------------------- */}
                         <div style={styleProperty} className="row col-md-12" >
                             <div style={{
                                 display: "flex",
@@ -189,33 +246,74 @@ const CardEdit = (props) => {
                             </div>
                             {modify.viewMorePrice && 
                                 <>
-                                    <input type='number' name='cantModifyPrice' onChange={readInput} placeholder='New price'/>
-                                    <span id="TooltipConfirmPrice" className="flex"><button onClick={() => editCant(modify.cantModifyPrice, 'price')} className='btn btn-secondary'><FontAwesomeIcon icon={faCheck}/></button></span>
-                                    <Tooltip placement="top" isOpen={tooltipOpenConfirmPrice} target="TooltipConfirmPrice" toggle={toggleConfirmPrice}>Confirm</Tooltip>
+                                    <input 
+                                    type='number' 
+                                    name='cantModifyPrice' 
+                                    onChange={readInput} 
+                                    placeholder='New price'/>
+                                    <span id="TooltipConfirmPrice" className="flex">
+                                        <button 
+                                        onClick={() => editCant(modify.cantModifyPrice, 'price')} 
+                                        className='btn btn-secondary'>
+                                            <FontAwesomeIcon icon={faCheck}/>
+                                        </button>
+                                    </span>
+                                    <Tooltip 
+                                    placement="top" 
+                                    isOpen={tooltipOpenConfirmPrice} 
+                                    target="TooltipConfirmPrice" 
+                                    toggle={toggleConfirmPrice}>
+                                        Confirm
+                                    </Tooltip>
                                 </>
                             }
-                            <span><button onClick={() => viewSwitch('price')} className='btn btn-primary'>{modify.viewMorePrice ? "Cancel" : 'Modify price'}</button></span>
+                            <span>
+                                <button 
+                                onClick={() => viewSwitch('price')} 
+                                className='btn btn-primary'>
+                                    {modify.viewMorePrice ? "Cancel" : 'Modify price'}
+                                </button>
+                            </span>
                         </div>
+                        {/*---------------------Vistas----------------------- */}
                         <div className="row">
                             <div className="col-md-6">
                                 <div style={styleProperty} className="row col-md-12" >
                                     <div className="flex">Views: {props.product.views}</div>
                                 </div>
                             </div>
+                        {/*---------------------Rating----------------------- */}
                             <div className="col-md-6">
                                 <div style={styleProperty} className="row col-md-12" >
                                     <div className="flex">Rating: {props.product.rating}</div>
                                 </div>
                             </div>
                         </div>
+                        {/*-------------------Boton para eliminar----------------------- */}
                         <div className="row col-md-12 justify-content-center">
                             {modify.viewMoreDelete && 
                                 <>
-                                    <span  id="TooltipConfirmDelete" className="flex"><button onClick={() => deleteProduct()} className='btn btn-secondary'><FontAwesomeIcon icon={faCheck}/></button></span>
-                                    <Tooltip placement="top" isOpen={tooltipOpenConfirmDelete} target="TooltipConfirmDelete" toggle={toggleConfirmDelete}>Confirmar</Tooltip>
+                                    <span  id="TooltipConfirmDelete" className="flex">
+                                        <button 
+                                        onClick={() => deleteProduct()} 
+                                        className='btn btn-secondary'>
+                                            <FontAwesomeIcon icon={faCheck}/>
+                                        </button>
+                                        </span>
+                                    <Tooltip 
+                                    placement="top" 
+                                    isOpen={tooltipOpenConfirmDelete} 
+                                    target="TooltipConfirmDelete" 
+                                    toggle={toggleConfirmDelete}>
+                                        Confirmar
+                                    </Tooltip>
                                 </>
                             }
-                            <button onClick={() => viewSwitch('delete')} className='btn btn-danger ml-1'>{modify.viewMoreDelete ? "Cancel" : 'Delete'}</button>
+                            <button 
+                            onClick={() => viewSwitch('delete')} 
+                            className='btn btn-danger ml-1'>
+                                {modify.viewMoreDelete ? "Cancel" : 'Delete'}
+                            </button>
                         </div>
                     </div>
                 </div>

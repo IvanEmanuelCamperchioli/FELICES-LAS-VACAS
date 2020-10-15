@@ -162,4 +162,6 @@
     margin: 2vw;
     width: 25vw;
 }
-
+.container-card{
+    flex-wrap: wrap;
+}

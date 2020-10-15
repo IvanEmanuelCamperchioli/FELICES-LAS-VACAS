@@ -4,6 +4,9 @@ import adminActions from '../redux/actions/adminActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
+
+//Formulario del administrador para cargar un nuevo producto
+
 const FormAdmin = (props) => {
 
     const listCategory = ['secos', 'refrigerados', 'congelados']
@@ -129,18 +132,6 @@ const FormAdmin = (props) => {
                     </div>
                 </div>
                 
-                {/* <label style={colorWhite}>Photo Product</label>
-                <input style={{
-                    borderRadius: '3vw'
-                }} type='text' name='photo' placeholder='Write the product photo (url)'
-                    onChange={readInput} />
-
-                <label style={colorWhite}>Photo1 Product</label>
-                <input style={{
-                    borderRadius: '3vw'
-                }} type='text' name='photo1' placeholder='Write the product photo1 (url)'
-                    onChange={readInput} />   */}
-
             </div>
         </>
     )

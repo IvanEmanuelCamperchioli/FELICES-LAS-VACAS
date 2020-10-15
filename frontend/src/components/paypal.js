@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 const Paypal = (props) => {
 
-    
+    //Componente utilizado para implementar paypal como medio de pago
 
     const redirect = () => {
         props.history.push('/gracias')

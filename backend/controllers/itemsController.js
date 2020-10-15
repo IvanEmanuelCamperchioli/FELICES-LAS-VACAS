@@ -1,18 +1,19 @@
 const Product = require('../models/itemModel');
 const nodeMailer = require('nodemailer')
 
-
+//Transporte para enviar mails al usuario 
 var transport = nodeMailer.createTransport({
     port:465, 
     host:"smtp.gmail.com",
     auth: {
-        pass: "123456789Emi",
-        user: "emiruffini5@gmail.com"
+        pass: "Vacafeliz1.",
+        user: "feliceslasvacas.staff@gmail.com"
     },
     tls: { rejectUnauthorized: false }
 })
 
 const itemsController = {
+    //Controlador para cargar un nuevo producto
     newProduct: async (req, res) => {
         const newProduct = new Product({...req.body})
         newProduct
@@ -20,16 +21,19 @@ const itemsController = {
         .then(resp => res.json({ success: true, response: newProduct }))
         .catch(error => res.json({ success: false, error }))
     },
+    //Controlador para obtener todos los productos
     getProducts: async (req, res) => {
         const products = await Product.find()
 		res.json({ success: true, products })
     },
+    //Controlador para eliminar un producto
     deleteProductById: (req, res) => {
         var id = req.params.id
         Product.findByIdAndDelete({_id: id})
         .then(() => res.json({success: true, res: "El producto ha sido eliminado con éxito."}))
         .catch(err=>res.json({success:false, error: err}))	
     },
+    //Controlador para obtener un producto mediante su id
     getProductById: async (req,res) => {
         var id = req.params.id
         
@@ -47,6 +51,7 @@ const itemsController = {
             })
         }
     },
+    //Controlador para aumentar o disminuir el stock de un producto de manera unitaria
     modifyStockProduct: async (req,res) => {
 
         const idProduct = req.params.id
@@ -63,6 +68,7 @@ const itemsController = {
             productModify
         })
     },
+    //Controlador para modificar el stock en una cantidad especifica
     modifyPropertyTotalProduct: async (req, res) => {
         const idProduct = req.params.id
         const { cantModify, aProperty } = req.body
@@ -74,7 +80,7 @@ const itemsController = {
             newModify
         })
     },
-
+    //Controlador para cerrar el circuito de compra
     confirmBuy: async (req, res) =>{
 
         /* Productos que compró */
@@ -114,6 +120,7 @@ const itemsController = {
         
 
         try{
+            //Disminuir el stock de los productos comprados
             const asyncRes = await Promise.all(products.map(async (product) => {
                 
                 const productSaved = await Product.findOne({_id : product.product._id})
@@ -121,8 +128,9 @@ const itemsController = {
                 const act = await Product.updateOne({_id:productSaved._id}, {stock:newStock}) 
               
             }));
-            console.log(products)
+            
             https://postimg.cc/QKx9kNJy
+            //Mail enviado al usuario con la confirmacion de compra
             var mailOptions = {
                 from: "Felices Las Vacas <notresponse@notreply.com>",
                 sender: "Felices Las Vacas <notresponse@notreply.com>",

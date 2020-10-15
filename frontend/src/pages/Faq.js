@@ -5,6 +5,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/mediaQuerys/mediaFaq.css";
 
+
+
+//Pagina con preguntas frecuentes
 class Faq extends React.Component {
   state = {
     one: { isOpen: false },

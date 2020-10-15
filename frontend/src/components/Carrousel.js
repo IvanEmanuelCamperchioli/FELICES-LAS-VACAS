@@ -13,6 +13,8 @@ const items = [
   {src: slide_tres, caption:"Alfajores de maicena con dulce de leche de almendras" } 
 ]
 
+//Componente que muestra el carrusel de la pagina home
+
 const Carrousel = (props) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [animating, setAnimating] = useState(false)

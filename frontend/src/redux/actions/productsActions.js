@@ -11,7 +11,7 @@ const productsActions = {
                 type: 'GET_PRODUCTS_USER',
                 payload: res.data.products,
             })
-            
+            return res.data.products
         }
     },
     getProductById: (idProduct) => {
@@ -81,17 +81,7 @@ const productsActions = {
                     Authorization: `Bearer ${token}`
                 }
             })
-            if (res.data.success === true){
-                await Swal.fire({  
-                    title: 'Muchas gracias por tu compra!',  
-                    text: `Recibirás un mail de confirmación a tu correo`,  
-                    imageUrl: 'https://i.pinimg.com/564x/59/df/57/59df57f70e533a1b116cff597638f1ed.jpg',
-                    showConfirmButton: true, 
-                    timer: false,
-                    allowOutsideClick: false,
-                    footer: 'Una vaquita te lo agradece',
-                })
-            }
+            
             dispatch({
                 type:"DELETE_CART"
             }) 

@@ -8,11 +8,15 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 toast.configure()
+
+
+//Tarjeta de cada item (se renderiza en home y en products)
 const ItemCard = (props) => {
   const [quantity, setQuantity] = useState(0);
 
 
     const changeInput = (e) =>{
+      //Funcion para agregar o quitar unidades del producto
       e.preventDefault()  
       if (e.target.value === "up"){
         setQuantity(quantity+1)
@@ -26,6 +30,7 @@ const ItemCard = (props) => {
   
 
   const addItem = (e) => {
+    //Funcion para agregar productos al carrito
     e.preventDefault();
     if (quantity > props.item.stock) {
       toast.warning("💩 NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK", {position: toast.POSITION.TOP_CENTER})

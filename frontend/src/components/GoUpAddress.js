@@ -2,9 +2,12 @@ import React, { useEffect,useState } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import Swal from "sweetalert2"
-import Header from './Header'
-import Footer from './Footer';
 
+
+
+//Componente donde puedo modificar los datos de envio
+
+//Se renderiza en FinishShopping
 
 const Profile = (props) => {
     const[load, setLoad]= useState(true)

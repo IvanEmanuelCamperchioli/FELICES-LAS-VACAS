@@ -1,6 +1,6 @@
 const Joi = require("@hapi/joi")
 
-
+//Validador de los campos del nuevo usuario antes de su almacenamiento
 const validador = {
     validarDatos: (req, res, next) => {
         const schema = Joi.object({

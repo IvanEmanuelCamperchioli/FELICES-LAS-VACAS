@@ -8,9 +8,9 @@ import Swal from 'sweetalert2'
 import Footer from '../components/Footer';
 import { NavLink } from 'react-router-dom';
 import '../styles/account.css'
-import { motion } from 'framer-motion'
 
 
+//Pagina donde el usuario inicia sesion
 class SignIn extends React.Component{
     state={
         logUser:{
@@ -20,6 +20,7 @@ class SignIn extends React.Component{
         error:""
     }
     getForm = e =>{
+        //Funcion para almacenar los datos del usuario ingresados a los inputs
         e.preventDefault()
        
         this.setState({
@@ -32,7 +33,7 @@ class SignIn extends React.Component{
 
 
     submit =  async e => {
- 
+        //Funcion que valida y envia los datos de inicio de sesion
         e.preventDefault()
         if (this.state.logUser.username ==="" || this.state.logUser.password === "" ){
             this.setState({
@@ -42,17 +43,17 @@ class SignIn extends React.Component{
             const logUser= {username:this.state.logUser.username , password: this.state.logUser.password}
             const response =  await this.props.logUser(logUser)
             
-            if (response.success === true){
-                
-            }else{
+            if (!response.success ){
                 this.setState({
                     error: response
-                })    
-            }
+                })  
+            }  
+            
         }
     }
 
     responseGoogle = async (response) =>{
+        //Funcion que maneja el inicio de sesion con google
         this.setState({
             ...this.state,
             logUser:{
@@ -64,9 +65,8 @@ class SignIn extends React.Component{
         
         if(res === true){
             const resp =  await this.props.logUser(this.state.logUser)
-            
-            
         }else{
+            //De no haberse registrado con google, el usuario será alertado
             Swal.fire({  
                 title: 'Debes registrarte primero!',  
                 text: `Porfavor ve a crear cuenta, ${response.profileObj.givenName}.`,  

@@ -3,25 +3,27 @@ import '../styles/home.css'
 import '../styles/mediaQuerys/mediaCards.css'
 import ItemCard from './ItemCard'
 
+
+
+//Componente que divide y renderiza los productos mas populares que se mostrarán
+
 class ProductsBestSellers extends React.Component{
     state = {
-        firstThree: [],
-        secondThree:[],
+        products:[]
     }
 
     async componentDidMount(){
-        
+        //Ordeno los productos recibidos por props
         var ordered = await this.props.products.sort((a,b) => b.views-a.views)
-        
-        var first = ordered.slice(0, 3)
-        var second = ordered.slice(3, 6)
+        //Los primeros 6 son guardados en un array
+        var products = ordered.slice(0, 6)
         
         this.setState({
             ...this.state,
-            firstThree: first,
-            secondThree: second
+            products,
+            
         })
-
+        
     }
 
 
@@ -30,7 +32,7 @@ class ProductsBestSellers extends React.Component{
         return(
             <>
             <div className="conteiner-card">
-                {this.state.firstThree.map(product => {
+                {this.state.products.map(product => {
                     return (
                         <>
                             <ItemCard key={product.id} item={product}/>
@@ -38,15 +40,7 @@ class ProductsBestSellers extends React.Component{
                     )
                 })}
             </div>
-            <div className="conteiner-card">
-                {this.state.secondThree.map(product => {
-                    return (
-                        <>
-                            <ItemCard key={product.id} item={product}/>
-                        </>
-                    )
-                })}
-            </div>
+            
             </>
         )
         

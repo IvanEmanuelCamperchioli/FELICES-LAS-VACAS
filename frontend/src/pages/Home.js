@@ -5,6 +5,8 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { motion } from 'framer-motion'
 
+//Pagina Home
+
 class Home extends React.Component {
 
     render() {

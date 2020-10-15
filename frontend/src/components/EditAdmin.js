@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons'
 import '../styles/itemsprofile.css'
 
+
+//Componente que muestra el listado de productos al admin e incluye filtros
 const EditAdmin = (props) => {
 
     const [panel, setPanel] = useState({
@@ -16,6 +18,7 @@ const EditAdmin = (props) => {
     })
 
     useEffect( () => {
+        //Hook que actualiza el state al cambiar las props
         const products = props.products
         setPanel({
             ...panel,
@@ -25,10 +28,12 @@ const EditAdmin = (props) => {
     }, [props])
 
     useEffect (() => {
+        //cuando el componente se monta obtengo los productos
         props.getProducts()
     }, [])
 
     const filterItem = e => {
+        //Funcion para guardar en el state la manera de filtrar y ordenar
         setPanel({
             ...panel,
             [e.target.name]: e.target.value
@@ -36,6 +41,7 @@ const EditAdmin = (props) => {
     }
 
     const filterP = () =>{
+        //Funcion para filtrar los productos
         var filtered = panel.items
         if (panel.category !== ""){
             switch (panel.category){
@@ -63,7 +69,7 @@ const EditAdmin = (props) => {
     }
 
     const orderF = (filtered) =>{
-       
+       //Funcion para ordenar los productos
         if(panel.order !== ""){
             switch (panel.order){
                 case "MasStock":
@@ -86,7 +92,10 @@ const EditAdmin = (props) => {
     }
 
     const searchFilterHome = async (e) => {
+        //Funcion que se ejecuta al pulsar e boton de buscar
+        //De haberse seleccionado un tipo de flitro, filtro los productos
         const filtered =  await filterP()
+        //Luego los ordeno
         if (filtered === undefined){
             const allfiltered = orderF(panel.items)
             setPanel({

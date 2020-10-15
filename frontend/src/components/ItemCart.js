@@ -7,7 +7,7 @@ import { Tooltip } from 'reactstrap'
 import "../styles/itemCart.css"
 import "../styles/mediaQuerys/mediaCart.css"
 
-
+//Tarjeta de cada item del carrito (se renderiza en cart)
 class ItemCart extends React.Component{
     state={
         product : this.props.product.product,

@@ -6,6 +6,8 @@ import EditAdmin from '../components/EditAdmin'
 import Footer from '../components/Footer'
 import HeaderAdmin from '../components/HeaderAdmin'
 
+//Pagina home del administrador
+
 const HomeAdmin = () => {
 
     const [bodyEdit, setBodyEdit] = useState('')
