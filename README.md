@@ -1,6 +1,6 @@
 # Felices las Vacas
 
-_Aplicación web desarrollada con stack mern. Es un e-commerce realizado para la empresa felices las vacas, donde los usuarios podrán ver y comprar sus productos y los administradores manejar el stock, precio, entre otras cosas de los mismos_
+_Aplicación web desarrollada con stack mern. Es un e-commerce realizado para la empresa felices las vacas, donde los usuarios podrán ver y comprar sus productos y los administradores manejar el stock, precio, entre otras cosas de los mismos._
 
 ## Demo 📦
 
