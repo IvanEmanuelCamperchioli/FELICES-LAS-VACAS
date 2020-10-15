@@ -62,7 +62,7 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 * [Jsonwebtoken](https://jwt.io/)
 * [React](https://es.reactjs.org/) - Framework utilizado
 * [Redux](https://es.redux.js.org/) - Utilizado para trabajar con un estado global
-* [Paypal] - Integración de pago utilizada
+* *Paypal* - Integración de pago utilizada
 
 
 ## Autores ✒️
